@@ -7,7 +7,7 @@ The goal of WZDx is to enable widespread access to up-to-date information about 
 
 Specifically, WZDx defines the structure and content of several [GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) documents that are each intended to be distributed as a data feed. The feeds describe a variety of high-level road work-related information such as the location and status of work zones, detours, and field devices.
 
-## WZDX Client
+## WZDX Models
 This project contains various classes representing the objects comprising the WZDx feeds.
 
 ## Namespaces
