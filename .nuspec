@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Wsdot.Wzdx.Core</id>
+        <authors>Washington State Department of Transportation - Information Technology Services (WSDOT)(ITS)</authors>
+        <version>1.0.0</version>
+        <copyright>MIT</copyright>
+        <description>This project contains various classes representing the objects comprising the Work zone data exchange (WZDx-https://github.com/usdot-jpo-ode/wzdx) feeds.</description>
+        <repositoryUrl>https://github.com/WSDOT/wzdx-client</repositoryUrl>
+        <repositoryType>git</repositoryType>
+        <packageTags>WZDX C#</packageTags>
+        <packageProjectUrl>https://github.com/WSDOT/wzdx-client</packageProjectUrl>
+    </metadata>
+</package>
