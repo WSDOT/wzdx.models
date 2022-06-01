@@ -11,15 +11,18 @@ Specifically, WZDx defines the structure and content of several [GeoJSON](https:
 This project contains various classes representing the objects comprising the WZDx feeds.
 
 ## Namespaces
+---
 ### GeoJson
-#### Converters
-#### Geometries
+* Converters
+* Geometries
+---
 ### v3
-#### Feeds
-#### WorkZones (RoadEvents)
+* Feeds
+* WorkZones (RoadEvents)
+---
 ### v4
-#### Builders
-#### Feeds
-#### Devices
-#### WorkZones (RoadEvents, e.g., Detours, Restrictsions, WorkZones )
+* Builders
+* Feeds
+* Devices
+* WorkZones (RoadEvents, e.g., Detours, Restrictsions, WorkZones )
 
