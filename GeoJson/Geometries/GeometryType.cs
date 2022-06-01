@@ -11,5 +11,11 @@ namespace Wsdot.Wzdx.GeoJson.Geometries
         MultiPoint = 1,
         [EnumMember(Value = @"LineString")]
         LineString = 2
+        // for full GeoJson (https://datatracker.ietf.org/doc/html/rfc7946) support need to add: 
+        // * MultiLineString
+        // * Polygon
+        // * MultiPolygon
+        // * GeometryCollection
+        //
     }
 }

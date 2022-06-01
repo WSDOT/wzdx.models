@@ -1,3 +1,4 @@
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.Devices;
 
 namespace Wsdot.Wzdx.v4.Builders

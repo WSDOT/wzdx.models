@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.Feeds;
 
 namespace Wsdot.Wzdx.v4.Builders

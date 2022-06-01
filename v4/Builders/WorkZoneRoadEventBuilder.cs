@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Builders
@@ -9,13 +10,15 @@ namespace Wsdot.Wzdx.v4.Builders
     {
         private readonly string _sourceId;
         private Direction _direction;
-        private readonly ICollection<string> _roadNames = new List<string>();
+        private readonly ICollection<string> _roadNames = new HashSet<string>();
         private readonly ICollection<LaneBuilder> _laneBuilders = new List<LaneBuilder>();
         private readonly ICollection<RestrictionBuilder> _restrictionBuilders = new List<RestrictionBuilder>();
         private string _description;
         private DateTimeOffset _updateDate = DateTimeOffset.UtcNow;
         private DateTimeOffset _createDate = DateTimeOffset.UtcNow;
         private Relationship _relationship;
+        private DateTimeOffset? _startDate;
+        private DateTimeOffset? _endDate;
         private TimeVerification _startDateAccuracy = TimeVerification.Estimated;
         private TimeVerification _endDateAccuracy = TimeVerification.Estimated;
         private EventStatus _eventStatus = EventStatus.Pending;
@@ -70,6 +73,24 @@ namespace Wsdot.Wzdx.v4.Builders
             return this;
         }
 
+        // optional
+        public WorkZoneRoadEventBuilder WithStart(DateTimeOffset value, TimeVerification accuracy)
+        {
+            _startDate = value;
+            _startDateAccuracy = accuracy;
+            return this;
+        }
+
+        // optional
+        public WorkZoneRoadEventBuilder WithEnd(DateTimeOffset value, TimeVerification accuracy)
+        {
+            _endDate = value;
+            _endDateAccuracy = accuracy;
+            return this;
+        }
+
+
+
         // ReSharper disable once UnusedMember.Global
         public WorkZoneRoadEventBuilder WithLane(LaneType type, LaneStatus status, int order, Action<LaneBuilder> configure)
         {
@@ -90,7 +111,7 @@ namespace Wsdot.Wzdx.v4.Builders
 
         public WorkZoneRoadEvent Result()
         {
-            return new WorkZoneRoadEvent()
+            var result = new WorkZoneRoadEvent()
             {
                 CoreDetails = new RoadEventCoreDetails()
                 {
@@ -109,6 +130,7 @@ namespace Wsdot.Wzdx.v4.Builders
                 //todo WorkZoneRoadEventBuilder.WithEndDate = ,
                 EndDateAccuracy = _endDateAccuracy,
                 //todo WorkZoneRoadEventBuilder.WithEndingCrossStreet = ,
+                EndingCrossStreet = string.Empty,
                 //todo WorkZoneRoadEventBuilder.WithEndingMilepost = ,
                 //todo WorkZoneRoadEventBuilder.WithEventStatus = ,
                 EventStatus = _eventStatus,
@@ -117,6 +139,7 @@ namespace Wsdot.Wzdx.v4.Builders
                 //todo WorkZoneRoadEventBuilder.WithBeginningAccuracy = ,
                 BeginningAccuracy = SpatialVerification.Estimated,
                 //todo WorkZoneRoadEventBuilder.WithBeginningCrossStreet = ,
+                BeginningCrossStreet = string.Empty,
                 //todo WorkZoneRoadEventBuilder.WithEndingAccuracy = ,
                 EndingAccuracy = SpatialVerification.Estimated,
                 //todo WorkZoneRoadEventBuilder.WithLocationMethod = ,
@@ -128,6 +151,18 @@ namespace Wsdot.Wzdx.v4.Builders
                 //todo WorkZoneRoadEventBuilder.WithWorkerPresence = ,
                 //todo WorkZoneRoadEventBuilder.WithAdditionalProperties = ,
             };
+
+            if (_startDate.HasValue)
+            {
+                result.StartDate = _startDate.Value;
+            }
+
+            if (_endDate.HasValue)
+            {
+                result.EndDate = _endDate.Value;
+            }
+
+            return result;
         }
     }
 }

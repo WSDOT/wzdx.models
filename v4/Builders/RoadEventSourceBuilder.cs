@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.Feeds;
 using Wsdot.Wzdx.v4.WorkZones;
 
@@ -37,7 +38,7 @@ namespace Wsdot.Wzdx.v4.Builders
         {
             return new RoadEventSourceBuilder(_id, _configuration, _features, featureBuilder);
         }
-
+        
         public RoadEventSourceBuilder WithWorkZoneFeature(string featureId, string roadName, Direction direction, Action<WorkZoneRoadEventFeatureBuilder> setup)
         {
             var builder = new WorkZoneRoadEventFeatureBuilder(_id, featureId, roadName, direction);

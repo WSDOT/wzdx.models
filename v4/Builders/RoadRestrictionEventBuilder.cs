@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Builders
@@ -10,7 +11,7 @@ namespace Wsdot.Wzdx.v4.Builders
     {
         private readonly string _sourceId;
         private Direction _direction;
-        private readonly ICollection<string> _roadNames = new List<string>();
+        private readonly ICollection<string> _roadNames = new HashSet<string>();
         private readonly ICollection<LaneBuilder> _laneBuilders = new List<LaneBuilder>();
         private readonly ICollection<RestrictionBuilder> _restrictionBuilders = new List<RestrictionBuilder>();
         private string _description;

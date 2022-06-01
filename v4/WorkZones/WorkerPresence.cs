@@ -17,17 +17,17 @@ namespace Wsdot.Wzdx.v4.WorkZones
 
         [JsonProperty("method", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WorkerPresenceMethod Method { get; set; }
+        public WorkerPresenceMethod? Method { get; set; }
 
         /// <summary>
         /// The UTC date and time at which the presence of workers was last confirmed
         /// </summary>
         [JsonProperty("worker_presence_last_confirmed_date", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public System.DateTimeOffset WorkerPresenceLastConfirmedDate { get; set; }
+        public System.DateTimeOffset? WorkerPresenceLastConfirmedDate { get; set; }
 
         [JsonProperty("confidence", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public WorkerPresenceConfidence Confidence { get; set; }
+        public WorkerPresenceConfidence? Confidence { get; set; }
 
         /// <summary>
         /// A list of situations in which workers are considered to be present in the jurisdiction of the data provider

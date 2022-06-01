@@ -34,11 +34,16 @@ namespace Wsdot.Wzdx.GeoJson.Converters
                 ? enumerator.Current as double? ?? 0
                 : throw new ArgumentOutOfRangeException(nameof(coordinates),
                     "To few coordinates, expected two or three coordinates");
-            if (enumerator.MoveNext() && enumerator.MoveNext())
+
+            var altitude = enumerator.MoveNext()
+                ? enumerator.Current as double? ?? 0
+                : (double?)null;
+
+            if (enumerator.MoveNext())
                 throw new ArgumentOutOfRangeException(nameof(coordinates),
                     "To many coordinates, expected two or three coordinates");
 
-            return new Position(longitude, latitude);
+            return new Position(longitude, latitude, altitude);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -50,6 +55,10 @@ namespace Wsdot.Wzdx.GeoJson.Converters
             writer.WriteStartArray();
             writer.WriteValue(position.Longitude);
             writer.WriteValue(position.Latitude);
+            if (position.Altitude.HasValue)
+            {
+                writer.WriteValue(position.Altitude);
+            }
             writer.WriteEndArray();
         }
         

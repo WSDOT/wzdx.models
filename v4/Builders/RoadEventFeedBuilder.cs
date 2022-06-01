@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.Feeds;
 
 namespace Wsdot.Wzdx.v4.Builders
@@ -47,6 +48,11 @@ namespace Wsdot.Wzdx.v4.Builders
         public RoadEventFeedBuilder WithSource(string sourceId, Func<RoadEventSourceBuilder, RoadEventSourceBuilder> setup)
         {
             var builder = setup(new RoadEventSourceBuilder(sourceId));
+            return WithSource(builder);
+        }
+        
+        public RoadEventFeedBuilder WithSource(RoadEventSourceBuilder builder)
+        {
             _sourcesBuilders.Add(builder);
 
             return this;

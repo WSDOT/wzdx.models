@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Builders
