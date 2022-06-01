@@ -9,7 +9,7 @@
         <Description>
             This project contains various classes and builders used to build WZDx feeds.
         </Description>
-        <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/WSDOT/wzdx-client</RepositoryUrl>   
     </PropertyGroup>
 
