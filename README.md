@@ -27,9 +27,12 @@ This project contains various classes and builders used to build WZDx feeds.
 * WorkZones (RoadEvents, e.g., Detours, Restrictions, WorkZones )
 
 
-## Usage
-While model objects can be used independently to create a feed, builders can be used to ensure a valid feed output is generated.
-For example, creating a v4 workzone/detour (wzdxfeed) feed can be done using the builder classes either individually or fluently:
+## Usage 
+Model objects in this package can be used independently to create a feed. However, it is highly encourged that you build your WZDx feed using the built in builder classes.
+
+These builders ensure a valid feed output is generated.
+
+Example: Creating a v4 workzone/detour (wzdxfeed) feed can be done using the builder classes either individually or fluently:
 
 ### Using individual builders:
 ``` cs
@@ -39,7 +42,7 @@ For example, creating a v4 workzone/detour (wzdxfeed) feed can be done using the
 	var sourceBuilder = new RoadEventSourceBuilder("wsdot-cia");
 	feedBuilder.WithSource(sourceBuilder);
 
-	var featureBuilder = new WorkZoneRoadEventFeatureBuilder("wsdit-wzdb", "work-zone-002E", "SR-90", Direction.Eastbound);
+	var featureBuilder = new WorkZoneRoadEventFeatureBuilder("wsdot-wzdb", "work-zone-002E", "SR-90", Direction.Eastbound);
 	sourceBuilder.WithFeature(featureBuilder);
 
 	RoadEventsFeed wzdx = feedBuilder.Result();
