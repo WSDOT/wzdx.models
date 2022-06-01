@@ -36,7 +36,6 @@ Example: Creating a v4 workzone/detour (wzdxfeed) feed can be done using the bui
 
 ### Using individual builders:
 ``` cs
-    //...
 	var feedBuilder = RoadEventFeedBuilder.Factory("wsdot").Create();
 
 	var sourceBuilder = new RoadEventSourceBuilder("wsdot-cia");
@@ -46,12 +45,10 @@ Example: Creating a v4 workzone/detour (wzdxfeed) feed can be done using the bui
 	sourceBuilder.WithFeature(featureBuilder);
 
 	RoadEventsFeed wzdx = feedBuilder.Result();
-    //...
 ```
 
 ### Using fluent builder interface:
 ``` cs
-    //...
     RoadEventsFeed wzdx = RoadEventFeedBuilder
         .Factory("wsdot")
         .Create()
@@ -69,6 +66,5 @@ Example: Creating a v4 workzone/detour (wzdxfeed) feed can be done using the bui
                 /* additional feature details */
             }))
         .Result();
-    //...
 ```
 
