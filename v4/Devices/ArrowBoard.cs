@@ -12,7 +12,11 @@ namespace Wsdot.Wzdx.v4.Devices
     {
         [JsonProperty("core_details", Required = Required.Always)]
         [Required]
-        public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails();
+        public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails()
+            {
+                DeviceType = FieldDeviceType.ArrowBoard,
+                DeviceStatus = FieldDeviceStatus.Unknown
+            };
 
         [JsonProperty("pattern", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.Feeds;
 
@@ -13,11 +14,7 @@ namespace Wsdot.Wzdx.v4.Builders
         private protected readonly ICollection<Action<FeedDataSource>> Configuration;
 
         protected FeedSourceBuilder(string id) :
-            this(id, new List<Action<FeedDataSource>>() { 
-                source => source.DataSourceId = id, 
-                source => source.OrganizationName = id,
-                source => source.UpdateFrequency = int.MaxValue
-            })
+            this(id, new List<Action<FeedDataSource>>())
         {
 
         }
@@ -25,13 +22,22 @@ namespace Wsdot.Wzdx.v4.Builders
         protected FeedSourceBuilder(string id, IEnumerable<Action<FeedDataSource>> configuration, Action<FeedDataSource> step) :
             this(id, new List<Action<FeedDataSource>>(configuration) { step })
         {
-            
+
         }
 
         protected FeedSourceBuilder(string id, IEnumerable<Action<FeedDataSource>> configuration)
         {
-            // count should be gte 3
-            Configuration = new List<Action<FeedDataSource>>(configuration);
+            configuration = configuration.ToList();
+            Configuration = configuration.Count() < 3
+                ? new Action<FeedDataSource>[]
+                    {
+                        source => source.DataSourceId = id,
+                        source => source.OrganizationName = id,
+                        source => source.UpdateFrequency = int.MaxValue
+                    }
+                    .Union(configuration)
+                    .ToList()
+                : new List<Action<FeedDataSource>>(configuration);
         }
 
         /// <summary>

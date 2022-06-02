@@ -12,7 +12,12 @@ namespace Wsdot.Wzdx.v4.Devices
     {
         [JsonProperty("core_details", Required = Required.Always)]
         [Required]
-        public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails();
+        public FieldDeviceCoreDetails CoreDetails { get; set; } =
+            new FieldDeviceCoreDetails()
+            {
+                DeviceType = FieldDeviceType.LocationMarker,
+                DeviceStatus = FieldDeviceStatus.Unknown
+            };
 
         [JsonProperty("marked_locations", Required = Required.Always)]
         [Required]

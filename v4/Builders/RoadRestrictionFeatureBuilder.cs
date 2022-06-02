@@ -8,27 +8,6 @@ using Wsdot.Wzdx.v4.WorkZones;
 namespace Wsdot.Wzdx.v4.Builders
 {
 
-    public class RoadRestrictionFeatureBuilderFactory : IFactory<IBuilder<RoadEventFeature>>
-    {
-        private readonly string _sourceId;
-        private readonly string _featureId;
-        private readonly string _roadName;
-        private readonly Direction _direction;
-
-        public RoadRestrictionFeatureBuilderFactory(string sourceId, string featureId, string roadName, Direction direction)
-        {
-            _sourceId = sourceId;
-            _featureId = featureId;
-            _roadName = roadName;
-            _direction = direction;
-        }
-
-        public IBuilder<RoadEventFeature> Create()
-        {
-            return new RoadRestrictionFeatureBuilder(_sourceId, _featureId, _roadName, _direction);
-        }
-    }
-
     public class RoadRestrictionFeatureBuilder : IBuilder<RoadEventFeature>
     {
         private readonly string _featureId;
@@ -60,6 +39,12 @@ namespace Wsdot.Wzdx.v4.Builders
             };
         }
 
+        public RoadRestrictionFeatureBuilder WithGeometry(LineString value)
+        {
+            this._geometry = value;
+            this._boundingBox = value.BoundaryBox;
+            return this;
+        }
         public RoadRestrictionFeatureBuilder WithGeometry(MultiPoint value)
         {
             this._geometry = value;

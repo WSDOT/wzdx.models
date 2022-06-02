@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Wsdot.Wzdx.GeoJson.Converters;
@@ -28,5 +29,20 @@ namespace Wsdot.Wzdx.GeoJson.Geometries
         [MaxLength(4)]
         [MinLength(4)]
         public IEnumerable<double> BoundaryBox { get; set; }
+
+        /// <summary>
+        /// Create LineString Geometry instance from position coordinate values
+        /// </summary>
+        /// <param name="value">Sequence of position coordinate values</param>
+        /// <returns>Instance of LineString Geometry comprised of coordinates</returns>
+        public static LineString FromCoordinates(IEnumerable<IPosition> value)
+        {
+            var coordinates = value.ToList().AsReadOnly();
+            return new LineString()
+            {
+                Coordinates = coordinates,
+                BoundaryBox = coordinates.AsBoundaryBox().ToList().AsReadOnly()
+            };
+        }
     }
 }

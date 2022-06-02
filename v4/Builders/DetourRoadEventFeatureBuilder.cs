@@ -27,6 +27,20 @@ namespace Wsdot.Wzdx.v4.Builders
             return this;
         }
 
+        public DetourRoadEventFeatureBuilder WithGeometry(LineString value)
+        {
+            this._geometry = value;
+            this._boundingBox = value.BoundaryBox;
+            return this;
+        }
+
+        public DetourRoadEventFeatureBuilder WithGeometry(MultiPoint value)
+        {
+            this._geometry = value;
+            this._boundingBox = value.BoundaryBox;
+            return this;
+        }
+
         public RoadEventFeature Result()
         {
             return new RoadEventFeature()
@@ -36,13 +50,6 @@ namespace Wsdot.Wzdx.v4.Builders
                 Geometry = _geometry,
                 BoundaryBox = _boundingBox?.ToList()
             };
-        }
-
-        public DetourRoadEventFeatureBuilder WithGeometry(MultiPoint value)
-        {
-            this._geometry = value;
-            this._boundingBox = value.BoundaryBox;
-            return this;
         }
     }
 }

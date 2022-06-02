@@ -30,11 +30,18 @@ namespace Wsdot.Wzdx.GeoJson.Geometries
         [MinLength(4)]
         public IEnumerable<double> BoundaryBox { get; set; }
 
-        public static MultiPoint FromCoordinates(IEnumerable<Position> value)
+        /// <summary>
+        /// Create MultiPoint Geometry instance from position coordinate values
+        /// </summary>
+        /// <param name="value">Sequence of position coordinate values</param>
+        /// <returns>Instance of MultiPoint Geometry comprised of coordinates</returns>
+        public static MultiPoint FromCoordinates(IEnumerable<IPosition> value)
         {
+            var coordinates = value.ToList().AsReadOnly();
             return new MultiPoint()
             {
-                Coordinates = value.ToList().AsReadOnly()
+                Coordinates = coordinates,
+                BoundaryBox = coordinates.AsBoundaryBox().ToList().AsReadOnly()
             };
         }
     }

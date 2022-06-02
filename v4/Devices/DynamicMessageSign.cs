@@ -10,7 +10,11 @@ namespace Wsdot.Wzdx.v4.Devices
     {
         [JsonProperty("core_details", Required = Required.Always)]
         [Required]
-        public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails();
+        public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails()
+        {
+            DeviceType = FieldDeviceType.DynamicMessageSign,
+            DeviceStatus = FieldDeviceStatus.Unknown
+        };
 
         /// <summary>
         /// A MULTI-formatted string describing the message currently posted to the sign

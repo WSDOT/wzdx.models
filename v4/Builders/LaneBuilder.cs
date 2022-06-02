@@ -1,63 +1,57 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Builders
 {
-    public class LaneBuilder
+    public class LaneBuilder : Builder<Lane>
     {
-        private LaneType _type;
-        private LaneStatus _status;
-        private int _order;
-        private ICollection<RestrictionBuilder> _restrictionBuilders = new List<RestrictionBuilder>();
-
         public LaneBuilder(LaneType type, LaneStatus status, int order)
+            : base(new List<Action<Lane>>(), lane =>
+            {
+                lane.Type = type;
+                lane.Status = status;
+                lane.Order = order;
+            })
         {
             if (order <= 0)
                 throw new ArgumentOutOfRangeException(nameof(order), order, "Order must be greater than zero.");
-
-            _type = type;
-            _status = status;
-            _order = order;
         }
 
-        public Lane Result()
+        private LaneBuilder(IEnumerable<Action<Lane>> configuration, Action<Lane> step) : base(configuration, step)
         {
-            return new Lane()
-            {
-                Type = _type,
-                Status = _status,
-                Order = _order,
-                LaneNumber = null,
-                Restrictions = _restrictionBuilders.Select(builder => builder.Result()).ToList()
-            };
+            
         }
 
         public LaneBuilder WithType(LaneType value)
         {
-            _type = value;
-            return this;
+            return new LaneBuilder(Configuration, lane => lane.Type = value);
         }
 
         public LaneBuilder WithStatus(LaneStatus value)
         {
-            _status = value;
-            return this;
+            return new LaneBuilder(Configuration, lane => lane.Status = value);
         }
 
         public LaneBuilder WithOrder(int value)
         {
-            _order = value;
-            return this;
+            return value <= 0
+                ? throw new ArgumentOutOfRangeException(nameof(value), value, "Order must be greater than zero.")
+                : new LaneBuilder(Configuration, lane => lane.Order = value);
+        }
+        
+        public LaneBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        {
+            var restriction = configure(new RestrictionBuilder(type, unit)).Result();
+            return new LaneBuilder(Configuration, lane => lane.Restrictions.Add(restriction));
         }
 
-        public LaneBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Action<RestrictionBuilder> configure)
+        public LaneBuilder WithNoRestrictions()
         {
-            var builder = new RestrictionBuilder(type, unit);
-            configure(builder);
-            _restrictionBuilders.Add(builder);
-            return this;
+            return new LaneBuilder(Configuration, lane => lane.Restrictions.Clear());
         }
+
+        protected override Func<Lane> ResultFactory { get; } = () => new Lane();
     }
 }

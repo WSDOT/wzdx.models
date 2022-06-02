@@ -13,7 +13,7 @@ namespace Wsdot.Wzdx.v4.Builders
         private readonly string _featureId;
         private IGeometry _geometry;
         private IEnumerable<double> _boundingBox;
-        private readonly WorkZoneRoadEventBuilder _eventBuilder;
+        private WorkZoneRoadEventBuilder _eventBuilder;
 
         public WorkZoneRoadEventFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction)
             : this(featureId, new WorkZoneRoadEventBuilder(sourceId, roadName, direction))
@@ -38,9 +38,23 @@ namespace Wsdot.Wzdx.v4.Builders
             };
         }
 
-        public WorkZoneRoadEventFeatureBuilder WithEvent(Action<WorkZoneRoadEventBuilder> configure)
+        public WorkZoneRoadEventFeatureBuilder WithEvent(Func<WorkZoneRoadEventBuilder, WorkZoneRoadEventBuilder> configure)
         {
-            configure(_eventBuilder);
+            _eventBuilder = configure(_eventBuilder);
+            return this;
+        }
+
+        public WorkZoneRoadEventFeatureBuilder WithGeometry(LineString value)
+        {
+            _geometry = value;
+            _boundingBox = value.GetBoundaryBox();
+            return this;
+        }
+
+        public WorkZoneRoadEventFeatureBuilder WithGeometry(MultiPoint value)
+        {
+            _geometry = value;
+            _boundingBox = value.GetBoundaryBox();
             return this;
         }
 
@@ -53,34 +67,6 @@ namespace Wsdot.Wzdx.v4.Builders
                 Geometry = _geometry,
                 BoundaryBox = _boundingBox?.ToList()
             };
-        }
-
-        public WorkZoneRoadEventFeatureBuilder WithGeometry(IGeometry value)
-        {
-            _geometry = value;
-            _boundingBox = value.GetBoundaryBox();
-            return this;
-        }
-    }
-
-    internal static class GeometryBoundingBoxExtensions
-    {
-        public static IEnumerable<double> GetBoundaryBox(this IGeometry geometry)
-        {
-            if (geometry == null) return Enumerable.Empty<double>();
-            switch (geometry.Type)
-            {
-                case GeometryType.None:
-                    return new double[4];
-                case GeometryType.Point:
-                    return ((Point)geometry).BoundaryBox;
-                case GeometryType.MultiPoint:
-                    return ((MultiPoint)geometry).BoundaryBox;
-                case GeometryType.LineString:
-                    return ((LineString)geometry).BoundaryBox;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(geometry.Type));
-            }
         }
     }
 }
