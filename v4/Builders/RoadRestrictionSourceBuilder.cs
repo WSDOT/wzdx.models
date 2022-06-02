@@ -35,7 +35,7 @@ namespace Wsdot.Wzdx.v4.Builders
 
         public RoadRestrictionSourceBuilder WithFeature(RoadRestrictionFeatureBuilder builder)
         {
-            return new RoadRestrictionSourceBuilder(_id, _configuration, _features, builder);
+            return new RoadRestrictionSourceBuilder(_id, Configuration, _features, builder);
         }
 
         public RoadRestrictionSourceBuilder WithFeature(string featureId, string roadName, Direction direction, Action<RoadRestrictionFeatureBuilder> setup)

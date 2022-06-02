@@ -35,7 +35,7 @@ namespace Wsdot.Wzdx.v4.Builders
 
         public FieldDeviceSourceBuilder WithFeature(FieldDeviceFeatureBuilder builder)
         {
-            return new FieldDeviceSourceBuilder(_id, _configuration, _features, builder);
+            return new FieldDeviceSourceBuilder(_id, Configuration, _features, builder);
         }
 
         public FieldDeviceSourceBuilder WithArrowBoardFeature(string featureId, string roadName, Func<ArrowBoardFeatureBuilder, ArrowBoardFeatureBuilder> config)

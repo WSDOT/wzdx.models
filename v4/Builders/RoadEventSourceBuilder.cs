@@ -36,14 +36,14 @@ namespace Wsdot.Wzdx.v4.Builders
 
         public RoadEventSourceBuilder WithFeature(IBuilder<RoadEventFeature> featureBuilder)
         {
-            return new RoadEventSourceBuilder(_id, _configuration, _features, featureBuilder);
+            return new RoadEventSourceBuilder(_id, Configuration, _features,  featureBuilder);
         }
         
         public RoadEventSourceBuilder WithWorkZoneFeature(string featureId, string roadName, Direction direction, Action<WorkZoneRoadEventFeatureBuilder> setup)
         {
             var builder = new WorkZoneRoadEventFeatureBuilder(_id, featureId, roadName, direction);
             setup(builder);
-            return new RoadEventSourceBuilder(_id, _configuration, _features, builder);
+            return WithFeature(builder);
         }
 
         public RoadEventSourceBuilder WithDetourFeature(string featureId, string roadName, Direction direction, Action<DetourRoadEventFeatureBuilder> setup)
