@@ -4,7 +4,7 @@ using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 using Wsdot.Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.RoadEvents
 {
     public sealed class DetourRoadEventFeatureBuilder : RoadEventFeatureBuilder<DetourRoadEventFeatureBuilder, DetourRoadEvent>
     {

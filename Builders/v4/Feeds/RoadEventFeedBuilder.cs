@@ -2,72 +2,70 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.v4.Feeds;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.Feeds
 {
-    public class FieldDeviceFeedBuilder : IBuilder<FieldDeviceFeed>
+    public class RoadEventFeedBuilder : IBuilder<RoadEventsFeed>
     {
         private FeedInfoBuilder _infoBuilder;
-        private readonly ICollection<FieldDeviceSourceBuilder> _sourcesBuilders = new List<FieldDeviceSourceBuilder>();
+        private readonly ICollection<RoadEventSourceBuilder> _sourcesBuilders = new List<RoadEventSourceBuilder>();
 
-        private FieldDeviceFeedBuilder(string publisher)
+        public RoadEventFeedBuilder(string publisher)
         {
             _infoBuilder = new FeedInfoBuilder(publisher);
         }
-
-        public static IFactory<FieldDeviceFeedBuilder> Factory(string publisher)
-        {
-            return new FieldDeviceFeedBuilderFactory(publisher);
-        }
-
-        public FieldDeviceFeedBuilder WithInfo(Func<FeedInfoBuilder, FeedInfoBuilder> setupAction)
+        public RoadEventFeedBuilder WithInfo(Func<FeedInfoBuilder, FeedInfoBuilder> setupAction)
         {
             _infoBuilder = setupAction(_infoBuilder);
             return this;
         }
 
-        public FieldDeviceFeedBuilder WithPublisher(string value)
+        public RoadEventFeedBuilder WithPublisher(string value)
         {
             WithInfo(builder => builder.WithPublisher(value));
             return this;
         }
 
-        public FieldDeviceFeedBuilder WithVersion(Version value)
+        public RoadEventFeedBuilder WithVersion(Version value)
         {
             WithInfo(builder => builder.WithVersion(value));
             return this;
         }
 
-        public FieldDeviceFeedBuilder WithUpdateFrequency(TimeSpan value)
+        public RoadEventFeedBuilder WithUpdateFrequency(TimeSpan value)
         {
             WithInfo(builder => builder.WithUpdateFrequency(value));
             return this;
         }
 
-        public FieldDeviceFeedBuilder WithUpdateDate(DateTimeOffset value)
+        public RoadEventFeedBuilder WithUpdateDate(DateTimeOffset value)
         {
             WithInfo(builder => builder.WithUpdateDate(value));
             return this;
         }
 
-        public FieldDeviceFeedBuilder WithSource(string sourceId, Func<FieldDeviceSourceBuilder, FieldDeviceSourceBuilder> setup)
+        public RoadEventFeedBuilder WithSource(string sourceId, Func<RoadEventSourceBuilder, RoadEventSourceBuilder> setup)
         {
-            var builder = setup(new FieldDeviceSourceBuilder(sourceId));
+            var builder = setup(new RoadEventSourceBuilder(sourceId));
+            return WithSource(builder);
+        }
+        
+        public RoadEventFeedBuilder WithSource(RoadEventSourceBuilder builder)
+        {
             _sourcesBuilders.Add(builder);
 
             return this;
         }
 
-        public FieldDeviceFeed Result()
+        public RoadEventsFeed Result()
         {
             var feedInfo = _infoBuilder.Result();
 
             // add default publisher source if non are defined
             if (!_sourcesBuilders.Any())
-                _sourcesBuilders.Add(new FieldDeviceSourceBuilder(feedInfo.Publisher));
+                _sourcesBuilders.Add(new RoadEventSourceBuilder(feedInfo.Publisher));
 
-            var result = new FieldDeviceFeed();
+            var result = new RoadEventsFeed();
             foreach (var sourceBuilder in _sourcesBuilders)
             {
                 var source = sourceBuilder.Result();
@@ -91,20 +89,27 @@ namespace Wsdot.Wzdx.v4.Builders
             return result;
         }
 
-        // todo: review is builder factory needed ??
-        private class FieldDeviceFeedBuilderFactory : IFactory<FieldDeviceFeedBuilder>
+
+        public static IFactory<RoadEventFeedBuilder> Factory(string publisher)
+        {
+            return new RoadEventFeedBuilderFactory(publisher);
+        }
+
+        private class RoadEventFeedBuilderFactory :
+            IFactory<RoadEventFeedBuilder>
         {
             private readonly string _publisher;
 
-            public FieldDeviceFeedBuilderFactory(string publisher)
+            public RoadEventFeedBuilderFactory(string publisher)
             {
                 _publisher = publisher;
             }
 
-            public FieldDeviceFeedBuilder Create()
+            public RoadEventFeedBuilder Create()
             {
-                return new FieldDeviceFeedBuilder(_publisher);
+                return new RoadEventFeedBuilder(_publisher);
             }
         }
+
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.RoadEvents
 {
     public class LaneBuilder : Builder<Lane>
     {

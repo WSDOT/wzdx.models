@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.Devices;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.Devices
 {
     public abstract class FieldDeviceFeatureBuilder<TBuilder, TProperties> : Builder<FieldDeviceFeature>
         where TBuilder : Builder<FieldDeviceFeature>

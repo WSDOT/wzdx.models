@@ -5,7 +5,7 @@ using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.GeoJson.Geometries;
 using Wsdot.Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.RoadEvents
 {
     public abstract class RoadEventFeatureBuilder<TBuilder, TProperties> : Builder<RoadEventFeature>
         where TBuilder : Builder<RoadEventFeature>

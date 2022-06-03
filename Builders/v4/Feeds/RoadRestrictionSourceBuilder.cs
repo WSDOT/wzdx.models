@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wsdot.Wzdx.v4.Feeds;
+using Wsdot.Wzdx.v4.RoadEvents;
 using Wsdot.Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.Feeds
 {
     public sealed class RoadRestrictionSourceBuilder :
         FeedSourceBuilder<RoadRestrictionSourceBuilder>

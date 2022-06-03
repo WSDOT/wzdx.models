@@ -44,8 +44,10 @@ Example: Creating a v4 workzone/detour (wzdxfeed) feed can be done using the bui
 	var featureBuilder = new WorkZoneRoadEventFeatureBuilder("wsdot-wzdb", 
         "work-zone-002E", 
         "SR-90", Direction.Eastbound);
+    
+    featureBuilder = featureBuilder.WithGeometry(MultiPoint.FromCoordinates(new[] { Position.From(0, 0), Position.From(10, 10) }));
 
-	sourceBuilder =sourceBuilder.WithFeature(featureBuilder);
+	sourceBuilder = sourceBuilder.WithFeature(featureBuilder);
 
 	RoadEventsFeed wzdx = feedBuilder.Result();
 ```
@@ -56,17 +58,20 @@ Example: Creating a v4 workzone/detour (wzdxfeed) feed can be done using the bui
         .Factory("wsdot")
         .Create()
         .WithSource("wsdot-wzdb", sourceBuilder => sourceBuilder
-            .WithWorkZoneFeature("work-zone-001N", "SR-5", Direction.Northbound, featureBuilder =>
-            {
+            .WithFeature("work-zone-001N", feature => feature
+                .WorkZone("SR-5", Direction.Northbound, MultiPoint.FromCoordinates(new[] { Position.From(0, 0), Position.From(10, 10) }))
+                
                 /* additional feature details */
-            })
-            .WithWorkZoneFeature("work-zone-001S", "SR-5", Direction.Southbound, featureBuilder =>
-            {
+            )
+            .WithFeature("work-zone-001S", feature => feature
+                .WorkZone("SR-5", Direction.Southbound, MultiPoint.FromCoordinates(new[] { Position.From(0, 0), Position.From(10, 10) }))
+                
                 /* additional feature details */
-            })
-            .WithDetourFeature("detour-001N", "SR-5", Direction.Northbound, featureBuilder =>
-            {
+            )
+            .WithFeature("detour-001S", feature => feature
+                .Detour("SR-5", Direction.Northbound, LineString.FromCoordinates(new[] { Position.From(0, 0), Position.From(10, 10) }))
+                
                 /* additional feature details */
-            }))
+            ))
         .Result();
 ```

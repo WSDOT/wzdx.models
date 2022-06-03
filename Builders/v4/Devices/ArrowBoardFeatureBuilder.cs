@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.Devices;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.Devices
 {
     public sealed class ArrowBoardFeatureBuilder : FieldDeviceFeatureBuilder<ArrowBoardFeatureBuilder, ArrowBoard>
     {

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.Devices;
-using Wsdot.Wzdx.v4.Feeds;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.Feeds
 {
     public class FieldDeviceSourceBuilder :
         FeedSourceBuilder<FieldDeviceSourceBuilder>

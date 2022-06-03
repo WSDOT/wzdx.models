@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.v4.Devices;
 
-namespace Wsdot.Wzdx.v4.Builders
+namespace Wsdot.Wzdx.v4.Devices
 {
     public sealed class MarkedLocationBuilder : Builder<MarkedLocation>
     {
