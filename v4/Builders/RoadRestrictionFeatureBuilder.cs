@@ -1,55 +1,67 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.GeoJson.Geometries;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Builders
 {
-
-    public class RoadRestrictionFeatureBuilder : IBuilder<RoadEventFeature>
+    public class RoadRestrictionFeatureBuilder : RoadEventFeatureBuilder<RoadRestrictionFeatureBuilder, RestrictionRoadEvent>
     {
-        private readonly string _featureId;
-        private IGeometry _geometry;
-        private IEnumerable<double> _boundingBox;
-        private readonly RoadRestrictionEventBuilder _eventBuilder;
-
-        public RoadRestrictionFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction)
-        {
-            _featureId = featureId;
-            _eventBuilder = new RoadRestrictionEventBuilder(sourceId, roadName, direction);
-            _geometry = MultiPoint.FromCoordinates(Enumerable.Empty<Position>());
-        }
-
-        public RoadRestrictionFeatureBuilder WithEvent(Action<RoadRestrictionEventBuilder> configure)
-        {
-            configure(_eventBuilder);
-            return this;
-        }
-
-        public RoadEventFeature Result()
-        {
-            return new RoadEventFeature()
+        
+        public RoadRestrictionFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction) : 
+            this(new List<Action<RoadEventFeature>>(), (feature, restriction) =>
             {
-                Id = _featureId,
-                Properties = _eventBuilder.Result(),
-                Geometry = _geometry,
-                BoundaryBox = _boundingBox?.ToList()
-            };
+                var geometry = MultiPoint.FromCoordinates(Enumerable.Empty<Position>());
+                feature.Id = featureId;
+                feature.Geometry = geometry;
+                feature.BoundaryBox = geometry.BoundaryBox.ToList().AsReadOnly();
+                feature.Properties.CoreDetails.DataSourceId = sourceId;
+                feature.Properties.CoreDetails.RoadNames.Add(roadName);
+                feature.Properties.CoreDetails.Direction = direction;
+            })
+        {
+            
         }
 
-        public RoadRestrictionFeatureBuilder WithGeometry(LineString value)
+        private RoadRestrictionFeatureBuilder(IEnumerable<Action<RoadEventFeature>> configuration, Action<RoadEventFeature, RestrictionRoadEvent> step) : 
+            base(configuration, step)
         {
-            this._geometry = value;
-            this._boundingBox = value.BoundaryBox;
-            return this;
+            // ignore
         }
-        public RoadRestrictionFeatureBuilder WithGeometry(MultiPoint value)
+
+
+        // ReSharper disable once UnusedMember.Global
+        public RoadRestrictionFeatureBuilder WithLane(LaneType type, LaneStatus status, int order, Action<LaneBuilder> configure)
         {
-            this._geometry = value;
-            this._boundingBox = value.BoundaryBox;
-            return this;
+            var builder = new LaneBuilder(type, status, order);
+            configure(builder);
+            var lane = builder.Result();
+            return CreateWith((_, restriction) => restriction.Lanes.Add(lane));
         }
+
+        // ReSharper disable once UnusedMember.Global
+        public RoadRestrictionFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Action<RestrictionBuilder> configure)
+        {
+            var builder = new RestrictionBuilder(type, unit);
+            configure(builder);
+            var lane = builder.Result();
+            return CreateWith((_, restriction) => restriction.Restrictions.Add(lane));
+        }
+
+        protected override Func<RoadEventFeature> ResultFactory { get; } = () =>
+            new RoadEventFeature()
+            {
+                Properties = new RestrictionRoadEvent() { }
+            };
+
+        
+        protected override RoadRestrictionFeatureBuilder CreateWith(Action<RoadEventFeature, RestrictionRoadEvent> step)
+        {
+            return new RoadRestrictionFeatureBuilder(Configuration, step);
+        }
+
+        protected override Func<RestrictionRoadEvent> ResultProperties { get; } = () =>
+            new RestrictionRoadEvent();
     }
 }

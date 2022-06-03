@@ -38,11 +38,9 @@ namespace Wsdot.Wzdx.v4.Builders
             return new RoadRestrictionSourceBuilder(_id, Configuration, _features, builder);
         }
 
-        public RoadRestrictionSourceBuilder WithFeature(string featureId, string roadName, Direction direction, Action<RoadRestrictionFeatureBuilder> setup)
+        public RoadRestrictionSourceBuilder WithFeature(string featureId, Func<IRoadRestrictionFeatureBuilderFactory, RoadRestrictionFeatureBuilder> config)
         {
-            var builder = new RoadRestrictionFeatureBuilder(_id, featureId, roadName, direction);
-            setup(builder);
-            return WithFeature(builder);
+            return WithFeature(config(new FeatureBuilderFactory(_id, featureId)));
         }
 
         protected override RoadRestrictionSourceBuilder Create(ICollection<Action<FeedDataSource>> configuration, Action<FeedDataSource> setup)

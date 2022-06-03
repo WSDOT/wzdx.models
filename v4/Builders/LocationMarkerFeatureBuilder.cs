@@ -6,7 +6,8 @@ using Wsdot.Wzdx.v4.Devices;
 
 namespace Wsdot.Wzdx.v4.Builders
 {
-    public sealed class LocationMarkerFeatureBuilder : FieldDeviceFeatureBuilder<LocationMarkerFeatureBuilder, LocationMarker>
+    public sealed class LocationMarkerFeatureBuilder : 
+        FieldDeviceFeatureBuilder<LocationMarkerFeatureBuilder, LocationMarker>
     {
 
         public LocationMarkerFeatureBuilder(string sourceId, string featureId, string roadName) : base(new List<Action<FieldDeviceFeature>>(),

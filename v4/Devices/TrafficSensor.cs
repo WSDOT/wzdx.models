@@ -11,7 +11,11 @@ namespace Wsdot.Wzdx.v4.Devices
     {
         [JsonProperty("core_details", Required = Required.Always)]
         [Required]
-        public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails();
+        public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails()
+        {
+            DeviceType = FieldDeviceType.TrafficSensor,
+            DeviceStatus = FieldDeviceStatus.Unknown
+        };
 
         /// <summary>
         /// The UTC date and time where the TrafficSensor data collection started. The averages and totals contained in the TrafficSensor data apply to the inclusive interval of 'collection_interval_start_date' to 'collection_interval_end_date'

@@ -1,4 +1,6 @@
+using System;
 using Wsdot.Wzdx.GeoJson.Geometries;
+using Wsdot.Wzdx.v4.Devices;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Builders
@@ -22,12 +24,13 @@ namespace Wsdot.Wzdx.v4.Builders
         ArrowBoardFeatureBuilder ArrowBoard(string roadName, Point geometry);
         CameraFeatureBuilder Camera(string roadName, Point geometry);
         DynamicMessageSignFeatureBuilder DynamicMessageSign(string roadName, Point geometry);
+        FlashingBeaconFeatureBuilder FlashingBeacon(string roadName, Point geometry, FlashingBeaconFunction function);
+        HybridSignFeatureBuilder HybridSign(string roadName, Point geometry, HybridSignDynamicMessageFunction function);
+        LocationMarkerFeatureBuilder LocationMarker(string roadName,
+            Point geometry,
+            Func<MarkedLocationBuilder, MarkedLocationBuilder> locationSetup);
 
-        // todo:
-        //FlashingBeacon,
-        //HybridSign,
-        LocationMarkerFeatureBuilder LocationMarker(string roadName, Point geometry);
-        //TrafficSensor
+        TrafficSensorFeatureBuilder TrafficSensor(string roadName, Point geometry);
     }
 
     public class FeatureBuilderFactory : 
@@ -98,11 +101,34 @@ namespace Wsdot.Wzdx.v4.Builders
                 .WithGeometry(geometry);
         }
 
-        LocationMarkerFeatureBuilder IFieldDeviceFeatureBuilderFactory.LocationMarker(string roadName, Point geometry)
+        FlashingBeaconFeatureBuilder IFieldDeviceFeatureBuilderFactory.FlashingBeacon(string roadName, Point geometry,
+            FlashingBeaconFunction function)
         {
-            return new LocationMarkerFeatureBuilder(SourceId, FeatureId, roadName)
+            return new FlashingBeaconFeatureBuilder(SourceId, FeatureId, roadName)
+                .WithFunction(function)
                 .WithGeometry(geometry);
         }
 
+        HybridSignFeatureBuilder IFieldDeviceFeatureBuilderFactory.HybridSign(string roadName, Point geometry,
+            HybridSignDynamicMessageFunction function)
+        {
+            return new HybridSignFeatureBuilder(SourceId, FeatureId, roadName)
+                .WithFunction(function)
+                .WithGeometry(geometry);
+        }
+
+        LocationMarkerFeatureBuilder IFieldDeviceFeatureBuilderFactory.LocationMarker(string roadName, Point geometry,
+            Func<MarkedLocationBuilder, MarkedLocationBuilder> locationSetup)
+        {
+            return new LocationMarkerFeatureBuilder(SourceId, FeatureId, roadName)
+                .WithMarkedLocation(locationSetup)
+                .WithGeometry(geometry);
+        }
+
+        TrafficSensorFeatureBuilder IFieldDeviceFeatureBuilderFactory.TrafficSensor(string roadName, Point geometry)
+        {
+            return new TrafficSensorFeatureBuilder(SourceId, FeatureId, roadName)
+                .WithGeometry(geometry);
+        }
     }
 }

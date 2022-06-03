@@ -9,6 +9,11 @@ namespace Wsdot.Wzdx.v4.WorkZones
     /// </summary>
     public class DetourRoadEvent : RoadEvent
     {
+        public DetourRoadEvent()
+        {
+            CoreDetails.EventType = EventType.Detour;
+        }
+
         /// <summary>
         /// Name or number of the nearest cross street along the roadway where the event begins
         /// </summary>

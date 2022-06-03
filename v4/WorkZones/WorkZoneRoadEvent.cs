@@ -10,6 +10,11 @@ namespace Wsdot.Wzdx.v4.WorkZones
     /// </summary>
     public class WorkZoneRoadEvent : RoadEvent
     {
+        public WorkZoneRoadEvent()
+        {
+            CoreDetails.EventType = EventType.WorkZone;
+        }
+
         /// <summary>
         /// Name or number of the nearest cross street along the roadway where the event begins
         /// </summary>
@@ -79,7 +84,7 @@ namespace Wsdot.Wzdx.v4.WorkZones
         public LocationMethod LocationMethod { get; set; }
 
         [JsonProperty("worker_presence", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public WorkerPresence WorkerPresence { get; set; }
+        public WorkerPresence WorkerPresence { get; set; } 
 
         /// <summary>
         /// If applicable, the reduced speed limit posted within the road event, in kilometers per hour
@@ -92,18 +97,18 @@ namespace Wsdot.Wzdx.v4.WorkZones
         /// A list of zero or more restrictions applying to the road event
         /// </summary>
         [JsonProperty("restrictions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public ICollection<Restriction> Restrictions { get; set; }
+        public ICollection<Restriction> Restrictions { get; set; } = new HashSet<Restriction>();
 
         /// <summary>
         /// A list of the types of work being done in a road event
         /// </summary>
         [JsonProperty("types_of_work", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public ICollection<TypeOfWork> TypesOfWork { get; set; }
+        public ICollection<TypeOfWork> TypesOfWork { get; set; } = new HashSet<TypeOfWork>();
 
         /// <summary>
         /// A list of individual lanes within a road event (roadway segment)
         /// </summary>
         [JsonProperty("lanes", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public ICollection<Lane> Lanes { get; set; }
+        public ICollection<Lane> Lanes { get; set; } = new HashSet<Lane>();
     }
 }
