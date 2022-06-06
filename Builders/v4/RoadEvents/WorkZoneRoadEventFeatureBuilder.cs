@@ -54,6 +54,9 @@ namespace Wsdot.Wzdx.v4.RoadEvents
 
         public WorkZoneRoadEventFeatureBuilder WithBeginning(string crossStreet, SpatialVerification verification)
         {
+            if (string.IsNullOrEmpty(crossStreet))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(crossStreet));
+
             return CreateWith((_, workZone) =>
             {
                 workZone.BeginningMilepost = 0;
@@ -74,6 +77,9 @@ namespace Wsdot.Wzdx.v4.RoadEvents
 
         public WorkZoneRoadEventFeatureBuilder WithEnding(string crossStreet, SpatialVerification verification)
         {
+            if (string.IsNullOrEmpty(crossStreet))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(crossStreet));
+
             return CreateWith((_, workZone) =>
             {
                 workZone.EndingMilepost = 0;

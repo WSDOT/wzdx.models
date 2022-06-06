@@ -57,6 +57,9 @@ namespace Wsdot.Wzdx.v4.RoadEvents
 
         public TBuilder WithGeometry(LineString value)
         {
+            if (value.BoundaryBox == null)
+                value.BoundaryBox = value.Coordinates.AsBoundaryBox();
+
             return CreateWith((feature, _) =>
             {
                 feature.Geometry = value;
@@ -66,6 +69,9 @@ namespace Wsdot.Wzdx.v4.RoadEvents
         
         public TBuilder WithGeometry(MultiPoint value)
         {
+            if (value.BoundaryBox == null)
+                value.BoundaryBox = value.Coordinates.AsBoundaryBox();
+
             return CreateWith((feature, _) =>
             {
                 feature.Geometry = value;

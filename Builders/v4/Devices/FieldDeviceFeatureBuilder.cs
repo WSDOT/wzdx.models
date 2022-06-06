@@ -86,6 +86,9 @@ namespace Wsdot.Wzdx.v4.Devices
 
         public TBuilder WithGeometry(Point value)
         {
+            if (value.BoundaryBox == null)
+                value = Point.FromCoordinates(value.Coordinates);
+
             return CreateWith((feature, _) =>
             {
                 feature.Geometry = value;
