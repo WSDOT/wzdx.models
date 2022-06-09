@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net45;net6.0;net5.0;netstandard2.0;netstandard2.1;netcoreapp3.1</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
         <RootNamespace>Wsdot.Wzdx</RootNamespace>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <Version>0.0.4</Version>
+        <Version>0.0.5</Version>
         <Company>WSDOT</Company>
         <Description>
             This project contains various classes and builders used to build WZDx feeds.
