@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -10,7 +11,7 @@ namespace Wsdot.Wzdx.v4.Feeds
     /// </summary>
     
     [DataContract(Name = "FeedDataSource")]
-    public class FeedDataSource
+    public class FeedDataSource : IEquatable<FeedDataSource>
     {
         /// <summary>
         /// Unique identifier for the organization providing work zone data
@@ -81,6 +82,56 @@ namespace Wsdot.Wzdx.v4.Feeds
                 UpdateFrequency = int.MaxValue,
                 UpdateDate = DateTimeOffset.UtcNow
             };
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj as FeedDataSource);
+        }
+
+        public bool Equals(FeedDataSource other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return DataSourceId == other.DataSourceId &&
+                   OrganizationName == other.OrganizationName &&
+                   ContactName == other.ContactName &&
+                   ContactEmail == other.ContactEmail &&
+                   UpdateFrequency == other.UpdateFrequency &&
+                   UpdateDate.Equals(other.UpdateDate) &&
+                   LrsType == other.LrsType &&
+                   Equals(LrsUrl,
+                       other.LrsUrl) &&
+                   LocationVerifyMethod == other.LocationVerifyMethod;
+        }
+
+        [SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "Supressing Resharper Code Quality Check")]
+        [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (DataSourceId != null ? DataSourceId.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (OrganizationName != null ? OrganizationName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ContactName != null ? ContactName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ContactEmail != null ? ContactEmail.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ UpdateFrequency;
+                hashCode = (hashCode * 397) ^ UpdateDate.GetHashCode();
+                hashCode = (hashCode * 397) ^ (LrsType != null ? LrsType.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LrsUrl != null ? LrsUrl.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LocationVerifyMethod != null ? LocationVerifyMethod.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(FeedDataSource left, FeedDataSource right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(FeedDataSource left, FeedDataSource right)
+        {
+            return !Equals(left, right);
         }
     }
 }

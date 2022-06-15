@@ -8,7 +8,7 @@ The goal of WZDx is to enable widespread access to up-to-date information about 
 Specifically, WZDx defines the structure and content of several [GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) documents that are each intended to be distributed as a data feed. The feeds describe a variety of high-level road work-related information such as the location and status of work zones, detours, and field devices.
 
 ## WZDX Models
-This project contains various classes and builders used to build WZDx feeds.
+This project contains various classes and builders used to build WZDx feeds. 
 
 ## Namespaces
 ---
@@ -21,11 +21,12 @@ This project contains various classes and builders used to build WZDx feeds.
 * WorkZones (RoadEvents)
 ---
 ### v4
-* Builders
 * Feeds
 * Devices
 * WorkZones (RoadEvents, e.g., Detours, Restrictions, WorkZones )
 
+### Builders
+* v4
 
 ## Usage 
 Model objects in this package can be used independently to create a feed. However, it is highly encourged that you build your WZDx feed using the built in builder classes.
@@ -33,6 +34,9 @@ Model objects in this package can be used independently to create a feed. Howeve
 These builders ensure a valid feed output is generated.
 
 Example: Creating a v4 workzone/detour (wzdxfeed) feed can be done using the builder classes either individually or fluently:
+
+#### Converting to Json
+The models and converters designed within make use of Newtonsoft Json serialization and it is recommended to use over the .Net Json serializer.
 
 ### Using individual builders:
 ``` cs
