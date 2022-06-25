@@ -35,7 +35,9 @@ namespace Wsdot.Wzdx.v4.Feeds
 
         public RoadEventSourceBuilder WithFeature(IBuilder<RoadEventFeature> featureBuilder)
         {
-            return new RoadEventSourceBuilder(_id, Configuration, _features, featureBuilder);
+            _features.Add(featureBuilder);
+
+            return this;
         }
 
         public RoadEventSourceBuilder WithFeature(string featureId, Func<IRoadEventFeatureBuilderFactory, IBuilder<RoadEventFeature>> setup)

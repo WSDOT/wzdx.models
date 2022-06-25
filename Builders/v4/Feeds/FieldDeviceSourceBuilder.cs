@@ -35,7 +35,9 @@ namespace Wsdot.Wzdx.v4.Feeds
 
         public FieldDeviceSourceBuilder WithFeature(Builder<FieldDeviceFeature> builder)
         {
-            return new FieldDeviceSourceBuilder(_id, Configuration, _features, builder);
+            _features.Add(builder);
+
+            return this;
         }
         
         public FieldDeviceSourceBuilder WithFeature(string featureId, Func<IFieldDeviceFeatureBuilderFactory, Builder<FieldDeviceFeature>> config)
