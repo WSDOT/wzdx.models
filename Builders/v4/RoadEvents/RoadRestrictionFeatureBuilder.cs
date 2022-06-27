@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.RoadEvents
 {
+    /// <summary>
+    /// Provides an immutable builder of a v4 RoadEventFeature (Restriction) class
+    /// </summary>
     public class RoadRestrictionFeatureBuilder : RoadEventFeatureBuilder<RoadRestrictionFeatureBuilder, RestrictionRoadEvent>
     {
         
@@ -30,21 +34,20 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             // ignore
         }
 
-
         // ReSharper disable once UnusedMember.Global
-        public RoadRestrictionFeatureBuilder WithLane(LaneType type, LaneStatus status, int order, Action<LaneBuilder> configure)
+        [Pure]
+        public RoadRestrictionFeatureBuilder WithLane(LaneType type, LaneStatus status, int order, Func<LaneBuilder, LaneBuilder> configure)
         {
-            var builder = new LaneBuilder(type, status, order);
-            configure(builder);
+            var builder = configure(new LaneBuilder(type, status, order));
             var lane = builder.Result();
             return CreateWith((_, restriction) => restriction.Lanes.Add(lane));
         }
 
         // ReSharper disable once UnusedMember.Global
-        public RoadRestrictionFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Action<RestrictionBuilder> configure)
+        [Pure]
+        public RoadRestrictionFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
         {
-            var builder = new RestrictionBuilder(type, unit);
-            configure(builder);
+            var builder = configure(new RestrictionBuilder(type, unit));
             var lane = builder.Result();
             return CreateWith((_, restriction) => restriction.Restrictions.Add(lane));
         }
@@ -52,15 +55,14 @@ namespace Wsdot.Wzdx.v4.RoadEvents
         protected override Func<RoadEventFeature> ResultFactory { get; } = () =>
             new RoadEventFeature()
             {
-                Properties = new RestrictionRoadEvent() { }
+                Properties = new RestrictionRoadEvent()
             };
 
-        
         protected override RoadRestrictionFeatureBuilder CreateWith(Action<RoadEventFeature, RestrictionRoadEvent> step)
         {
             return new RoadRestrictionFeatureBuilder(Configuration, step);
         }
-
+        
         protected override Func<RestrictionRoadEvent> ResultProperties { get; } = () =>
             new RestrictionRoadEvent();
     }

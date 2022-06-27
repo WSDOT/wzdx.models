@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Wsdot.Wzdx.Core
 {
@@ -12,8 +13,10 @@ namespace Wsdot.Wzdx.Core
             Configuration = new List<Action<T>>(configuration) { step };
         }
 
+        [Pure]
         protected abstract Func<T> ResultFactory { get; }
 
+        [Pure]
         public virtual T Result()
         {
             var result = ResultFactory();

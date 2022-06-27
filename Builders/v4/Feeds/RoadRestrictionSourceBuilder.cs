@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.v4.RoadEvents;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Feeds
 {
+    /// <summary>
+    /// Provides an immutable builder of a v4 FeedSource class of a Road Restriction Feed 
+    /// </summary>
     public sealed class RoadRestrictionSourceBuilder :
         FeedSourceBuilder<RoadRestrictionSourceBuilder>
     {
@@ -33,21 +37,25 @@ namespace Wsdot.Wzdx.v4.Feeds
             _features = new List<RoadRestrictionFeatureBuilder>(features) { builder };
         }
 
+        [Pure]
         public RoadRestrictionSourceBuilder WithFeature(RoadRestrictionFeatureBuilder builder)
         {
             return new RoadRestrictionSourceBuilder(_id, Configuration, _features, builder);
         }
 
+        [Pure]
         public RoadRestrictionSourceBuilder WithFeature(string featureId, Func<IRoadRestrictionFeatureBuilderFactory, RoadRestrictionFeatureBuilder> config)
         {
             return WithFeature(config(new FeatureBuilderFactory(_id, featureId)));
         }
 
+        [Pure]
         protected override RoadRestrictionSourceBuilder Create(ICollection<Action<FeedDataSource>> configuration, Action<FeedDataSource> setup)
         {
             return new RoadRestrictionSourceBuilder(_id, configuration, _features, setup);
         }
 
+        [Pure]
         public IEnumerable<RoadEventFeature> Features()
         {
             return _features.Select(builder => builder.Result());

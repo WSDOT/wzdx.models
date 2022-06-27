@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.WorkZones;
@@ -33,11 +34,13 @@ namespace Wsdot.Wzdx.v4.Feeds
             _features = new List<IBuilder<RoadEventFeature>>(features) { builder };
         }
 
+        [Pure]
         public RoadEventSourceBuilder WithFeature(IBuilder<RoadEventFeature> featureBuilder)
         {
             return new RoadEventSourceBuilder(_id, Configuration, _features, featureBuilder);
         }
 
+        [Pure]
         public RoadEventSourceBuilder WithFeature(string featureId, Func<IRoadEventFeatureBuilderFactory, IBuilder<RoadEventFeature>> setup)
         {
             return WithFeature(setup(new FeatureBuilderFactory(_id, featureId)));
@@ -48,6 +51,7 @@ namespace Wsdot.Wzdx.v4.Feeds
             return new RoadEventSourceBuilder(_id, configuration, _features, setup);
         }
 
+        [Pure]
         public IEnumerable<RoadEventFeature> Features()
         {
             return _features.Select(builder => builder.Result());

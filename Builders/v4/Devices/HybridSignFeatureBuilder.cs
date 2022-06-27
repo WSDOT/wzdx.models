@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 
 namespace Wsdot.Wzdx.v4.Devices
 {
-    public sealed class HybridSignFeatureBuilder :
+    /// <summary>
+    /// Provides an immutable builder of a v4 FieldDeviceFeature (HybridSign) class
+    /// </summary>
+    public class HybridSignFeatureBuilder :
         FieldDeviceFeatureBuilder<HybridSignFeatureBuilder, HybridSign>
     {
         public HybridSignFeatureBuilder(string sourceId, string featureId, string roadName) :
@@ -29,17 +33,20 @@ namespace Wsdot.Wzdx.v4.Devices
         {
             // ignore
         }
-
+        
+        [Pure]
         public HybridSignFeatureBuilder WithFunction(HybridSignDynamicMessageFunction value)
         {
             return CreateWith((_, sign) => sign.DynamicMessageFunction = value);
         }
-        
+
+        [Pure]
         public HybridSignFeatureBuilder WithDynamicMessage(string value)
         {
             return CreateWith((_, sign) => sign.DynamicMessageText = value);
         }
 
+        [Pure]
         public HybridSignFeatureBuilder WithStaticMessage(string value)
         {
             return CreateWith((_, sign) => sign.StaticSignText = value);

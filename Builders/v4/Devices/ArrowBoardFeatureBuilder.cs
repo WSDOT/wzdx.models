@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 
 namespace Wsdot.Wzdx.v4.Devices
 {
-    public sealed class ArrowBoardFeatureBuilder : FieldDeviceFeatureBuilder<ArrowBoardFeatureBuilder, ArrowBoard>
+    /// <summary>
+    /// Provides an immutable builder of a v4 FieldDeviceFeature (ArrowBoard) class
+    /// </summary>
+    public class ArrowBoardFeatureBuilder : FieldDeviceFeatureBuilder<ArrowBoardFeatureBuilder, ArrowBoard>
     {
         public ArrowBoardFeatureBuilder(string sourceId, string featureId, string roadName) :
             this(new List<Action<FieldDeviceFeature>>(), (feature, properties) =>
@@ -29,16 +33,19 @@ namespace Wsdot.Wzdx.v4.Devices
             // ignore
         }
 
+        [Pure]
         public ArrowBoardFeatureBuilder WithIsMoving(bool value)
         {
             return CreateWith((feature, board) => board.IsMoving = value);
         }
 
+        [Pure]
         public ArrowBoardFeatureBuilder WithIsInTransportPosition(bool value)
         {
             return CreateWith((feature, board) => board.IsInTransportPosition = value);
         }
 
+        [Pure]
         public ArrowBoardFeatureBuilder WithPattern(ArrowBoardPattern value)
         {
             return CreateWith((feature, board) => board.Pattern = value);

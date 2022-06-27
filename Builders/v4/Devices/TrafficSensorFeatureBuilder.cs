@@ -5,7 +5,10 @@ using Wsdot.Wzdx.GeoJson.Geometries;
 
 namespace Wsdot.Wzdx.v4.Devices
 {
-    public sealed class TrafficSensorFeatureBuilder : 
+    /// <summary>
+    /// Provides an immutable builder of a v4 FieldDeviceFeature (TrafficSensor) class
+    /// </summary>
+    public class TrafficSensorFeatureBuilder : 
         FieldDeviceFeatureBuilder<TrafficSensorFeatureBuilder, TrafficSensor>
     {
         public TrafficSensorFeatureBuilder(string sourceId, string featureId, string roadName) :
@@ -36,6 +39,5 @@ namespace Wsdot.Wzdx.v4.Devices
         }
 
         protected override Func<TrafficSensor> ResultProperties { get; } = () => new TrafficSensor();
-
     }
 }

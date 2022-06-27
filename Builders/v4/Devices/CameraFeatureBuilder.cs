@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 
 namespace Wsdot.Wzdx.v4.Devices
 {
-    public sealed class CameraFeatureBuilder : FieldDeviceFeatureBuilder<CameraFeatureBuilder, Camera>
+    /// <summary>
+    /// Provides an immutable builder of a v4 FieldDeviceFeature (Camera) class
+    /// </summary>
+    public class CameraFeatureBuilder : FieldDeviceFeatureBuilder<CameraFeatureBuilder, Camera>
     {
         public CameraFeatureBuilder(string sourceId, string featureId, string roadName) :
             this(new List<Action<FieldDeviceFeature>>(), (feature, properties) =>
@@ -30,6 +34,7 @@ namespace Wsdot.Wzdx.v4.Devices
             // ignore
         }
 
+        [Pure]
         public CameraFeatureBuilder WithImage(Uri url, DateTimeOffset timestamp)
         {
             return CreateWith((feature, camera) =>

@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Wsdot.Wzdx.v4.Feeds
 {
+    /// <summary>
+    /// Provides an immutable builder of a v4 FeedInfo (ArrowBoard) class
+    /// </summary>
     public class FeedInfoBuilder
     {
         private readonly ICollection<Action<FeedInfo>> _configuration;
@@ -25,40 +29,49 @@ namespace Wsdot.Wzdx.v4.Feeds
             _configuration = new List<Action<FeedInfo>>(configuration) { step };
         }
 
+        [Pure]
         public FeedInfoBuilder WithPublisher(string value)
         {
             return new FeedInfoBuilder(_configuration, info => info.Publisher = value);
         }
+        
+        [Pure]
         public FeedInfoBuilder WithVersion(Version value)
         {
             return new FeedInfoBuilder(_configuration, info => info.Version = value.ToString(2));
         }
 
+        [Pure]
         public FeedInfoBuilder WithUpdateFrequency(TimeSpan value)
         {
             return new FeedInfoBuilder(_configuration, info => info.UpdateFrequency = (int)value.TotalSeconds);
         }
 
+        [Pure]
         public FeedInfoBuilder WithUpdateDate(DateTimeOffset value)
         {
             return new FeedInfoBuilder(_configuration, info => info.UpdateDate = value);
         }
 
+        [Pure]
         public FeedInfoBuilder WithContactName(string value)
         {
             return new FeedInfoBuilder(_configuration, info => info.ContactName = value);
         }
-        
+
+        [Pure]
         public FeedInfoBuilder WithContactEmail(string value)
         {
             return new FeedInfoBuilder(_configuration, info => info.ContactEmail = value);
         }
-        
+
+        [Pure]
         public FeedInfoBuilder WithLicense(LicenseType value)
         {
             return new FeedInfoBuilder(_configuration, info => info.License = value);
         }
 
+        [Pure]
         public FeedInfo Result()
         {
             var result = new FeedInfo();

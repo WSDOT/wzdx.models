@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.RoadEvents
 {
-    public sealed class RestrictionBuilder : Builder<Restriction>
+    /// <summary>
+    /// Provides an immutable builder of a v4 Restriction class
+    /// </summary>
+    public class RestrictionBuilder : Builder<Restriction>
     {
         public RestrictionBuilder(RestrictionType type, UnitOfMeasurement unit) :
             base(new List<Action<Restriction>>(), restriction =>
@@ -24,16 +28,19 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             
         }
 
+        [Pure]
         public RestrictionBuilder WithType(RestrictionType value)
         {
             return new RestrictionBuilder(Configuration, restriction => restriction.Type = value);
         }
 
+        [Pure]
         public RestrictionBuilder WithUnitOfMeasure(UnitOfMeasurement value)
         {
             return new RestrictionBuilder(Configuration, restriction => restriction.Unit = value);
         }
-        
+
+        [Pure]
         public RestrictionBuilder WithValue(double value)
         {
             return new RestrictionBuilder(Configuration, restriction => restriction.Value = value);

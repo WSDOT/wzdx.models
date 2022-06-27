@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 
 namespace Wsdot.Wzdx.v4.Devices
 {
-    public sealed class LocationMarkerFeatureBuilder : 
+    /// <summary>
+    /// Provides an immutable builder of a v4 FieldDeviceFeature (LocationMarker) class
+    /// </summary>
+    public class LocationMarkerFeatureBuilder : 
         FieldDeviceFeatureBuilder<LocationMarkerFeatureBuilder, LocationMarker>
     {
 
@@ -31,11 +35,14 @@ namespace Wsdot.Wzdx.v4.Devices
             // ignore
         }
 
+        [Pure]
         public LocationMarkerFeatureBuilder WithMarkedLocation(Func<MarkedLocationBuilder, MarkedLocationBuilder> config)
         {
             var value = config(new MarkedLocationBuilder()).Result();
             return CreateWith((feature, marker) => marker.MarkedLocations = new List<MarkedLocation>() { value });
         }
+
+        [Pure]
         public LocationMarkerFeatureBuilder WithAdditionalMarkedLocation(Func<MarkedLocationBuilder, MarkedLocationBuilder> config)
         {
             var value = config(new MarkedLocationBuilder()).Result();

@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 
 namespace Wsdot.Wzdx.v4.Devices
 {
+    /// <summary>
+    /// Provides an immutable builder of a v4 FieldDeviceFeature (FlashingBeacon) class
+    /// </summary>
     public sealed class FlashingBeaconFeatureBuilder : 
         FieldDeviceFeatureBuilder<FlashingBeaconFeatureBuilder, FlashingBeacon>
     {
@@ -25,11 +29,13 @@ namespace Wsdot.Wzdx.v4.Devices
             // ignore
         }
 
+        [Pure]
         public FlashingBeaconFeatureBuilder WithFunction(FlashingBeaconFunction value)
         {
             return CreateWith((feature, beacon) => beacon.Function = value);
         }
 
+        [Pure]
         public FlashingBeaconFeatureBuilder WithFlashing(bool value)
         {
             return CreateWith((feature, beacon) => beacon.IsFlashing = value);

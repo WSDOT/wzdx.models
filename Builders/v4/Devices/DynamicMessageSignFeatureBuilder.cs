@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 
 namespace Wsdot.Wzdx.v4.Devices
 {
+    /// <summary>
+    /// Provides an immutable builder of a v4 FieldDeviceFeature (DynamicMessageSign) class
+    /// </summary>
     public class DynamicMessageSignFeatureBuilder : FieldDeviceFeatureBuilder<DynamicMessageSignFeatureBuilder, DynamicMessageSign>
     {
         public DynamicMessageSignFeatureBuilder(string sourceId, string featureId, string roadName) :
@@ -30,6 +34,7 @@ namespace Wsdot.Wzdx.v4.Devices
             // ignore
         }
 
+        [Pure]
         public DynamicMessageSignFeatureBuilder WithMessage(string value)
         {
             return CreateWith((feature, sign) => sign.MessageMultiString = value);

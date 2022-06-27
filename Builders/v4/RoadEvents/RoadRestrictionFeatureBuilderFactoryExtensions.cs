@@ -4,6 +4,9 @@ using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.RoadEvents
 {
+    /// <summary>
+    /// Provides extensions of for v4 IRoadRestrictionFeatureBuilderFactory 
+    /// </summary>
     public static class RoadRestrictionFeatureBuilderFactoryExtensions
     {
 

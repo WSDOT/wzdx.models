@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.RoadEvents
 {
-    public sealed class DetourRoadEventFeatureBuilder : RoadEventFeatureBuilder<DetourRoadEventFeatureBuilder, DetourRoadEvent>
+    /// <summary>
+    /// Provides an immutable builder of a v4 RoadEventFeature (Detour) class
+    /// </summary>
+    public class DetourRoadEventFeatureBuilder : RoadEventFeatureBuilder<DetourRoadEventFeatureBuilder, DetourRoadEvent>
     {
         public DetourRoadEventFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction)
             : this(new List<Action<RoadEventFeature>>(), (feature, detour) =>
@@ -32,7 +36,8 @@ namespace Wsdot.Wzdx.v4.RoadEvents
         {
 
         }
-
+        
+        [Pure]
         public DetourRoadEventFeatureBuilder WithBeginning(double milepost)
         {
             return CreateWith((_, workZone) =>
@@ -42,6 +47,7 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public DetourRoadEventFeatureBuilder WithBeginning(string crossStreet)
         {
             return CreateWith((_, workZone) =>
@@ -51,6 +57,7 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public DetourRoadEventFeatureBuilder WithEnding(double milepost)
         {
             return CreateWith((_, workZone) =>
@@ -60,6 +67,7 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public DetourRoadEventFeatureBuilder WithEnding(string crossStreet)
         {
             return CreateWith((_, workZone) =>
@@ -69,11 +77,13 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public DetourRoadEventFeatureBuilder WithStatus(EventStatus value)
         {
             return CreateWith((_, workZone) => workZone.EventStatus = value);
         }
 
+        [Pure]
         public DetourRoadEventFeatureBuilder WithStart(DateTimeOffset value, TimeVerification accuracy)
         {
             return CreateWith((_, detour) =>
@@ -83,6 +93,7 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public DetourRoadEventFeatureBuilder WithEnd(DateTimeOffset value, TimeVerification accuracy)
         {
             return CreateWith((_, detour) =>
@@ -92,13 +103,12 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
-
+        [Pure]
         protected override DetourRoadEventFeatureBuilder CreateWith(Action<RoadEventFeature, DetourRoadEvent> step)
         {
             return new DetourRoadEventFeatureBuilder(Configuration, step);
         }
-
+        
         protected override Func<DetourRoadEvent> ResultProperties { get; } = () => new DetourRoadEvent();
-
     }
 }

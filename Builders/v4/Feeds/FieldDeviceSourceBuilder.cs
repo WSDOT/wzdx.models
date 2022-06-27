@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.Core;
 using Wsdot.Wzdx.v4.Devices;
@@ -33,11 +34,13 @@ namespace Wsdot.Wzdx.v4.Feeds
             _features = new List<Builder<FieldDeviceFeature>>(features) { builder };
         }
 
+        [Pure]
         public FieldDeviceSourceBuilder WithFeature(Builder<FieldDeviceFeature> builder)
         {
             return new FieldDeviceSourceBuilder(_id, Configuration, _features, builder);
         }
         
+        [Pure]
         public FieldDeviceSourceBuilder WithFeature(string featureId, Func<IFieldDeviceFeatureBuilderFactory, Builder<FieldDeviceFeature>> config)
         {
             return WithFeature(config(new FeatureBuilderFactory(_id, featureId)));

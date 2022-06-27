@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.Core;
 
 namespace Wsdot.Wzdx.v4.Feeds
 {
+    /// <summary>
+    /// Provides an abstract immutable builder of a v4 FeedDataSource (abstract) class
+    /// </summary>
     public abstract class FeedSourceBuilder<TFeedSourceBuilder> :
         IBuilder<FeedDataSource>
         where TFeedSourceBuilder : FeedSourceBuilder<TFeedSourceBuilder>
@@ -43,6 +47,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// Returns a builder containing configuration with source identifier
         /// </summary>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithSourceId(string value)
         {
             return Create(Configuration, source => source.DataSourceId = value);
@@ -52,6 +57,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// Returns a builder containing configuration with organization name
         /// </summary>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithOrganizationName(string value)
         {
             return Create(Configuration, source => source.OrganizationName = value);
@@ -61,6 +67,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// Returns a builder containing configuration with contact name
         /// </summary>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithContactName(string value)
         {
             return Create(Configuration, info => info.ContactName = value);
@@ -70,6 +77,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// Returns a builder containing configuration with contact email
         /// </summary>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithContactEmail(string value)
         {
             return Create(Configuration, info => info.ContactEmail = value);
@@ -79,6 +87,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// Returns a builder containing configuration with contact name and email
         /// </summary>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithContact(string name, string email)
         {
             return Create(Configuration, source =>
@@ -93,6 +102,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// </summary>
         /// <returns></returns>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithNoContact()
         {
             return Create(Configuration, source =>
@@ -107,6 +117,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// </summary>
         /// <param name="value">TimeSpan value representing frequency of updates</param>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithUpdateFrequency(TimeSpan value)
         {
             return Create(Configuration, info => info.UpdateFrequency = (int)value.TotalSeconds);
@@ -117,6 +128,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// </summary>
         /// <param name="value">DateTimeOffset containing the last updated date time in UTC</param>
         /// <returns>Source Builder<typeparam name="TFeedSourceBuilder"></typeparam></returns>
+        [Pure]
         public TFeedSourceBuilder WithUpdateDate(DateTimeOffset value)
         {
             return Create(Configuration, info => info.UpdateDate = value.UtcDateTime);
@@ -128,6 +140,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// Returns the completed feed data source as configured by the builder
         /// </summary>
         /// <returns></returns>
+        [Pure]
         public FeedDataSource Result()
         {
             var result = new FeedDataSource();

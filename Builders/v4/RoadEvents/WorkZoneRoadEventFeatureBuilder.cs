@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Wsdot.Wzdx.GeoJson.Geometries;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.RoadEvents
 {
-
+    /// <summary>
+    /// Provides an immutable builder of a v4 RoadEventFeature (WorkZone) class
+    /// </summary>
     public sealed class WorkZoneRoadEventFeatureBuilder : RoadEventFeatureBuilder<WorkZoneRoadEventFeatureBuilder, WorkZoneRoadEvent>
     {
         public WorkZoneRoadEventFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction)
@@ -37,11 +40,13 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             // ignore
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithLocationMethod(LocationMethod value)
         {
             return CreateWith((_, workZone) => workZone.LocationMethod = value );
         }
-        
+
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithBeginning(double milepost, SpatialVerification verification)
         {
             return CreateWith((_, workZone) =>
@@ -52,6 +57,7 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithBeginning(string crossStreet, SpatialVerification verification)
         {
             if (string.IsNullOrEmpty(crossStreet))
@@ -64,7 +70,8 @@ namespace Wsdot.Wzdx.v4.RoadEvents
                 workZone.BeginningAccuracy = verification;
             });
         }
-        
+
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithEnding(double milepost, SpatialVerification verification)
         {
             return CreateWith((_, workZone) =>
@@ -75,6 +82,7 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithEnding(string crossStreet, SpatialVerification verification)
         {
             if (string.IsNullOrEmpty(crossStreet))
@@ -88,37 +96,44 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithStatus(EventStatus value)
         {
             return CreateWith((_, workZone) => workZone.EventStatus = value );
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithReducedSpeedLimitKph(double value)
         {
             return CreateWith((_, workZone) => workZone.ReducedSpeedLimitKph = value);
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithNoReducedSpeedLimitKph()
         {
             return CreateWith((_, workZone) => workZone.ReducedSpeedLimitKph = null);
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithTypesOfWork(IEnumerable<TypeOfWork> value)
         {
             return CreateWith((_, workZone) => workZone.TypesOfWork = value.ToList());
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithVehicleImpact(VehicleImpact value)
         {
             return CreateWith((_, workZone) => workZone.VehicleImpact = value);
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithWorkerPresence(Func<WorkerPresenceBuilder, WorkerPresenceBuilder> config)
         {
             var presence = config(new WorkerPresenceBuilder(false)).Result();
             return CreateWith((_, workZone) => workZone.WorkerPresence = presence);
         }
-        
+
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithStart(DateTimeOffset value, TimeVerification accuracy)
         {
             return CreateWith((_, workZone) =>
@@ -128,6 +143,7 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             });
         }
 
+        [Pure]
         public WorkZoneRoadEventFeatureBuilder WithEnd(DateTimeOffset value, TimeVerification accuracy)
         {
             return CreateWith((_, workZone) =>
@@ -138,19 +154,19 @@ namespace Wsdot.Wzdx.v4.RoadEvents
         }
 
         // ReSharper disable once UnusedMember.Global
-        public WorkZoneRoadEventFeatureBuilder WithLane(LaneType type, LaneStatus status, int order, Action<LaneBuilder> configure)
+        [Pure]
+        public WorkZoneRoadEventFeatureBuilder WithLane(LaneType type, LaneStatus status, int order, Func<LaneBuilder, LaneBuilder> configure)
         {
-            var builder = new LaneBuilder(type, status, order);
-            configure(builder);
+            var builder = configure(new LaneBuilder(type, status, order));
             var lane = builder.Result();
             return CreateWith((_, workZone) => workZone.Lanes.Add(lane));
         }
-        
+
         // ReSharper disable once UnusedMember.Global
-        public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Action<RestrictionBuilder> configure)
+        [Pure]
+        public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
         {
-            var builder = new RestrictionBuilder(type, unit);
-            configure(builder);
+            var builder = configure(new RestrictionBuilder(type, unit));
             var lane = builder.Result();
             return CreateWith((_, workZone) => workZone.Restrictions.Add(lane));
         }
