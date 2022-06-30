@@ -1,16 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <PropertyGroup>
+        <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="v3\**" />
-    <EmbeddedResource Remove="v3\**" />
-    <None Remove="v3\**" />
-  </ItemGroup>
+    <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+        <NoWarn>1701;1702;CS8032;CS8033;NETSDK1182</NoWarn>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
