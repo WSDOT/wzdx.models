@@ -13,11 +13,11 @@ namespace Wsdot.Wzdx.Models.Tests
     {
         private Func<string, IEnumerable<ValidationError>> Validator { get; }
 
-        public SchemaValidator(JSchema schema) :
+        private SchemaValidator(JSchema schema) :
             this(value => DefaultValidator(schema, value))
         {
+            // 
         }
-
 
         private SchemaValidator(Func<string, IEnumerable<ValidationError>> validator)
         {
@@ -29,9 +29,7 @@ namespace Wsdot.Wzdx.Models.Tests
             errors = Validate(json);
             return !errors.Any();
         }
-
-        public IEnumerable<ValidationError> Validate(string json) => Validator(json);
-
+        
         public static SchemaValidator Load(Uri path)
         {
             var client = new HttpClient();
@@ -43,9 +41,12 @@ namespace Wsdot.Wzdx.Models.Tests
                 : Empty();
         }
 
+        private IEnumerable<ValidationError> Validate(string json) => Validator(json);
+
+        // ReSharper disable once MemberCanBePrivate.Global
         public static SchemaValidator Empty() => new SchemaValidator(_ => throw new NotSupportedException("Empty schema cannot be used to validate with."));
 
-        public static SchemaValidator Load(Stream stream)
+        private static SchemaValidator Load(Stream stream)
         {
             var reader = new JsonTextReader(new StreamReader(stream));
             var schema = JSchema.Load(reader, new JSchemaReaderSettings()

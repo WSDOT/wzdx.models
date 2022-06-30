@@ -15,37 +15,10 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
         [Fact]
         public void FactoryCreatedResultShouldBeValid()
         {
-            var feed = RoadEventFeedBuilder.Factory(Constants.RoadEventsPublisher)
+            var feed = RoadEventFeedBuilder.Factory(Constants.DefaultPublisher)
                 .Create()
                 .Result();
 
-            EnsureValid(feed);
-        }
-
-
-        [Fact]
-        public void WithUpdateFrequencyShouldBeValid()
-        {
-            const int expected = 60;
-            var feed = RoadEventFeedBuilder.Factory(Constants.RoadEventsPublisher)
-                .Create()
-                .WithInfo(builder => builder.WithUpdateFrequency(TimeSpan.FromSeconds(expected)))
-                .Result();
-
-            Assert.Equal(expected, feed.FeedInfo.UpdateFrequency);
-            EnsureValid(feed);
-        }
-
-        [Fact]
-        public void WithoutUpdateFrequencyShouldBeValid()
-        {
-            
-            var feed = RoadEventFeedBuilder.Factory(Constants.RoadEventsPublisher)
-                .Create()
-                .WithInfo(builder => builder.WithNoUpdateFrequency())
-                .Result();
-
-            Assert.Null(feed.FeedInfo.UpdateFrequency);
             EnsureValid(feed);
         }
     }

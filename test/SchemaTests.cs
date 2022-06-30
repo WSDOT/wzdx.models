@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wsdot.Wzdx.Models.Tests
 {
     public abstract class SchemaTests
     {

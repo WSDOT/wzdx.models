@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Wsdot.Wzdx.Core;
+using Wsdot.Wzdx.v4.RoadEvents;
+using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Feeds
 {
     public class RoadRestrictionFeedBuilder : IBuilder<RoadRestrictionFeed>
     {
+        private readonly ICollection<RoadEventFeature> _features = new List<RoadEventFeature>();
         private FeedInfoBuilder _infoBuilder;
-        private readonly ICollection<RoadRestrictionSourceBuilder> _sourcesBuilders = new List<RoadRestrictionSourceBuilder>();
-
+        
         private RoadRestrictionFeedBuilder(string publisher)
         {
             _infoBuilder = new FeedInfoBuilder(publisher);
@@ -49,45 +50,48 @@ namespace Wsdot.Wzdx.v4.Feeds
             WithInfo(builder => builder.WithUpdateDate(value));
             return this;
         }
-
+        
         public RoadRestrictionFeedBuilder WithSource(string sourceId, Func<RoadRestrictionSourceBuilder, RoadRestrictionSourceBuilder> setup)
         {
-            var builder = setup(new RoadRestrictionSourceBuilder(sourceId));
-            _sourcesBuilders.Add(builder);
+            var source = setup(new RoadRestrictionSourceBuilder(sourceId)).Result(out var features);
+            foreach (var feature in features)
+            {
+                _features.Add(feature);
+            }
+
+            _infoBuilder.WithSource(sourceId, sourceBuilder => sourceBuilder.From(source));
 
             return this;
         }
 
         public RoadRestrictionFeed Result()
         {
-            var feedInfo = _infoBuilder.Result();
+            // todo: determine feed info / source update date?
 
-            // add default publisher source if non are defined
-            if (!_sourcesBuilders.Any())
-                _sourcesBuilders.Add(new RoadRestrictionSourceBuilder(feedInfo.Publisher));
+            //    feedInfo.UpdateDate = source.UpdateDate.Value;
+            //if (source.UpdateDate.HasValue && feedInfo.UpdateDate < source.UpdateDate.Value)
+            // match feed update date to max source update date 
 
-            var result = new RoadRestrictionFeed();
-            foreach (var sourceBuilder in _sourcesBuilders)
+            // match source update date to max item update date 
+            //if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
+            //    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
+
+            return new RoadRestrictionFeed
             {
-                var source = sourceBuilder.Result();
-                feedInfo.DataSources.Add(source);
-
-                foreach (var feature in sourceBuilder.Features())
-                {
-                    // match source update date to max item update date 
-                    if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
-                        source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
-
-                    result.Features.Add(feature);
-                }
-
-                // match feed update date to max source update date 
-                if (source.UpdateDate.HasValue && feedInfo.UpdateDate < source.UpdateDate.Value)
-                    feedInfo.UpdateDate = source.UpdateDate.Value;
-            }
-
-            result.FeedInfo = feedInfo;
-            return result;
+                FeedInfo = _infoBuilder.Result(),
+                Features = _features,
+                // todo: determine feed bbox?
+            };
         }
+    }
+
+    public class RoadRestrictionFeatureCollectionBuilder : FeatureCollectionBuilder<IRoadRestrictionFeatureBuilderFactory, RoadRestrictionFeatureBuilder, RoadEventFeature>
+    {
+        public RoadRestrictionFeatureCollectionBuilder(string sourceId) : 
+            base(sourceId)
+        {
+
+        }
+        
     }
 }

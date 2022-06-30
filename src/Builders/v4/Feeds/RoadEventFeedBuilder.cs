@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Wsdot.Wzdx.Core;
+using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Feeds
 {
     public class RoadEventFeedBuilder : IBuilder<RoadEventsFeed>
     {
+        private readonly ICollection<RoadEventFeature> _features = new List<RoadEventFeature>();
         private FeedInfoBuilder _infoBuilder;
-        private readonly ICollection<RoadEventSourceBuilder> _sourcesBuilders = new List<RoadEventSourceBuilder>();
 
         public RoadEventFeedBuilder(string publisher)
         {
@@ -46,48 +46,36 @@ namespace Wsdot.Wzdx.v4.Feeds
 
         public RoadEventFeedBuilder WithSource(string sourceId, Func<RoadEventSourceBuilder, RoadEventSourceBuilder> setup)
         {
-            var builder = setup(new RoadEventSourceBuilder(sourceId));
-            return WithSource(builder);
-        }
-
-        public RoadEventFeedBuilder WithSource(RoadEventSourceBuilder builder)
-        {
-            _sourcesBuilders.Add(builder);
-            return this;
-        }
-
-        public RoadEventsFeed Result()
-        {
-            var feedInfo = _infoBuilder.Result();
-
-            // add default publisher source if non are defined
-            if (!_sourcesBuilders.Any())
-                _sourcesBuilders.Add(new RoadEventSourceBuilder(feedInfo.Publisher));
-
-            var result = new RoadEventsFeed();
-            foreach (var sourceBuilder in _sourcesBuilders)
+            var source = setup(new RoadEventSourceBuilder(sourceId)).Result(out var features);
+            foreach (var feature in features)
             {
-                var source = sourceBuilder.Result();
-                feedInfo.DataSources.Add(source);
-
-                foreach (var feature in sourceBuilder.Features())
-                {
-                    // match source update date to max item update date 
-                    if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
-                        source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
-
-                    result.Features.Add(feature);
-                }
-
-                // match feed update date to max source update date 
-                if (source.UpdateDate.HasValue && feedInfo.UpdateDate < source.UpdateDate)
-                    feedInfo.UpdateDate = source.UpdateDate.Value;
+                _features.Add(feature);
             }
 
-            result.FeedInfo = feedInfo;
-            return result;
-        }
+            _infoBuilder.WithSource(sourceId, sourceBuilder => sourceBuilder.From(source));
 
+            return this;
+        }
+        
+        public RoadEventsFeed Result()
+        {
+            // todo: determine feed info / source update date?
+
+            //    feedInfo.UpdateDate = source.UpdateDate.Value;
+            //if (source.UpdateDate.HasValue && feedInfo.UpdateDate < source.UpdateDate.Value)
+            // match feed update date to max source update date 
+
+            // match source update date to max item update date 
+            //if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
+            //    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
+
+            return new RoadEventsFeed
+            {
+                FeedInfo = _infoBuilder.Result(),
+                Features = _features,
+                // todo: determine feed bbox?
+            };
+        }
 
         public static IFactory<RoadEventFeedBuilder> Factory(string publisher)
         {

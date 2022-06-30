@@ -1,8 +1,9 @@
-﻿namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+﻿namespace Wsdot.Wzdx.Models.Tests
 {
     internal static class Constants
     {
-        public const string RoadEventsPublisher = "wsdot.wzdx.wz";
+        public const string DefaultPublisher = "wzdx";
+        public const string DefaultSourceId = "wzdx.planning";
 
         public static class Schema
         {

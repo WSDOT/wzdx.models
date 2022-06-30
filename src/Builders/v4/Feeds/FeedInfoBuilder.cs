@@ -29,6 +29,18 @@ namespace Wsdot.Wzdx.v4.Feeds
             return this;
         }
 
+        public FeedInfoBuilder WithSource(string sourceId)
+        {
+            return WithSource(sourceId, _ => _);
+        }
+
+        public FeedInfoBuilder WithSource(string sourceId, Func<FeedSourceBuilder, FeedSourceBuilder> setup)
+        {
+            var source = setup(new FeedSourceBuilder(sourceId)).Result();
+            _configuration.Combine(info => info.DataSources, info => info.DataSources.Add(source));
+            return this;
+        }
+
         public FeedInfoBuilder WithVersion(Version value)
         {
             _configuration.Set(info => info.Version, value.ToString(2));
@@ -72,12 +84,24 @@ namespace Wsdot.Wzdx.v4.Feeds
             return this;
         }
 
+        public FeedInfoBuilder WithNoLicense()
+        {
+            _configuration.Default(info => info.License);
+            return this;
+        }
+
         [Pure]
         public FeedInfo Result()
         {
             var result = new FeedInfo();
             _configuration.ApplyTo(result);
+
+            if (result.DataSources.Count == 0)
+                result.DataSources.Add(new FeedSourceBuilder(result.Publisher).Result());
+
             return result;
         }
+
+        
     }
 }

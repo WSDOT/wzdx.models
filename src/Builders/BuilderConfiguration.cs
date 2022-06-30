@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using Wsdot.Wzdx.Common;
@@ -8,8 +9,18 @@ namespace Wsdot.Wzdx
 {
     public class BuilderConfiguration<T>
     {
-        private readonly ConcurrentDictionary<PropertyInfo, Action<T>> _configuration
-            = new ConcurrentDictionary<PropertyInfo, Action<T>>();
+        private readonly ConcurrentDictionary<PropertyInfo, Action<T>> _configuration;
+
+        public BuilderConfiguration() : 
+            this(new Dictionary<PropertyInfo, Action<T>>())
+        {
+
+        }
+
+        private BuilderConfiguration(IDictionary<PropertyInfo, Action<T>> configuration)
+        {
+            _configuration = new ConcurrentDictionary<PropertyInfo, Action<T>>(configuration);
+        }
 
         public void Set<TProperty>(Expression<Func<T, TProperty>> selector, TProperty value)
         {
@@ -21,7 +32,7 @@ namespace Wsdot.Wzdx
         {
             Set(selector.GetPropertyInfo(), setup);
         }
-        
+
         public void Default<TProperty>(Expression<Func<T, TProperty>> selector)
         {
             Default(selector, default(TProperty));
@@ -31,7 +42,6 @@ namespace Wsdot.Wzdx
         {
             Set(selector, value);
         }
-
 
         public void ApplyTo(T source)
         {
@@ -45,6 +55,11 @@ namespace Wsdot.Wzdx
         {
             var propertyInfo = selector.GetPropertyInfo();
             _configuration.AddOrUpdate(propertyInfo, setup, (info, action) => (Action<T>)Delegate.Combine(action, setup));
+        }
+
+        public BuilderConfiguration<T> Clone()
+        {
+            return new BuilderConfiguration<T>(_configuration);
         }
 
         private void Set(PropertyInfo propertyInfo, Action<T> setup)

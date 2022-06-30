@@ -4,6 +4,37 @@ using Wsdot.Wzdx.Core;
 
 namespace Wsdot.Wzdx.v4.Feeds
 {
+    public class FeedSourceBuilder : FeedSourceBuilder<FeedSourceBuilder>
+    {
+        public FeedSourceBuilder(string sourceId) : 
+            base(sourceId)
+        {
+
+        }
+
+        public FeedSourceBuilder From(FeedDataSource source)
+        {
+            var sourceBuilder = this;
+            // assuming immutability
+            sourceBuilder = sourceBuilder.WithOrganizationName(source.OrganizationName);
+            sourceBuilder = source.UpdateDate.HasValue
+                ? sourceBuilder.WithUpdateDate(source.UpdateDate.Value)
+                : sourceBuilder.WithNoUpdateDate();
+            sourceBuilder = string.IsNullOrEmpty(source.ContactName) && string.IsNullOrEmpty(source.ContactEmail)
+                ? sourceBuilder.WithNoContact()
+                : sourceBuilder.WithContact(source.ContactName, source.ContactEmail);
+            sourceBuilder = source.UpdateFrequency.HasValue
+                ? sourceBuilder.WithUpdateFrequency(TimeSpan.FromSeconds(source.UpdateFrequency.Value))
+                : sourceBuilder.WithNoUpdateFrequency();
+            // ignored source.LocationVerifyMethod
+            sourceBuilder = source.LrsUrl == null && string.IsNullOrEmpty(source.LrsType)
+                ? sourceBuilder.WithNoLrsInfo()
+                : sourceBuilder.WithLrsInfo(source.LrsType, source.LrsUrl);
+
+            return sourceBuilder;
+        }
+    }
+
     /// <summary>
     /// Provides an abstract of a v4 FeedDataSource (abstract) class
     /// </summary>
@@ -15,11 +46,11 @@ namespace Wsdot.Wzdx.v4.Feeds
         protected BuilderConfiguration<FeedDataSource> Configuration { get; }
             = new BuilderConfiguration<FeedDataSource>();
 
-        protected FeedSourceBuilder(string id)
+        protected FeedSourceBuilder(string sourceId)
         {
-            SourceId = id;
-            Configuration.Set(source => source.DataSourceId, id);
-            Configuration.Set(source => source.OrganizationName, id);
+            SourceId = sourceId;
+            Configuration.Set(source => source.DataSourceId, sourceId);
+            Configuration.Set(source => source.OrganizationName, sourceId);
             Configuration.Set(source => source.UpdateFrequency, 1); // todo set UpdateFrequency to null value
         }
 
@@ -95,10 +126,30 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// <summary>
         /// Returns a builder containing configuration for no last updated date time (UTC)
         /// </summary>
-        /// <param name="value">DateTimeOffset containing the last updated date time in UTC</param>
         public T WithNoUpdateDate()
         {
             return WithUpdateDate(null);
+        }
+
+        /// <summary>
+        /// Returns a builder containing configuration for lrs information
+        /// </summary>
+        /// <param name="lrsType"></param>
+        /// <param name="lrsUrl"></param>
+        public T WithLrsInfo(string lrsType, Uri lrsUrl)
+        {
+            Configuration.Set(info => info.LrsType, lrsType);
+            Configuration.Set(info => info.LrsUrl, lrsUrl);
+            return Derived();
+        }
+
+        /// <summary>
+        /// Returns a builder containing configuration for no lrs information
+        /// </summary>
+        public T WithNoLrsInfo()
+        {
+            WithLrsInfo(null, null);
+            return Derived();
         }
 
         [Pure]
