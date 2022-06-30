@@ -24,6 +24,6 @@ jobs:
     - name: Publish WSDOT WZDX-Client
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: Wsdot.Wzdx.Models.csproj
+          PROJECT_FILE_PATH: src/Wsdot.Wzdx.Models.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           PACKAGE_NAME: WZDx Client
