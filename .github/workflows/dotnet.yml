@@ -20,7 +20,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Test
-      run: dotnet test test/ --no-build --verbosity normal
+      run: dotnet test test/ --runtime net6.0 --verbosity normal 
     - name: Publish WSDOT WZDX-Client
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
