@@ -17,7 +17,7 @@ namespace Wsdot.Wzdx.Common
             if (info == null)
                 throw new ArgumentException($"Expression '{selector}' refers to a field, not a property.");
 
-            if (type != info.ReflectedType && !type.IsSubclassOf(info.ReflectedType))
+            if (type != info.ReflectedType && !type.IsSubclassOf(info.ReflectedType ?? type))
                 throw new ArgumentException($"Expression '{selector}' refers to a property that is not from type {type}.");
 
             return info;

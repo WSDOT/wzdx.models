@@ -1,14 +1,13 @@
 ﻿using System;
-using Wsdot.Wzdx.GeoJson;
 using Wsdot.Wzdx.v4.Feeds;
 using Xunit;
 
 namespace Wsdot.Wzdx.Models.Tests.v4.Builders
 {
-    public class RoadEventFeedBuilderTests : SchemaTests
+    public class RoadRestrictionsFeedBuilderTests : SchemaTests
     {
-        public RoadEventFeedBuilderTests() :
-            base(new Uri(Constants.Schema.V4.RoadEventsFeedSchema))
+        public RoadRestrictionsFeedBuilderTests() :
+            base(new Uri(Constants.Schema.V4.RoadRestrictionsEventFeedSchema))
         {
 
         }
@@ -18,7 +17,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
         [Fact]
         public void FactoryCreatedResultShouldBeValid()
         {
-            EnsureResultWith((RoadEventsFeed feed) => { });
+            EnsureResultWith((RoadRestrictionFeed feed) => { });
 
         }
 
@@ -143,7 +142,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
         public void WithSourceShouldBeBuilderInstance()
         {
             EnsureResultWith(Constants.DefaultPublisher,
-                setup => setup.WithSource(Constants.DefaultSourceId, Assert.IsType<RoadEventSourceBuilder>),
+                setup => setup.WithSource(Constants.DefaultSourceId, Assert.IsType<RoadRestrictionSourceBuilder>),
                 _ => { }
             );
         }
@@ -161,19 +160,19 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
 
         /* test update frequency */
         
-        private void EnsureResultWith(Action<RoadEventsFeed> assertion)
+        private void EnsureResultWith(Action<RoadRestrictionFeed> assertion)
         {
             EnsureResultWith(Constants.DefaultPublisher, assertion);
         }
 
-        private void EnsureResultWith(string publisher, Action<RoadEventsFeed> assertion)
+        private void EnsureResultWith(string publisher, Action<RoadRestrictionFeed> assertion)
         {
             EnsureResultWith(publisher, _ => _, assertion);
         }
 
-        private void EnsureResultWith(string publisher, Func<RoadEventFeedBuilder, RoadEventFeedBuilder> setup, Action<RoadEventsFeed> assertion)
+        private void EnsureResultWith(string publisher, Func<RoadRestrictionFeedBuilder, RoadRestrictionFeedBuilder> setup, Action<RoadRestrictionFeed> assertion)
         {
-            var feed = setup(RoadEventFeedBuilder.Factory(publisher).Create())
+            var feed = setup(RoadRestrictionFeedBuilder.Factory(publisher).Create())
                 .Result();
 
             EnsureValid(feed);

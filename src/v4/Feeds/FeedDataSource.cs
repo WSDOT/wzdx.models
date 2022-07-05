@@ -65,6 +65,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// **DEPRECATED** A URL where additional information on the LRS information and transformation information is stored
         /// </summary>
         [JsonProperty("lrs_url", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        // todo: format validator
         public Uri LrsUrl { get; set; }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace Wsdot.Wzdx.v4.Feeds
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj as FeedDataSource);
+            return Equals(obj as FeedDataSource);
         }
 
         public bool Equals(FeedDataSource other)

@@ -1,4 +1,6 @@
-﻿namespace Wsdot.Wzdx.Models.Tests
+﻿using System;
+
+namespace Wsdot.Wzdx.Models.Tests
 {
     internal static class Constants
     {
@@ -9,7 +11,9 @@
         {
             public static class V4
             {
+                public static readonly Version DefaultVersion = new Version(4, 0);
                 public const string RoadEventsFeedSchema = "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.0/WZDxFeed.json";
+                //https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.0/RoadEventFeature.json
                 public const string FieldDevicesFeedSchema = "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.0/SwzDeviceFeed.json";
                 public const string RoadRestrictionsEventFeedSchema = "https://raw.githubusercontent.com/usdot-jpo-ode/wzdx/main/schemas/4.0/RoadRestrictionFeed.json";
 

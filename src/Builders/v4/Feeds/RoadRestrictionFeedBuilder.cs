@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.v4.RoadEvents;
 using Wsdot.Wzdx.v4.WorkZones;
 
 namespace Wsdot.Wzdx.v4.Feeds
@@ -39,9 +38,15 @@ namespace Wsdot.Wzdx.v4.Feeds
             return this;
         }
 
-        public RoadRestrictionFeedBuilder WithUpdateFrequency(TimeSpan value)
+        public RoadRestrictionFeedBuilder WithUpdateFrequency(TimeSpan? value)
         {
-            WithInfo(builder => builder.WithUpdateFrequency(value));
+            WithInfo(builder => value.HasValue ? builder.WithUpdateFrequency(value.Value) : builder.WithNoUpdateFrequency());
+            return this;
+        }
+        
+        public RoadRestrictionFeedBuilder WithNoUpdateFrequency()
+        {
+            WithInfo(builder => builder.WithNoUpdateFrequency());
             return this;
         }
 
@@ -83,15 +88,5 @@ namespace Wsdot.Wzdx.v4.Feeds
                 // todo: determine feed bbox?
             };
         }
-    }
-
-    public class RoadRestrictionFeatureCollectionBuilder : FeatureCollectionBuilder<IRoadRestrictionFeatureBuilderFactory, RoadRestrictionFeatureBuilder, RoadEventFeature>
-    {
-        public RoadRestrictionFeatureCollectionBuilder(string sourceId) : 
-            base(sourceId)
-        {
-
-        }
-        
     }
 }

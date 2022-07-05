@@ -6,7 +6,7 @@ namespace Wsdot.Wzdx.v4.Feeds
 {
     public class FeedSourceBuilder : FeedSourceBuilder<FeedSourceBuilder>
     {
-        public FeedSourceBuilder(string sourceId) : 
+        public FeedSourceBuilder(string sourceId) :
             base(sourceId)
         {
 
@@ -51,7 +51,7 @@ namespace Wsdot.Wzdx.v4.Feeds
             SourceId = sourceId;
             Configuration.Set(source => source.DataSourceId, sourceId);
             Configuration.Set(source => source.OrganizationName, sourceId);
-            Configuration.Set(source => source.UpdateFrequency, 1); // todo set UpdateFrequency to null value
+            Configuration.Default(source => source.UpdateFrequency);
         }
 
         /// <summary>
@@ -62,8 +62,6 @@ namespace Wsdot.Wzdx.v4.Feeds
             Configuration.Set(info => info.OrganizationName, value);
             return Derived();
         }
-
-        protected T Derived() => (T)this;
 
         /// <summary>
         /// Returns a builder containing configuration with contact name
@@ -79,6 +77,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         /// </summary>
         public T WithContactEmail(string value)
         {
+            // todo: validate email with same schema "format" (email) pattern
             Configuration.Set(info => info.ContactEmail, value);
             return Derived();
         }
@@ -113,6 +112,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         {
             return WithUpdateFrequency(null);
         }
+
         /// <summary>
         /// Returns a builder containing configuration for the last updated date time (UTC)
         /// </summary>
@@ -122,7 +122,7 @@ namespace Wsdot.Wzdx.v4.Feeds
             Configuration.Set(info => info.UpdateDate, value?.ToUniversalTime());
             return Derived();
         }
-        
+
         /// <summary>
         /// Returns a builder containing configuration for no last updated date time (UTC)
         /// </summary>
@@ -159,5 +159,7 @@ namespace Wsdot.Wzdx.v4.Feeds
             Configuration.ApplyTo(result);
             return result;
         }
+
+        protected T Derived() => (T)this;
     }
 }
