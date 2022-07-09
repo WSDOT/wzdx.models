@@ -74,10 +74,9 @@ namespace Wsdot.Wzdx.Models.Tests.Core
             if (TryResolveLocal(context, reference, out var content))
                 return content;
 
-            Trace.TraceError(Directory.GetCurrentDirectory());
-
+            
             throw new ArgumentException(
-                    $"No local copy of referenced url {reference.BaseUri}",
+                    $"No local copy of '{reference.BaseUri}' found in '{Directory.GetCurrentDirectory()}'",
                     nameof(reference));
         }
         
@@ -85,7 +84,8 @@ namespace Wsdot.Wzdx.Models.Tests.Core
         {
             var uri = reference.BaseUri ?? new Uri("http://localhost");
             // read from the directory
-            var path = $".\\local\\{uri.Host}\\{uri.AbsolutePath}";
+            
+            var path = $"./local/{uri.Host}/{uri.LocalPath}";
             content = File.Exists(path) ? File.OpenRead(path) : new MemoryStream();
             return content.Length > 0;
         }
