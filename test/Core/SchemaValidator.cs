@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -70,9 +71,12 @@ namespace Wsdot.Wzdx.Models.Tests.Core
     {
         public override Stream GetSchemaResource(ResolveSchemaContext context, SchemaReference reference)
         {
-            return TryResolveLocal(context, reference, out var content)
-                ? content
-                : throw new ArgumentException(
+            if (TryResolveLocal(context, reference, out var content))
+                return content;
+
+            Trace.TraceError(Directory.GetCurrentDirectory());
+
+            throw new ArgumentException(
                     $"No local copy of referenced url {reference.BaseUri}",
                     nameof(reference));
         }
