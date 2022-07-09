@@ -29,4 +29,47 @@
         <ProjectReference Include="..\src\Wsdot.Wzdx.Models.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="local\geojson.org\schema\Feature.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\geojson.org\schema\FeatureCollection.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\geojson.org\schema\LineString.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\geojson.org\schema\MultiPoint.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\geojson.org\schema\Point.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\raw.githubusercontent.com\usdot-jpo-ode\wzdx\main\schemas\3.1\WZDxFeed.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\raw.githubusercontent.com\usdot-jpo-ode\wzdx\main\schemas\4.0\BoundingBox.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\raw.githubusercontent.com\usdot-jpo-ode\wzdx\main\schemas\4.0\FeedInfo.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\raw.githubusercontent.com\usdot-jpo-ode\wzdx\main\schemas\4.0\RoadEventFeature.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\raw.githubusercontent.com\usdot-jpo-ode\wzdx\main\schemas\4.0\RoadRestrictionFeed.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\raw.githubusercontent.com\usdot-jpo-ode\wzdx\main\schemas\4.0\SwzDeviceFeed.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="local\raw.githubusercontent.com\usdot-jpo-ode\wzdx\main\schemas\4.0\WZDxFeed.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+
 </Project>
