@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Wsdot.Wzdx.Models.Tests.Core;
 using Xunit;
 
@@ -9,7 +10,6 @@ namespace Wsdot.Wzdx.Models.Tests
 {
     public abstract class SchemaTests
     {
-        // todo: cache schema in temp
         private SchemaValidator Validator { get; }
         protected SchemaTests(Uri schemaUri)
         {
@@ -32,10 +32,13 @@ namespace Wsdot.Wzdx.Models.Tests
         [Fact]
         public void NestedValidationErrorsShouldBeOutputToMessage()
         {
-            const string expected = @" (0: 0)[]
-	 (0: 0)[]
-	 (0: 0)[]
-";
+            const string line = " (0: 0)[]";
+            var expected = new StringBuilder()
+                .AppendLine(line)
+                .AppendLine($"\t{line}")
+                .AppendLine($"\t{line}")
+                .ToString();
+
             var errors = new List<ValidationError>
             {
                 new ValidationError()
