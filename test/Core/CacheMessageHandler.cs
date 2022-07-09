@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -9,52 +10,39 @@ namespace Wsdot.Wzdx.Models.Tests.Core
 {
     internal class CacheMessageHandler : DelegatingHandler
     {
-        private readonly string _cachePath;
+        private static readonly ConcurrentDictionary<string, byte[]> ContentCache = new();
 
-        public CacheMessageHandler() : this(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache))
+        public CacheMessageHandler() : base(new SocketsHttpHandler())
         {
-
+            
         }
-
-        private CacheMessageHandler(string cachePath) :
-            base(new SocketsHttpHandler())
-        {
-            _cachePath = cachePath;
-        }
-
+        
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var uri = request.RequestUri ?? throw new NullReferenceException("");
-            var path = Path.Combine(_cachePath, string.Join('-', uri.Segments).Replace("/", "-").Replace(".", "_"));
+            var uri = request.RequestUri?.ToString() ?? throw new NullReferenceException("");
 
-            if (File.Exists(path))
+            if (ContentCache.ContainsKey(uri))
             {
-                return FileContentResponse(path);
-
-
+                return ContentResponse(uri);
             }
 
             var response = await base.SendAsync(request, cancellationToken);
             if (!response.IsSuccessStatusCode) return response;
 
             // 
-            var content = await response.Content.ReadAsStreamAsync(cancellationToken);
-            var reader = new StreamReader(content);
-            await using var writer = new StreamWriter(File.OpenWrite(path));
-
-            await writer.WriteAsync(await reader.ReadToEndAsync());
-            await writer.FlushAsync();
-            writer.Close();
-
-            return FileContentResponse(path);
+            var content = await response.Content.ReadAsByteArrayAsync(cancellationToken);
+            
+            ContentCache.TryAdd(uri, content);
+            return ContentResponse(uri);
         }
 
-        private HttpResponseMessage FileContentResponse(string path)
+        private static HttpResponseMessage ContentResponse(string key)
         {
+            var content = ContentCache[key];
+            
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StreamContent(File.Open(path, FileMode.Open, FileAccess.Read,
-                    FileShare.Delete | FileShare.ReadWrite))
+                Content = new StreamContent(new MemoryStream(content))
             };
         }
     }
