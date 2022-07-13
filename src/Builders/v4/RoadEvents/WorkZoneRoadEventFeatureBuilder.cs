@@ -23,10 +23,10 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             WithRoadName(roadName);
             WithDirection(direction);
             WithStatus(EventStatus.Pending);
+            WithBeginning(SpatialVerification.Estimated);
+            WithEnding(SpatialVerification.Estimated);
             WithStart(DateTimeOffset.MinValue, TimeVerification.Estimated);
-            WithEnd(DateTimeOffset.MinValue, TimeVerification.Estimated);
-            WithBeginning(0, SpatialVerification.Estimated);
-            WithEnding(0, SpatialVerification.Estimated);
+            WithEnd(DateTimeOffset.MinValue, TimeVerification.Estimated);   
             WithLocationMethod(LocationMethod.Unknown);
             WithVehicleImpact(VehicleImpact.Unknown);
         }
@@ -46,6 +46,12 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             return Derived();
         }
 
+        public WorkZoneRoadEventFeatureBuilder WithBeginning(SpatialVerification verification)
+        {
+            PropertiesConfiguration.Set(properties => properties.BeginningAccuracy, verification);
+            return Derived();
+        }
+
         public WorkZoneRoadEventFeatureBuilder WithBeginning(string crossStreet, SpatialVerification verification)
         {
             if (string.IsNullOrEmpty(crossStreet))
@@ -54,6 +60,12 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             PropertiesConfiguration.Default(properties => properties.BeginningMilepost);
             PropertiesConfiguration.Set(properties => properties.BeginningCrossStreet, crossStreet);
             PropertiesConfiguration.Set(properties => properties.BeginningAccuracy, verification);
+            return Derived();
+        }
+
+        public WorkZoneRoadEventFeatureBuilder WithEnding(SpatialVerification verification)
+        {
+            PropertiesConfiguration.Set(properties => properties.EndingAccuracy, verification);
             return Derived();
         }
 

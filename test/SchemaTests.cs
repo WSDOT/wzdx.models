@@ -1,5 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Schema;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Wsdot.Wzdx.Models.Tests.Core;
 using Xunit;
 
 namespace Wsdot.Wzdx.Models.Tests
@@ -11,11 +15,39 @@ namespace Wsdot.Wzdx.Models.Tests
         {
             Validator = SchemaValidator.Load(schemaUri);
         }
-        
+
         [Fact]
         public void ShouldFail()
         {
             EnsureInvalid(new object());
+        }
+
+        [Fact]
+        public void OnValidateWithEmptySchemaThrowsNotSupported()
+        {
+            var validator = SchemaValidator.Empty();
+            Assert.Throws<NotSupportedException>(() => validator.TryValidate("{}", out var _));
+        }
+
+        [Fact]
+        public void NestedValidationErrorsShouldBeOutputToMessage()
+        {
+            const string line = " (0: 0)[]";
+            var expected = new StringBuilder()
+                .AppendLine(line)
+                .AppendLine($"\t{line}")
+                .AppendLine($"\t{line}")
+                .ToString();
+
+            var errors = new List<ValidationError>
+            {
+                new ValidationError()
+                {
+                    ChildErrors = { new ValidationError(), new ValidationError() }
+                }
+            };
+
+            Assert.Equal(expected, errors.ToMessage());
         }
 
         protected void EnsureValid(object value)

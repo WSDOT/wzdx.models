@@ -14,6 +14,7 @@ namespace Wsdot.Wzdx.v4.Feeds
         {
             _infoBuilder = new FeedInfoBuilder(publisher);
         }
+
         public RoadEventFeedBuilder WithInfo(Func<FeedInfoBuilder, FeedInfoBuilder> setupAction)
         {
             _infoBuilder = setupAction(_infoBuilder);
@@ -32,9 +33,17 @@ namespace Wsdot.Wzdx.v4.Feeds
             return this;
         }
 
-        public RoadEventFeedBuilder WithUpdateFrequency(TimeSpan value)
+        public RoadEventFeedBuilder WithUpdateFrequency(TimeSpan? value)
         {
-            WithInfo(builder => builder.WithUpdateFrequency(value));
+            WithInfo(builder => value.HasValue 
+                ? builder.WithUpdateFrequency(value.Value)
+                : builder.WithNoUpdateFrequency());
+            return this;
+        }
+
+        public RoadEventFeedBuilder WithNoUpdateFrequency()
+        {
+            WithInfo(builder => builder.WithNoUpdateFrequency());
             return this;
         }
 
@@ -56,7 +65,7 @@ namespace Wsdot.Wzdx.v4.Feeds
 
             return this;
         }
-        
+
         public RoadEventsFeed Result()
         {
             // todo: determine feed info / source update date?
@@ -76,6 +85,7 @@ namespace Wsdot.Wzdx.v4.Feeds
                 // todo: determine feed bbox?
             };
         }
+
 
         public static IFactory<RoadEventFeedBuilder> Factory(string publisher)
         {

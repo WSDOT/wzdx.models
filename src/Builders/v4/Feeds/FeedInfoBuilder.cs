@@ -5,7 +5,7 @@ using Wsdot.Wzdx.Core;
 namespace Wsdot.Wzdx.v4.Feeds
 {
     /// <summary>
-    /// Provides an of a v4 FeedInfo (ArrowBoard) class
+    /// Provides a builder for a v4 FeedInfo class
     /// </summary>
     public sealed class FeedInfoBuilder : IBuilder<FeedInfo>
     {
@@ -43,6 +43,7 @@ namespace Wsdot.Wzdx.v4.Feeds
 
         public FeedInfoBuilder WithVersion(Version value)
         {
+            if (value == null) throw new ArgumentNullException(nameof(value));
             _configuration.Set(info => info.Version, value.ToString(2));
             return this;
         }
@@ -65,6 +66,16 @@ namespace Wsdot.Wzdx.v4.Feeds
             return this;
         }
 
+        public FeedInfoBuilder WithContact(string name, string email)
+        {
+            return WithContactName(name).WithContactEmail(email);
+        }
+
+        public FeedInfoBuilder WithNoContact()
+        {
+            return WithContactName(null).WithContactEmail(null);
+        }
+
         public FeedInfoBuilder WithContactName(string value)
         {
 
@@ -77,6 +88,7 @@ namespace Wsdot.Wzdx.v4.Feeds
             _configuration.Set(info => info.ContactEmail, value);
             return this;
         }
+
 
         public FeedInfoBuilder WithLicense(LicenseType value)
         {

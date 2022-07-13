@@ -37,6 +37,29 @@ namespace Wsdot.Wzdx.v4.RoadEvents
             return Derived();
         }
         
+        public T WithOneRoadName(string value)
+        {
+            CoreDetailConfiguration.Set(details => details.RoadNames, details =>
+            {
+                details.RoadNames.Add(value);
+            });
+
+            return Derived();
+        }
+
+        public T WithRoadNames(IEnumerable<string> values)
+        {
+            CoreDetailConfiguration.Set(details => details.RoadNames, details =>
+            {
+                foreach (var value in values)
+                {
+                    details.RoadNames.Add(value);
+                }
+            });
+
+            return Derived();
+        }
+
         public T WithDirection(Direction value)
         {
             CoreDetailConfiguration.Set(details => details.Direction, value);
