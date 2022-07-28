@@ -10,6 +10,9 @@ Specifically, WZDx defines the structure and content of several [GeoJSON](https:
 ## WZDX Models
 This project contains various classes and builders used to build WZDx feeds. 
 
+## License
+The Washington State Department of Transportation created this project as part of a federal grant to expand the use of the WZDx specification. The WZDx.Models library and code is now licensed under the CC0-1.0, just like the specification format it creates.
+
 ## Namespaces
 ---
 ### GeoJson

@@ -23,6 +23,13 @@
         <None Remove="Geometry\**" />
     </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
@@ -30,12 +37,6 @@
 
     <ItemGroup>
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="README.md">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>
