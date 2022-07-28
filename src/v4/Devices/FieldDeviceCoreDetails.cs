@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// The core details both configuration and current state of a field device that are shared by all types of field devices

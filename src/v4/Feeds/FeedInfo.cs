@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     /// <summary>
     /// Describes WZDx feed header information such as metadata, contact information, and data sources

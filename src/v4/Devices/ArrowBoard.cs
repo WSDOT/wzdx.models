@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// An electronic, connected arrow board which can display an arrow pattern to direct traffic

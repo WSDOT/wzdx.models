@@ -1,6 +1,6 @@
 using System;
 
-namespace Wsdot.Wzdx.Core
+namespace Wzdx.Core
 {
     internal class DelegatingFactory<T> : IFactory<T>
     {

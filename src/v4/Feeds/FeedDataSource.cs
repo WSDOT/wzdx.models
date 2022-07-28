@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     /// <summary>
     /// Describes information about a specific data source used to build the work zone data feed

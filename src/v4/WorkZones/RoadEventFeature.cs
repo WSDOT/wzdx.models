@@ -1,10 +1,10 @@
 using Newtonsoft.Json;
-using Wsdot.Wzdx.GeoJson;
-using Wsdot.Wzdx.v4.WorkZones.Converters;
+using Wzdx.GeoJson;
+using Wzdx.v4.WorkZones.Converters;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// The container object for a specific WZDx road event; an instance of a GeoJSON Feature

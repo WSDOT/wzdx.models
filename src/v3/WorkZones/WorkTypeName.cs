@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v3.WorkZones
+namespace Wzdx.v3.WorkZones
 {
     /// <summary>A high-level text description of the type of work being done in a road event</summary>
 

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// Describes a work zone road event including where, when, and what activities are taking place within a work zone on a roadway

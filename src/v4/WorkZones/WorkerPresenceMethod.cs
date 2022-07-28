@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// Describes methods for how worker presence in a work zone event area is determined

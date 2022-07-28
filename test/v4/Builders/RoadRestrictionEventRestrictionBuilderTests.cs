@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.Feeds;
-using Wsdot.Wzdx.v4.RoadEvents;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.GeoJson.Geometries;
+using Wzdx.v4.Feeds;
+using Wzdx.v4.RoadEvents;
+using Wzdx.v4.WorkZones;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class RoadRestrictionEventRestrictionBuilderTests : SchemaTests
     {
@@ -25,7 +25,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             {
                 features = features.ToList();
                 Assert.Single(features);
-                Assert.Equal(featureId, features.First().Id);
+                Assert.Equal((string)featureId, (string)features.First().Id);
             });
         }
 

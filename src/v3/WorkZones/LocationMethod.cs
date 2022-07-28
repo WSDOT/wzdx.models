@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v3.WorkZones
+namespace Wzdx.v3.WorkZones
 {
     /// <summary>
     /// The typical method used to locate the beginning and end of a work zone impact area

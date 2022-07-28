@@ -1,7 +1,7 @@
-﻿using Wsdot.Wzdx.v4.Feeds;
+﻿using Wzdx.v4.Feeds;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class FeedSourceTests
     {
@@ -12,8 +12,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             var actual = new FeedDataSource();
 
 
-            Assert.True(expected.GetHashCode() == actual.GetHashCode());
-            Assert.True(expected == actual);
+            Assert.True((bool)(expected.GetHashCode() == actual.GetHashCode()));
+            Assert.True((bool)(expected == actual));
         }
 
         [Fact]
@@ -25,8 +25,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 DataSourceId = "test-source"
             };
 
-            Assert.False(expected.GetHashCode() == actual.GetHashCode());
-            Assert.False(expected == actual);
+            Assert.False((bool)(expected.GetHashCode() == actual.GetHashCode()));
+            Assert.False((bool)(expected == actual));
         }
 
         [Fact]
@@ -38,8 +38,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 OrganizationName = "test-org"
             };
 
-            Assert.False(expected.GetHashCode() == actual.GetHashCode());
-            Assert.False(expected == actual);
+            Assert.False((bool)(expected.GetHashCode() == actual.GetHashCode()));
+            Assert.False((bool)(expected == actual));
         }
 
         [Fact]
@@ -51,8 +51,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 ContactName = "test-name"
             };
 
-            Assert.False(expected.GetHashCode() == actual.GetHashCode());
-            Assert.False(expected == actual);
+            Assert.False((bool)(expected.GetHashCode() == actual.GetHashCode()));
+            Assert.False((bool)(expected == actual));
         }
 
 
@@ -65,15 +65,15 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 ContactEmail = "test-email"
             };
 
-            Assert.False(expected.GetHashCode() == actual.GetHashCode());
-            Assert.True(expected != actual);
+            Assert.False((bool)(expected.GetHashCode() == actual.GetHashCode()));
+            Assert.True((bool)(expected != actual));
         }
 
         [Fact]
         public void EqualityShouldCheckNull()
         {
             var expected = new FeedDataSource();
-            Assert.False(expected.Equals((object)null));
+            Assert.False((bool)expected.Equals((object)null));
         }
 
         [Fact]

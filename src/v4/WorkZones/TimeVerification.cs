@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// A measure of how accurate a date-time is

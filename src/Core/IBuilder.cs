@@ -1,4 +1,4 @@
-namespace Wsdot.Wzdx.Core
+namespace Wzdx.Core
 {
     public interface IBuilder<out TResult>
     {

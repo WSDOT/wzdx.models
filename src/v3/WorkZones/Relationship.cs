@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Wsdot.Wzdx.v3.WorkZones
+namespace Wzdx.v3.WorkZones
 {
     /// <summary>Identifies both sequential and hierarchical relationships between road events and other entities. For example, a relationship can be used to link multiple road events to a common 'parent', such as a project or phase, or identify a sequence of road events</summary>
 

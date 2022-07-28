@@ -1,8 +1,8 @@
 ﻿using System;
-using Wsdot.Wzdx.v4.Feeds;
+using Wzdx.v4.Feeds;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class RoadEventFeedTests : SchemaTests
     {

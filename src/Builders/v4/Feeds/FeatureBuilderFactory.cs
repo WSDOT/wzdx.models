@@ -1,4 +1,4 @@
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     public interface IFeatureBuilderFactory
     {

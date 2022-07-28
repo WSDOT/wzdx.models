@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// An electronic traffic sign deployed on the roadway, used to provide information to travelers

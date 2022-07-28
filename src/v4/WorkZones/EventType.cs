@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// The type of WZDx road event

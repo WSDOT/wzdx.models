@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Wsdot.Wzdx.GeoJson.Geometries;
+using Wzdx.GeoJson.Geometries;
 
-namespace Wsdot.Wzdx.GeoJson.Converters
+namespace Wzdx.GeoJson.Converters
 {
     internal class EnumerablePositionConverter : JsonConverter
     {

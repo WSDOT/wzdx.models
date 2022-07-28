@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// Information about the presence of workers in the work zone event area

@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Wsdot.Wzdx.GeoJson.Converters;
+using Wzdx.GeoJson.Converters;
 
-namespace Wsdot.Wzdx.GeoJson.Geometries
+namespace Wzdx.GeoJson.Geometries
 {
     /// <summary>
     /// GeoJSON MultiPoint Geometry

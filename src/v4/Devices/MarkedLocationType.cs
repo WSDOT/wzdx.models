@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// Options for what a MarkedLocation can mark, such as the start or end of a road event

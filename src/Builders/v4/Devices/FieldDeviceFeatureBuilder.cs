@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.GeoJson.Geometries;
+using Wzdx.Core;
+using Wzdx.GeoJson.Geometries;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// Provides an abstract builder of a v4 FieldDeviceFeature (abstract) class

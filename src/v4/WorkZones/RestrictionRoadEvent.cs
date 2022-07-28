@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// A road event describing a section of roadway and the limitations of how that section can be used

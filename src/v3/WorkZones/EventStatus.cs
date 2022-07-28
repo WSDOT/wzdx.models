@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v3.WorkZones
+namespace Wzdx.v3.WorkZones
 {
     /// <summary>The status of the road event</summary>
 

@@ -1,8 +1,8 @@
 using System;
 using System.Linq.Expressions;
-using Wsdot.Wzdx.Core;
+using Wzdx.Core;
 
-namespace Wsdot.Wzdx
+namespace Wzdx
 {
     /// <summary>
     /// Provides an Immutable builder configuration builder, using a fluent interface to apply configuration changes to a builder configuration.

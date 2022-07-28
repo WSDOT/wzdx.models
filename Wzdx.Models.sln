@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{050B3FB3-5DB1-430D-8DB1-3A04AE8242F2}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wzdx.Models", "src\Wzdx.Models.csproj", "{3F753CD8-4AB8-4686-82B4-9964507F581C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wzdx.Models.Tests", "test\Wzdx.Models.Tests.csproj", "{FA27EC96-CA91-431B-AC67-9D153B31DA1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F753CD8-4AB8-4686-82B4-9964507F581C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F753CD8-4AB8-4686-82B4-9964507F581C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F753CD8-4AB8-4686-82B4-9964507F581C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F753CD8-4AB8-4686-82B4-9964507F581C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA27EC96-CA91-431B-AC67-9D153B31DA1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA27EC96-CA91-431B-AC67-9D153B31DA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA27EC96-CA91-431B-AC67-9D153B31DA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA27EC96-CA91-431B-AC67-9D153B31DA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {690835A9-0862-4A11-9B78-5BA53FF43850}
+	EndGlobalSection
+EndGlobal

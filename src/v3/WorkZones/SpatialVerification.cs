@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v3.WorkZones
+namespace Wzdx.v3.WorkZones
 {
     /// <summary>An indication of how a geographical coordinate was defined</summary>
 

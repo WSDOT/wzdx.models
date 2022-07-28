@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Wsdot.Wzdx.GeoJson.Geometries
+namespace Wzdx.GeoJson.Geometries
 {
     /// <summary>
     /// A position represent the longitude, latitude, and optionally altitude of a coordinate

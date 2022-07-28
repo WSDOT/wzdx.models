@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
-using Wsdot.Wzdx.GeoJson;
-using Wsdot.Wzdx.v3.WorkZones;
+using Wzdx.GeoJson;
+using Wzdx.v3.WorkZones;
 
-namespace Wsdot.Wzdx.v3.Feeds
+namespace Wzdx.v3.Feeds
 {
     public class RoadEventsFeed : FeatureCollection<RoadEventFeature>
     {

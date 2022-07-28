@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// A flashing beacon light of any form (e.g. trailer-mounted, vehicle), used to indicate something and capture driver attention

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.Core;
+using Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     public class RoadRestrictionFeedBuilder : IBuilder<RoadRestrictionFeed>
     {

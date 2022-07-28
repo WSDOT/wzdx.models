@@ -1,8 +1,8 @@
-using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.Feeds;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.GeoJson.Geometries;
+using Wzdx.v4.Feeds;
+using Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.RoadEvents
+namespace Wzdx.v4.RoadEvents
 {
     /// <summary>
     /// Provides extensions of v4 IRoadRestrictionFeatureBuilderFactory 

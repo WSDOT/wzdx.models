@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.Core;
+using Wzdx.GeoJson.Geometries;
+using Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.RoadEvents
+namespace Wzdx.v4.RoadEvents
 {
     /// <summary>
     /// Provides an abstract builder of a v4 RoadEventFeature (abstract) class

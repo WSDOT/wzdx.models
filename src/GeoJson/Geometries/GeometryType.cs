@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.GeoJson.Geometries
+namespace Wzdx.GeoJson.Geometries
 {
     public enum GeometryType
     {

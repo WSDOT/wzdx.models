@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace Wsdot.Wzdx.v4.WorkZones.Converters
+namespace Wzdx.v4.WorkZones.Converters
 {
     internal interface IRoadEventConverter
     {

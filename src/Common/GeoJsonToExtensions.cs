@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Wsdot.Wzdx.GeoJson;
+using Wzdx.GeoJson;
 
-namespace Wsdot.Wzdx
+namespace Wzdx.Common
 {
     public static class GeoJsonToExtensions
     {

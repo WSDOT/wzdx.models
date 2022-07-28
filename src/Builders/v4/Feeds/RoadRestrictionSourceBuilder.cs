@@ -1,8 +1,8 @@
 using System;
-using Wsdot.Wzdx.v4.RoadEvents;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.v4.RoadEvents;
+using Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     /// <summary>
     /// Provides an of a v4 FeedSource class of a Road Restriction Feed 

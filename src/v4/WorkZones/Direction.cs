@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v4.WorkZones
+namespace Wzdx.v4.WorkZones
 {
     /// <summary>
     /// The direction for a road event based on standard naming for US roads; indicates the direction the traffic flow regardless of the real heading angle

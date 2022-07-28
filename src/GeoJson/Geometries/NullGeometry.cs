@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.GeoJson.Geometries
+namespace Wzdx.GeoJson.Geometries
 {
     /// <summary>
     /// Instance of geometry that does not contain any coordinates

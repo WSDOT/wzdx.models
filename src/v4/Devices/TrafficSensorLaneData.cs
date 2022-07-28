@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// data for a single lane within a RoadEvent measured by a TrafficSensor deployed on the roadway

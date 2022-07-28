@@ -1,10 +1,10 @@
 using Newtonsoft.Json;
-using Wsdot.Wzdx.GeoJson;
-using Wsdot.Wzdx.v4.Devices.Converters;
+using Wzdx.GeoJson;
+using Wzdx.v4.Devices.Converters;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// The GeoJSON feature container for a WZDx field device

@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Wsdot.Wzdx.v3.WorkZones;
+using Wzdx.v3.WorkZones;
 
-namespace Wsdot.Wzdx.v3.Feeds
+namespace Wzdx.v3.Feeds
 {
     /// <summary>Describes information about a specific data source used to build the work zone data feed</summary>
 

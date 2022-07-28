@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.Core;
+using Wzdx.GeoJson.Geometries;
+using Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.RoadEvents
+namespace Wzdx.v4.RoadEvents
 {
     /// <summary>
     /// Provides a builder for a v4 RoadEventFeature (Detour) class

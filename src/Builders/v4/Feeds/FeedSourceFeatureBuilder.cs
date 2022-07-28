@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.GeoJson;
+using Wzdx.Core;
+using Wzdx.GeoJson;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     public abstract class FeedSourceFeatureBuilder<T, TFeature, TFeatureBuilder> :
         FeedSourceBuilder<T>

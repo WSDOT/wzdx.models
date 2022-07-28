@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// A camera device deployed in the field, capable of capturing still images

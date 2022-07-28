@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using Wsdot.Wzdx.Common;
+using Wzdx.Common;
 
-namespace Wsdot.Wzdx
+namespace Wzdx
 {
     public class BuilderConfiguration<T>
     {

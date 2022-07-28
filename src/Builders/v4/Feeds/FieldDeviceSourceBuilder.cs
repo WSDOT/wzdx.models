@@ -1,8 +1,8 @@
 using System;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.v4.Devices;
+using Wzdx.Core;
+using Wzdx.v4.Devices;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     public sealed class FieldDeviceSourceBuilder :
         FeedSourceFeatureBuilder<FieldDeviceSourceBuilder, FieldDeviceFeature, IBuilder<FieldDeviceFeature>>

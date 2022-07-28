@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics.Contracts;
-using Wsdot.Wzdx.Core;
+using Wzdx.Core;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     /// <summary>
     /// Provides a builder for a v4 FeedInfo class

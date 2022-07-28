@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Wsdot.Wzdx.GeoJson.Converters;
-using Wsdot.Wzdx.GeoJson.Geometries;
+using Wzdx.GeoJson.Converters;
+using Wzdx.GeoJson.Geometries;
 
-namespace Wsdot.Wzdx.GeoJson
+namespace Wzdx.GeoJson
 {
     public interface IFeature
     {

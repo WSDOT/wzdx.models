@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.Feeds;
-using Wsdot.Wzdx.v4.RoadEvents;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.Core;
+using Wzdx.GeoJson.Geometries;
+using Wzdx.v4.Feeds;
+using Wzdx.v4.RoadEvents;
+using Wzdx.v4.WorkZones;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class RoadEventFeedDetourBuilderTests : SchemaTests
     {
@@ -26,7 +26,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             {
                 features = features.ToList();
                 Assert.Single(features);
-                Assert.Equal(featureId, features.First().Id);
+                Assert.Equal((string)featureId, (string)features.First().Id);
             });
         }
 
@@ -38,7 +38,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             {
                 features = features.ToList();
                 Assert.Single(features);
-                Assert.Equal(featureId, features.First().Id);
+                Assert.Equal((string)featureId, (string)features.First().Id);
             });
         }
 
@@ -50,7 +50,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             EnsureResultWith(featureId, builder => builder.WithDescription(value), features =>
             {
                 var feature = features.Single();
-                Assert.Equal(value, feature.Properties.CoreDetails.Description);
+                Assert.Equal((string)value, (string)feature.Properties.CoreDetails.Description);
             });
         }
 
@@ -69,7 +69,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             EnsureResultWith(featureId, builder => builder.WithCreated(value), features =>
             {
                 var feature = features.Single();
-                Assert.Equal(value, feature.Properties.CoreDetails.CreationDate);
+                Assert.Equal<DateTimeOffset?>(value, feature.Properties.CoreDetails.CreationDate);
             });
         }
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Wsdot.Wzdx.GeoJson.Geometries
+namespace Wzdx.GeoJson.Geometries
 {
     public static class GeometryFactory
     {

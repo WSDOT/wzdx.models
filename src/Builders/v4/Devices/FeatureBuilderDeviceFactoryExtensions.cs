@@ -1,8 +1,8 @@
 ﻿using System;
-using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.Feeds;
+using Wzdx.GeoJson.Geometries;
+using Wzdx.v4.Feeds;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// Provides extensions of v4 IFieldDeviceFeatureBuilderFactory 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Wsdot.Wzdx.Models.Tests
+namespace Wzdx.Models.Tests
 {
     internal static class Constants
     {

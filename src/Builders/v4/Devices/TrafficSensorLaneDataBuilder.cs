@@ -1,7 +1,7 @@
 using System;
-using Wsdot.Wzdx.Core;
+using Wzdx.Core;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// Provides a builder for a v4 TrafficSensorLaneData class

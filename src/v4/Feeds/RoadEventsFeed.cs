@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Wsdot.Wzdx.GeoJson;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.GeoJson;
+using Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     /// <summary>
     /// The GeoJSON output of a WZDx feed data feed (v4.0)

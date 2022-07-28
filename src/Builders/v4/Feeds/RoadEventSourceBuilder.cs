@@ -1,8 +1,8 @@
 using System;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.Core;
+using Wzdx.v4.WorkZones;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     public sealed class RoadEventSourceBuilder :
         FeedSourceFeatureBuilder<RoadEventSourceBuilder, RoadEventFeature, IBuilder<RoadEventFeature>>

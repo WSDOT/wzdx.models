@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.GeoJson
+namespace Wzdx.GeoJson
 {
     public enum FeatureType
     {

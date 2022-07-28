@@ -1,7 +1,7 @@
 
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     public enum LicenseType
     {

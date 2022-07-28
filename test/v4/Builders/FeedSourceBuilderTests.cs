@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Wsdot.Wzdx.v4.Feeds;
+using Wzdx.v4.Feeds;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class FeedSourceBuilderTests : SchemaTests
     {
@@ -21,7 +21,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(Constants.DefaultSourceId, result.DataSourceId);
+                    Assert.Equal((string)Constants.DefaultSourceId, (string)result.DataSourceId);
                 });
         }
 
@@ -47,7 +47,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(organization, result.OrganizationName);
+                    Assert.Equal((string)organization, (string)result.OrganizationName);
                 });
         }
 
@@ -84,7 +84,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(contactName, result.ContactName);
+                    Assert.Equal((string)contactName, (string)result.ContactName);
                 });
         }
 
@@ -97,7 +97,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(contactEmail, result.ContactEmail);
+                    Assert.Equal((string)contactEmail, (string)result.ContactEmail);
                 });
         }
 
@@ -111,8 +111,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(contactName, result.ContactName);
-                    Assert.Equal(contactEmail, result.ContactEmail);
+                    Assert.Equal((string)contactName, (string)result.ContactName);
+                    Assert.Equal((string)contactEmail, (string)result.ContactEmail);
                 });
         }
 
@@ -153,7 +153,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 {
                     Assert.NotNull(result);
                     Assert.NotNull(result.UpdateFrequency);
-                    Assert.Equal(duration, result.UpdateFrequency);
+                    Assert.Equal<int?>(duration, result.UpdateFrequency);
                 });
         }
 
@@ -203,7 +203,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 {
                     Assert.NotNull(result);
                     Assert.NotNull(result.UpdateDate);
-                    Assert.Equal(value, result.UpdateDate);
+                    Assert.Equal<DateTimeOffset?>(value, result.UpdateDate);
                 });
         }
         
@@ -219,7 +219,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(value.ToUniversalTime(), result.UpdateDate);
+                    Assert.Equal<DateTimeOffset?>(value.ToUniversalTime(), result.UpdateDate);
                 });
         }
         
@@ -270,7 +270,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(type, result.LrsType);
+                    Assert.Equal(type, (string)result.LrsType);
                     Assert.Equal(uri, result.LrsUrl);
                 });
         }
@@ -319,7 +319,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal("test-source~1", result.DataSourceId);
+                    Assert.Equal((string)"test-source~1", (string)result.DataSourceId);
                     Assert.Equal(original.OrganizationName, result.OrganizationName);
                     Assert.Equal(original.ContactName,result.ContactName);
                     Assert.Equal(original.ContactEmail, result.ContactEmail);
@@ -347,7 +347,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal("test-source~1", result.DataSourceId);
+                    Assert.Equal((string)"test-source~1", (string)result.DataSourceId);
                     Assert.Equal(original.OrganizationName, result.OrganizationName);
                     Assert.Equal(original.ContactName, result.ContactName);
                     Assert.Equal(original.ContactEmail, result.ContactEmail);
@@ -368,7 +368,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             Assert.NotNull(result);
             EnsureValid(result);
 
-            assertion(result.DataSources.First());
+            assertion(Enumerable.First(result.DataSources));
         }
     }
 }

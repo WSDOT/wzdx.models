@@ -1,9 +1,8 @@
 ﻿using System;
-using Wsdot.Wzdx.GeoJson;
-using Wsdot.Wzdx.v4.Feeds;
+using Wzdx.v4.Feeds;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class RoadEventFeedBuilderTests : SchemaTests
     {
@@ -30,7 +29,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             const string publisher = Constants.DefaultPublisher + "~1";
             EnsureResultWith(Constants.DefaultPublisher,
                 setup => setup.WithPublisher(publisher),
-                result => { Assert.Equal(publisher, result.FeedInfo.Publisher); });
+                result => { Assert.Equal((string)publisher, (string)result.FeedInfo.Publisher); });
         }
 
         /* test version */
@@ -41,7 +40,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             const string version = "4.1";
             EnsureResultWith(Constants.DefaultPublisher,
                 setup => setup.WithVersion(Version.Parse(version)),
-                result => { Assert.Equal(version, result.FeedInfo.Version); });
+                result => { Assert.Equal((string)version, (string)result.FeedInfo.Version); });
         }
 
         [Fact]
@@ -79,7 +78,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 {
                     Assert.NotNull(result);
                     Assert.NotNull(result.FeedInfo.UpdateFrequency);
-                    Assert.Equal(duration, result.FeedInfo.UpdateFrequency);
+                    Assert.Equal<int?>(duration, result.FeedInfo.UpdateFrequency);
                 });
         }
 

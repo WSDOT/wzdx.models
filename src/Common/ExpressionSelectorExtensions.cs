@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Wsdot.Wzdx.Common
+namespace Wzdx.Common
 {
     internal static class ExpressionSelectorExtensions
     {

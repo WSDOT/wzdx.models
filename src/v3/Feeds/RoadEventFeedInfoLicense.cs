@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Wsdot.Wzdx.v3.Feeds
+namespace Wzdx.v3.Feeds
 {
 
     public enum RoadEventFeedInfoLicense

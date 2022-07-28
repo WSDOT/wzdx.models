@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.GeoJson
+namespace Wzdx.GeoJson
 {
     [DataContract]
     public abstract class FeatureCollection<T>

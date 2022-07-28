@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Wsdot.Wzdx.GeoJson;
+using Wzdx.GeoJson;
 
-namespace Wsdot.Wzdx.v3.WorkZones
+namespace Wzdx.v3.WorkZones
 {
     /// <summary>The container object for a WZDx road event; an instance of a GeoJSON Feature</summary>
 

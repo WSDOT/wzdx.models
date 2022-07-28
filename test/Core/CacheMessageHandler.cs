@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Wsdot.Wzdx.Models.Tests.Core
+namespace Wzdx.Models.Tests.Core
 {
     internal class CacheMessageHandler : DelegatingHandler
     {

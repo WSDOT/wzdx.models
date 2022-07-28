@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Wsdot.Wzdx.v4.Feeds;
+using Wzdx.v4.Feeds;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class FeedInfoBuilderTests : SchemaTests
     {
@@ -20,7 +20,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
         {
             var result = new FeedInfoBuilder(Constants.DefaultPublisher).Result();
             Assert.NotNull(result);
-            Assert.Equal(Constants.DefaultPublisher, result.Publisher);
+            Assert.Equal((string)Constants.DefaultPublisher, (string)result.Publisher);
             EnsureValid(result);
         }
 
@@ -31,8 +31,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             const string version = "2.1";
             var result = new FeedInfoBuilder(publisher, Version.Parse(version)).Result();
             Assert.NotNull(result);
-            Assert.Equal(publisher, result.Publisher);
-            Assert.Equal(version, result.Version);
+            Assert.Equal((string)publisher, (string)result.Publisher);
+            Assert.Equal((string)version, (string)result.Version);
             EnsureValid(result);
         }
 
@@ -45,7 +45,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             var result = new FeedInfoBuilder(publisher).Result();
 
             Assert.NotNull(result);
-            Assert.Equal(publisher, result.Publisher);
+            Assert.Equal((string)publisher, (string)result.Publisher);
             EnsureValid(result);
         }
 
@@ -68,8 +68,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 .Result();
 
             Assert.NotNull(result);
-            Assert.Equal(publisher, result.Publisher);
-            Assert.Equal(version, result.Version);
+            Assert.Equal((string)publisher, (string)result.Publisher);
+            Assert.Equal((string)version, (string)result.Version);
             EnsureValid(result);
         }
 
@@ -82,7 +82,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 .Result();
 
             Assert.NotNull(result);
-            Assert.Equal("4.0", result.Version);
+            Assert.Equal((string)"4.0", (string)result.Version);
             EnsureValid(result);
         }
 
@@ -95,7 +95,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 .Result();
 
             Assert.NotNull(result);
-            Assert.Equal(version, result.Version);
+            Assert.Equal((string)version, (string)result.Version);
             EnsureValid(result);
         }
 
@@ -128,7 +128,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             var result = new FeedInfoBuilder(Constants.DefaultPublisher).WithContactName(contactName).Result();
 
             Assert.NotNull(result);
-            Assert.Equal(contactName, result.ContactName);
+            Assert.Equal((string)contactName, (string)result.ContactName);
             EnsureValid(result);
         }
 
@@ -139,7 +139,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             var result = new FeedInfoBuilder(Constants.DefaultPublisher).WithContactEmail(contactEmail).Result();
 
             Assert.NotNull(result);
-            Assert.Equal(contactEmail, result.ContactEmail);
+            Assert.Equal((string)contactEmail, (string)result.ContactEmail);
             EnsureValid(result);
         }
 
@@ -152,8 +152,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 .Result();
 
             Assert.NotNull(result);
-            Assert.Equal(contactName, result.ContactName);
-            Assert.Equal(contactEmail, result.ContactEmail);
+            Assert.Equal((string)contactName, (string)result.ContactName);
+            Assert.Equal((string)contactEmail, (string)result.ContactEmail);
             EnsureValid(result);
         }
 
@@ -222,7 +222,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
 
             Assert.NotNull(result);
             Assert.NotNull(result.UpdateFrequency);
-            Assert.Equal(duration, result.UpdateFrequency);
+            Assert.Equal<int?>(duration, result.UpdateFrequency);
             EnsureValid(result);
         }
 
@@ -286,7 +286,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
             var result = new FeedInfoBuilder(publisher).Result();
             Assert.NotNull(result);
             Assert.Equal(1, result.DataSources.Count);
-            Assert.Equal(publisher, result.DataSources.First().DataSourceId);
+            Assert.Equal((string)publisher, (string)Enumerable.First(result.DataSources).DataSourceId);
             EnsureValid(result);
         }
 
@@ -301,7 +301,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                 .Result();
             Assert.NotNull(result);
             Assert.Equal(1, result.DataSources.Count);
-            Assert.Equal(sourceId, result.DataSources.First().DataSourceId);
+            Assert.Equal((string)sourceId, (string)Enumerable.First(result.DataSources).DataSourceId);
             EnsureValid(result);
         }
 
@@ -325,7 +325,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
 
             for (var index = 0; index < count; index++)
             {
-                Assert.Equal($"{sourceId}~{index}", result.DataSources.ElementAt(index).DataSourceId);
+                Assert.Equal((string)$"{sourceId}~{index}", (string)Enumerable.ElementAt(result.DataSources, index).DataSourceId);
             }
 
             EnsureValid(result);

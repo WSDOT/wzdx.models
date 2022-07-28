@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace Wsdot.Wzdx.v4.Devices.Converters
+namespace Wzdx.v4.Devices.Converters
 {
     internal interface IFieldDeviceConverter
     {

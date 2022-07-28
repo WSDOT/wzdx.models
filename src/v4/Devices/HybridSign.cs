@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Wsdot.Wzdx.v4.Devices
+namespace Wzdx.v4.Devices
 {
     /// <summary>
     /// A hybrid sign that contains static text (e.g. on an aluminum sign) along with a single electronic message display, used to provide information to travelers

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
-using Wsdot.Wzdx.Core;
-using Wsdot.Wzdx.GeoJson.Geometries;
-using Wsdot.Wzdx.v4.Feeds;
-using Wsdot.Wzdx.v4.RoadEvents;
-using Wsdot.Wzdx.v4.WorkZones;
+using Wzdx.Core;
+using Wzdx.GeoJson.Geometries;
+using Wzdx.v4.Feeds;
+using Wzdx.v4.RoadEvents;
+using Wzdx.v4.WorkZones;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests.v4.Builders
+namespace Wzdx.Models.Tests.v4.Builders
 {
     public class RoadEventFeedWorkZoneBuilderTests : SchemaTests
     {
@@ -29,11 +28,11 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                     features = features.ToList();
                     Assert.Single(features);
                     var feature = features.Single();
-                    Assert.Equal(featureId, feature.Id);
+                    Assert.Equal((string)featureId, (string)feature.Id);
 
                     var properties = (WorkZoneRoadEvent)feature.Properties;
                     var details = properties.CoreDetails;
-                    Assert.Single(details.RoadNames);
+                    Assert.Single<string>(details.RoadNames);
                     Assert.Null(properties.BeginningCrossStreet);
                     Assert.Null(properties.BeginningMilepost);
                     Assert.Equal(SpatialVerification.Estimated, properties.BeginningAccuracy);
@@ -116,8 +115,8 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                     var properties = feature.Properties;
                     var details = properties.CoreDetails;
 
-                    Assert.Single(details.RoadNames);
-                    Assert.Equal(value, details.RoadNames.Single());
+                    Assert.Single<string>(details.RoadNames);
+                    Assert.Equal(value, Enumerable.Single<string>(details.RoadNames));
                 });
         }
 
@@ -135,7 +134,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                     var details = properties.CoreDetails;
 
                     Assert.Equal(2, details.RoadNames.Count);
-                    Assert.Equal(value, details.RoadNames.Last());
+                    Assert.Equal(value, Enumerable.Last<string>(details.RoadNames));
                 });
         }
 
@@ -152,7 +151,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                     var properties = feature.Properties;
                     var details = properties.CoreDetails;
 
-                    Assert.Equal(values, details.RoadNames);
+                    Assert.Equal<ICollection<string>>(values, details.RoadNames);
                 });
         }
 
@@ -168,7 +167,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                     var properties = feature.Properties;
                     var details = properties.CoreDetails;
 
-                    Assert.Equal(value, details.Description);
+                    Assert.Equal((string)value, (string)details.Description);
                 });
         }
 
@@ -226,7 +225,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
 
                     Assert.NotNull(properties.BeginningCrossStreet);
                     Assert.Null(properties.BeginningMilepost);
-                    Assert.Equal(value, properties.BeginningCrossStreet);
+                    Assert.Equal((string)value, (string)properties.BeginningCrossStreet);
                     Assert.Equal(SpatialVerification.Verified, properties.BeginningAccuracy);
                 });
         }
@@ -246,7 +245,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
 
                     Assert.NotNull(properties.EndingCrossStreet);
                     Assert.Null(properties.EndingMilepost);
-                    Assert.Equal(value, properties.EndingCrossStreet);
+                    Assert.Equal((string)value, (string)properties.EndingCrossStreet);
                     Assert.Equal(SpatialVerification.Verified, properties.EndingAccuracy);
                 });
         }
@@ -295,7 +294,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                     var details = properties.CoreDetails;
 
                     Assert.NotNull(details.CreationDate);
-                    Assert.Equal(value, details.CreationDate);
+                    Assert.Equal<DateTimeOffset?>(value, details.CreationDate);
                     Assert.Equal(TimeSpan.Zero, details.CreationDate.Value.Offset);
                 });
         }
@@ -315,7 +314,7 @@ namespace Wsdot.Wzdx.Models.Tests.v4.Builders
                     var details = properties.CoreDetails;
 
                     Assert.NotNull(details.UpdateDate);
-                    Assert.Equal(value, details.UpdateDate);
+                    Assert.Equal<DateTimeOffset?>(value, details.UpdateDate);
                     Assert.Equal(TimeSpan.Zero, details.UpdateDate.Value.Offset);
                 });
         }

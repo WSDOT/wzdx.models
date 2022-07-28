@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Wsdot.Wzdx.GeoJson;
-using Wsdot.Wzdx.v4.Devices;
+using Wzdx.GeoJson;
+using Wzdx.v4.Devices;
 
-namespace Wsdot.Wzdx.v4.Feeds
+namespace Wzdx.v4.Feeds
 {
     /// <summary>
     /// The SwzDeviceFeed contains information (location, status, live data) about field devices deployed on the roadway in work zones.

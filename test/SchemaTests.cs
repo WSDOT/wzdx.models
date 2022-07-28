@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Schema;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Wsdot.Wzdx.Models.Tests.Core;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Schema;
+using Wzdx.Models.Tests.Core;
 using Xunit;
 
-namespace Wsdot.Wzdx.Models.Tests
+namespace Wzdx.Models.Tests
 {
     public abstract class SchemaTests
     {
