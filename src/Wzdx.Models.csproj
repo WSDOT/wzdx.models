@@ -4,13 +4,16 @@
         <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
         <RootNamespace>Wzdx</RootNamespace>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <Version>0.0.7</Version>
+        <Version>0.0.8</Version>
         <Company>WSDOT</Company>
         <Description>
             This project contains various classes and builders used to build WZDx feeds.
         </Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <RepositoryUrl>https://github.com/WSDOT/wzdx.models</RepositoryUrl>   
+        <RepositoryUrl>https://github.com/WSDOT/wzdx.models</RepositoryUrl>
+      <PackageLicenseExpression>CC0-1.0</PackageLicenseExpression>
+      <PackageLicenseUrl>https://creativecommons.org/publicdomain/zero/1.0/</PackageLicenseUrl>
+      <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
