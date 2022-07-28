@@ -21,9 +21,9 @@ jobs:
       run: dotnet build
     - name: Test
       run: dotnet test test/ -f net6.0 --no-build --verbosity normal 
-    - name: Publish WSDOT WZDX-Client
+    - name: Publish wzdx.models to nuget
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/Wsdot.Wzdx.Models.csproj
+          PROJECT_FILE_PATH: src/Wzdx.Models.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          PACKAGE_NAME: WZDx Client
+          PACKAGE_NAME: wzdx.models
