@@ -13,6 +13,8 @@ This project contains various classes and builders used to build WZDx feeds.
 ## License
 The Washington State Department of Transportation created this project as part of a federal grant to expand the use of the WZDx specification. The WZDx.Models library and code is now licensed under the CC0-1.0, just like the specification format it creates.
 
+All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with the waiver of copyright interest. See LICENSE for more details.
+
 ## Namespaces
 ---
 ### GeoJson
