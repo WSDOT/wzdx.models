@@ -11,7 +11,6 @@
         </Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/WSDOT/wzdx.models</RepositoryUrl>
-      <PackageLicenseExpression>CC0-1.0</PackageLicenseExpression>
       <PackageLicenseFile>LICENSE</PackageLicenseFile>
       <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     </PropertyGroup>
