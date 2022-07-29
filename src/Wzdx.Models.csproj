@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/WSDOT/wzdx.models</RepositoryUrl>
       <PackageLicenseExpression>CC0-1.0</PackageLicenseExpression>
-      <PackageLicenseUrl>https://creativecommons.org/publicdomain/zero/1.0/</PackageLicenseUrl>
+      <PackageLicenseFile>LICENSE</PackageLicenseFile>
       <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     </PropertyGroup>
 
@@ -28,6 +28,13 @@
 
   <ItemGroup>
     <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
