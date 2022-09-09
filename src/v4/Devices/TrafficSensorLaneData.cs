@@ -11,7 +11,7 @@ namespace Wzdx.v4.Devices
         /// <summary>
         /// The ID of a RoadEventFeature that the measured lane occurs in
         /// </summary>
-        [JsonProperty("road_event_id", Required = Required.Always)]
+        [JsonProperty("road_event_id", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [Required(AllowEmptyStrings = true)]
         public string RoadEventId { get; set; }
 
@@ -26,21 +26,21 @@ namespace Wzdx.v4.Devices
         /// The average speed of traffic in the lane over the collection interval (in kilometers per hour)
         /// </summary>
         [JsonProperty("average_speed_kph", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        [Range(1, int.MaxValue)]
-        public int? AverageSpeedKph { get; set; }
+        [Range(0, int.MaxValue)]
+        public decimal? AverageSpeedKph { get; set; }
 
         /// <summary>
         /// The rate of vehicles passing by the sensor in the lane during the collection interval (in vehicles per hour)
         /// </summary>
         [JsonProperty("volume_vph", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [Range(0, int.MaxValue)]
-        public int? VolumeVph { get; set; }
+        public decimal? VolumeVph { get; set; }
 
         /// <summary>
         /// The percent of time the lane monitored by the sensor was occupied by a vehicle over the collection interval
         /// </summary>
         [JsonProperty("occupancy_percent", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [Range(0, int.MaxValue)]
-        public int? OccupancyPercent { get; set; }
+        public decimal? OccupancyPercent { get; set; }
     }
 }

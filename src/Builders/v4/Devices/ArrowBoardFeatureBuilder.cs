@@ -17,7 +17,7 @@ namespace Wzdx.v4.Devices
             WithRoadName(roadName);
             WithStatus(FieldDeviceStatus.Unknown);
         }
-
+        
         public ArrowBoardFeatureBuilder WithIsMoving(bool value)
         {
             PropertiesConfiguration.Set(properties => properties.IsMoving, value);

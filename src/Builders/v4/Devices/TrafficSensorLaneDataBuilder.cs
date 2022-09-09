@@ -27,7 +27,7 @@ namespace Wzdx.v4.Devices
         {
             if (value < 1) throw new ArgumentOutOfRangeException(nameof(value), value, "Lane order value must be greater than 0");
 
-            Configuration.Set(properties => properties.AverageSpeedKph, value);
+            Configuration.Set(properties => properties.LaneOrder, value);
             return this;
         }
 

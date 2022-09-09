@@ -34,6 +34,8 @@ namespace Wzdx.v4.WorkZones
         [EnumMember(Value = @"permitted-oversize-loads-prohibited")]
         PermittedOversizeLoadsProhibited = 13,
         [EnumMember(Value = @"local-access-only")]
-        LocalAccessOnly = 14
+        LocalAccessOnly = 14,
+        [EnumMember(Value = @"no-passing")]
+        NoPassing = 15
     }
 }

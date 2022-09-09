@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace Wzdx.v4.WorkZones
@@ -10,7 +11,7 @@ namespace Wzdx.v4.WorkZones
         [EnumMember(Value = @"general")]
         General = 31,
         [EnumMember(Value = @"exit-lane")]
-        ExitLane = 351,
+        ExitLane = 35,
         [EnumMember(Value = @"exit-ramp")]
         ExitRamp = 36,
         [EnumMember(Value = @"entrance-lane")]
@@ -27,7 +28,10 @@ namespace Wzdx.v4.WorkZones
         Parking = 37,
         [EnumMember(Value = @"median")]
         Median = 32,
+        [Obsolete("Depreciated, use the new `two-way-center-turn-lane` type")]
         [EnumMember(Value = @"center-left-turn-lane")]
-        CenterLeftTurnLane = 14
+        CenterLeftTurnLane = 14,
+        [EnumMember(Value = @"two-way-center-turn-lane")]
+        TwoWayCenterTurnLane = 38 
     }
 }

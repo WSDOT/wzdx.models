@@ -25,10 +25,10 @@ namespace Wzdx.v4.Devices
         /// <summary>
         /// A list of publicly known names of the road on which the field device is located. This may include the road number designated by a jurisdiction such as a county, state or interstate (e.g. I-5, VT 133)
         /// </summary>
-        [JsonProperty("road_names", Required = Required.Always)]
+        [JsonProperty("road_names", Required = Required.AllowNull, NullValueHandling = NullValueHandling.Ignore)]
         [Required]
         [MinLength(1)]
-        public ICollection<string> RoadNames { get; set; } = new Collection<string>();
+        public ICollection<string> RoadNames { get; set; } 
 
         [JsonProperty("device_status", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
@@ -100,6 +100,15 @@ namespace Wzdx.v4.Devices
         /// </summary>
         [JsonProperty("firmware_version", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string FirmwareVersion { get; set; }
-        
+
+        /// <summary>
+        /// A yes/no value indicating if the arrow board is actively moving (not statically placed) as part of a mobile work zone operation.
+        /// </summary>
+        [JsonProperty("is_moving", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsMoving { get; set; }
+
+        [JsonProperty("road_direction", Required = Required.Always, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Direction Direction { get; set; } = Direction.Undefined;
     }
 }

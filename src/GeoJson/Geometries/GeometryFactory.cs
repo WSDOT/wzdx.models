@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Wzdx.GeoJson.Geometries
 {
@@ -19,7 +20,16 @@ namespace Wzdx.GeoJson.Geometries
         /// <returns>Instance of Geometry</returns>
         public static IGeometry CreatePoint(IEnumerable<double> values)
         {
-            return Point.FromCoordinates(new [] { Position.From(values) });
+            return Point.FromCoordinates(new[] { Position.From(values) });
+        }
+
+        /// <summary>
+        /// Creates an instance of Geometry representing a point
+        /// </summary>
+        /// <returns>Instance of Geometry</returns>
+        public static IGeometry CreatePoint(IEnumerable<IPosition> values)
+        {
+            return Point.FromCoordinates(values);
         }
 
         /// <summary>

@@ -80,26 +80,32 @@ namespace Wzdx.v4.Devices
             CoreDetailConfiguration.Set(details => details.SerialNumber, value);
             return Derived();
         }
-
-        [Obsolete("To be removed, use WithRoadName")]
-        public T WithAdditionalRoadName(string value)
-        {
-            CoreDetailConfiguration.Combine(details => details.RoadNames, details => details.RoadNames.Add(value));
-            return Derived();
-        }
-
+        
         public T WithRoadName(string value)
         {
-            CoreDetailConfiguration.Combine(details => details.RoadNames, details => details.RoadNames.Add(value));
+            CoreDetailConfiguration.Combine(details => details.RoadNames, details =>
+            {
+                if (details.RoadNames == null) details.RoadNames = new List<string>();
+                details.RoadNames.Add(value);
+            });
             return Derived();
         }
 
         public T WithoutRoadName(string value)
         {
-            CoreDetailConfiguration.Combine(details => details.RoadNames, details => details.RoadNames.Remove(value));
+            CoreDetailConfiguration.Combine(details => details.RoadNames, details =>
+            {
+                if (details.RoadNames == null) return;
+                details.RoadNames.Remove(value);
+            });
             return Derived();
         }
 
+        public T WithoutRoadNames()
+        {
+            CoreDetailConfiguration.Combine(details => details.RoadNames, details => details.RoadNames = null);
+            return Derived();
+        }
 
         public T WithMilepost(double value)
         {

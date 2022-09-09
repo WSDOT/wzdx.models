@@ -39,6 +39,12 @@ namespace Wzdx.v4.Feeds
             return this;
         }
 
+        public FieldDeviceFeedBuilder WithNoUpdateFrequency()
+        {
+            WithInfo(builder => builder.WithNoUpdateFrequency());
+            return this;
+        }
+
         public FieldDeviceFeedBuilder WithUpdateDate(DateTimeOffset value)
         {
             WithInfo(builder => builder.WithUpdateDate(value));
