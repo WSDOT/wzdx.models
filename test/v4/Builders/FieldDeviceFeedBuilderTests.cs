@@ -5,8 +5,6 @@ using Wzdx.Core;
 using Wzdx.GeoJson.Geometries;
 using Wzdx.v4.Devices;
 using Wzdx.v4.Feeds;
-using Wzdx.v4.RoadEvents;
-using Wzdx.v4.WorkZones;
 using Xunit;
 
 namespace Wzdx.Models.Tests.v4.Builders
