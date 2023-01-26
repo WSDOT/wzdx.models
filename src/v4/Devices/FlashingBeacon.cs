@@ -17,6 +17,12 @@ namespace Wzdx.v4.Devices
             DeviceStatus = FieldDeviceStatus.Unknown
         };
 
+        /// <summary>
+        /// The text on the sign the beacon is mounted on, if applicable
+        /// </summary>
+        [JsonProperty("sign_text", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public string SignText { get; set; }
+
         [JsonProperty("function", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
         public FlashingBeaconFunction Function { get; set; }

@@ -18,8 +18,11 @@ namespace Wzdx.GeoJson
     public abstract class Feature<TProperties> : IFeature
     {
         /// <summary>
-        /// A unique identifier used to identify the feature
+        /// A unique identifier used to identify the feature.
         /// </summary>
+        /// <remarks>
+        /// It is recommended that this identifier is a Universally Unique IDentifier (UUID) as defined in [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
+        /// </remarks>
         [JsonProperty("id", Required = Required.Always)]
         [Required(AllowEmptyStrings = true)]
         public string Id { get; set; }

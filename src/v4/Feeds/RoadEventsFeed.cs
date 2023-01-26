@@ -15,7 +15,16 @@ namespace Wzdx.v4.Feeds
     [DataContract(Name = "WZDxFeed")]
     public class RoadEventsFeed : FeatureCollection<RoadEventFeature>
     {
+        [Obsolete("Use feed_info property")]
         [JsonProperty("road_event_feed_info", Required = Required.Always)]
+        [Required]
+        public FeedInfo RoadEventFeedInfo
+        {
+            get => FeedInfo;
+            set => FeedInfo = value;
+        }
+
+        [JsonProperty("feed_info", Required = Required.Always)]
         [Required]
         public FeedInfo FeedInfo { get; set; } = new FeedInfo();
 

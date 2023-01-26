@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
@@ -41,36 +42,69 @@ namespace Wzdx.v4.WorkZones
         [Range(0D, double.MaxValue)]
         public double? EndingMilepost { get; set; }
 
+        [Obsolete("Depreciated, use the new `is_start_position_verified` instead")]
         [JsonProperty("beginning_accuracy", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public SpatialVerification BeginningAccuracy { get; set; }
+        public SpatialVerification BeginningAccuracy
+        {
+            get => IsStartPositionVerified ? SpatialVerification.Verified : SpatialVerification.Estimated;
+            set => IsStartPositionVerified = value == SpatialVerification.Verified;
+        }
+        
+        [JsonProperty("is_start_position_verified", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public bool IsStartPositionVerified { get; set; }
 
+        [Obsolete("Depreciated, use the new `is_end_position_verified` instead")]
         [JsonProperty("ending_accuracy", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public SpatialVerification EndingAccuracy { get; set; }
+        public SpatialVerification EndingAccuracy
+        {
+            get => IsEndPositionVerified ? SpatialVerification.Verified : SpatialVerification.Estimated;
+            set => IsEndPositionVerified = value == SpatialVerification.Verified;
+        }
+
+        [JsonProperty("is_end_position_verified", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public bool IsEndPositionVerified { get; set; }
 
         /// <summary>
         /// The UTC date and time (formatted according to RFC 3339, Section 5.6) when the road event begins (e.g. 2020-11-03T19:37:00Z)
         /// </summary>
         [JsonProperty("start_date", Required = Required.Always)]
         [Required(AllowEmptyStrings = true)]
-        public System.DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
         /// <summary>
         /// The UTC date and time (formatted according to RFC 3339, Section 5.6) when the road event ends (e.g. 2020-11-03T19:37:00Z)
         /// </summary>
         [JsonProperty("end_date", Required = Required.Always)]
         [Required(AllowEmptyStrings = true)]
-        public System.DateTimeOffset EndDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
 
+        [Obsolete("Depreciated, use the new `is_start_date_verified` instead")]
         [JsonProperty("start_date_accuracy", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public TimeVerification StartDateAccuracy { get; set; }
+        public TimeVerification StartDateAccuracy
+        {
+            get => IsStartDateVerified ? TimeVerification.Verified : TimeVerification.Estimated; 
+            set => IsStartDateVerified = value == TimeVerification.Verified;
+        }
 
+        [JsonProperty("is_start_date_verified", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public bool IsStartDateVerified { get; set; }
+
+        [Obsolete("Depreciated, use the new `is_end_date_verified` instead")]
         [JsonProperty("end_date_accuracy", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public TimeVerification EndDateAccuracy { get; set; }
+        public TimeVerification EndDateAccuracy
+        {
+            get => IsEndDateVerified ? TimeVerification.Verified : TimeVerification.Estimated;
+            set => IsEndDateVerified = value == TimeVerification.Verified;
+        }
 
+        [JsonProperty("is_end_date_verified", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public bool IsEndDateVerified { get; set; }
+
+        [Obsolete("Depreciated")]
         [JsonProperty("event_status", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public EventStatus? EventStatus { get; set; }
@@ -84,7 +118,7 @@ namespace Wzdx.v4.WorkZones
         public LocationMethod LocationMethod { get; set; }
 
         [JsonProperty("worker_presence", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public WorkerPresence WorkerPresence { get; set; } 
+        public WorkerPresence WorkerPresence { get; set; }
 
         /// <summary>
         /// If applicable, the reduced speed limit posted within the road event, in kilometers per hour

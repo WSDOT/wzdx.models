@@ -20,6 +20,8 @@ namespace Wzdx.v4.Devices
         [EnumMember(Value = @"location-marker")]
         LocationMarker = 6,
         [EnumMember(Value = @"traffic-sensor")]
-        TrafficSensor = 7
+        TrafficSensor = 7,
+        [EnumMember(Value = @"traffic-signal")]
+        TrafficSignal = 8
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace Wzdx.v4.Devices
@@ -15,6 +16,7 @@ namespace Wzdx.v4.Devices
         LaneShift = 3,
         [EnumMember(Value = @"lane-closure")]
         LaneClosure = 4,
+        [Obsolete("Depreciated, use new traffic signal field device")]
         [EnumMember(Value = @"temporary-traffic-signal")]
         TemporaryTrafficSignal = 5,
         [EnumMember(Value = @"road-event-start")]
@@ -24,6 +26,14 @@ namespace Wzdx.v4.Devices
         [EnumMember(Value = @"work-zone-start")]
         WorkZoneStart = 8,
         [EnumMember(Value = @"work-zone-end")]
-        WorkZoneEnd = 9
+        WorkZoneEnd = 9,
+        [EnumMember(Value = @"personal-device")]
+        PersonalDevice = 10,
+        [EnumMember(Value = @"ramp-closure")]
+        RampClosure = 11,
+        [EnumMember(Value = @"road-closure")]
+        RoadClosure = 12,
+        [EnumMember(Value = @"delineator")]
+        Delineator = 13
     }
 }

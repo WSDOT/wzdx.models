@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -25,6 +26,7 @@ namespace Wzdx.v4.Devices
         /// <summary>
         /// A yes/no value indicating if the arrow board is actively moving (not statically placed) as part of a mobile work zone operation.
         /// </summary>
+        [Obsolete("Use core_details is_moving property.")]
         [JsonProperty("is_moving", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsMoving { get; set; }
 

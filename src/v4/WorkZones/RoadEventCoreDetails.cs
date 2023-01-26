@@ -19,10 +19,24 @@ namespace Wzdx.v4.WorkZones
         [Required(AllowEmptyStrings = true)]
         public string DataSourceId { get; set; }
 
+        /// <summary>
+        /// A human-readable name for the road event
+        /// </summary>
+        [JsonProperty("name", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        [Required(AllowEmptyStrings = true)]
+        public string Name { get; set; }
+
         [JsonProperty("event_type", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
         public EventType EventType { get; set; }
 
+        /// <summary>
+        /// A list describing one or more road events which are related to this road event, such as a work zone project it is part of or another road event that occurs before or after it in sequence
+        /// </summary>
+        [JsonProperty("related_road_events", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public IEnumerable<RelatedRoadEvent> RelatedRoadEvents { get; set; }
+
+        [Obsolete("Depreciated, use the new `related_road_events` property instead")]
         [JsonProperty("relationship", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public Relationship Relationship { get; set; }
 
@@ -55,7 +69,7 @@ namespace Wzdx.v4.WorkZones
         /// </summary>
         [JsonProperty("update_date", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public DateTimeOffset? UpdateDate { get; set; }
-        
+
         private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
         [JsonExtensionData]
