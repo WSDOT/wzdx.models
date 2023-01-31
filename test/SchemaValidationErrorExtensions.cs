@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Schema;
 
-namespace Wsdot.Wzdx.Models.Tests
+namespace Wzdx.Models.Tests
 {
     public static class SchemaValidationErrorExtensions
     {

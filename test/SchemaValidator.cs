@@ -1,13 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 
-namespace Wsdot.Wzdx.Models.Tests
+namespace Wzdx.Models.Tests
 {
     internal sealed class SchemaValidator
     {
