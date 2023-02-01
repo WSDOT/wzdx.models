@@ -19,6 +19,8 @@ namespace Wzdx.v4.RoadEvents
         {
             FeatureConfiguration.Set(feature => feature.Id, featureId);
             CoreDetailConfiguration.Set(details => details.DataSourceId, sourceId);
+            //CoreDetailConfiguration.Set(details => details.Name, featureId);    // todo: set name!
+
             WithGeometry(MultiPoint.FromCoordinates(Enumerable.Empty<Position>()));
             WithRoadName(roadName);
             WithDirection(direction);

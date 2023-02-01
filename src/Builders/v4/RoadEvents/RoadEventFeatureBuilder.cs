@@ -26,7 +26,17 @@ namespace Wzdx.v4.RoadEvents
         {
             _featureFactory = featureFactory;
         }
-        
+
+        public T WithName(string value)
+        {
+            CoreDetailConfiguration.Combine(details => details.Name, details =>
+            {
+                details.Name = value;
+            });
+
+            return Derived();
+        }
+
         public T WithRoadName(string value)
         {
             CoreDetailConfiguration.Combine(details => details.RoadNames, details =>
