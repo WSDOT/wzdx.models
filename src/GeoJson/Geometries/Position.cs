@@ -20,30 +20,60 @@ namespace Wzdx.GeoJson.Geometries
         double Longitude { get; }
 
         /// <summary>
-        /// Height meters above or below spatial reference ellipsoid.
+        /// Height meters above or below spatial reference ellipsoid
         /// </summary>
         double? Altitude { get; }
     }
 
     public sealed class Position : IPosition, IEquatable<Position>
     {
+        /// <summary>
+        /// Set the default rounding precision for coordinates
+        /// </summary>
+        public static int DefaultPrecision { get; set; } = 6;
+
         private const string PositionValuesLengthToShort = "Position values length invalid (expected at least 2).";
         private const string PositionValuesLengthToLong = "Position values length invalid (expected at most 3).";
 
-
-        public Position(double longitude, double latitude) : this(longitude, latitude, null)
+        /// <summary>
+        /// Create a new position without altitude using the default precision
+        /// </summary>
+        /// <param name="longitude">Decimal degrees of longitude</param>
+        /// <param name="latitude">Decimal degrees of latitude</param>
+        public Position(double longitude, double latitude) : 
+            this(longitude, latitude, null)
         {
             // ignore
         }
 
-        public Position(double longitude, double latitude, double? altitude)
+        /// <summary>
+        /// Create a new position at specified altitude using the default precision
+        /// </summary>
+        /// <param name="longitude">Decimal degrees of longitude</param>
+        /// <param name="latitude">Decimal degrees of latitude</param>
+        /// <param name="altitude">Height meters above or below spatial reference ellipsoid.</param>
+        public Position(double longitude, double latitude, double? altitude) : 
+            this(longitude, latitude, altitude, DefaultPrecision)
         {
-            Longitude = Math.Round(longitude, 6);
-            Latitude = Math.Round(latitude, 6);
-            Altitude = altitude.HasValue 
-                ? Math.Round(altitude.Value, 6) 
+
+        }
+
+        /// <summary>
+        /// Create a new position at specified altitude and precision
+        /// </summary>
+        /// <param name="longitude">Decimal degrees of longitude</param>
+        /// <param name="latitude">Decimal degrees of latitude</param>
+        /// <param name="altitude">Height meters above or below spatial reference ellipsoid.</param>
+        /// <param name="precision">Rounding value to use for position</param>
+        public Position(double longitude, double latitude, double? altitude, int precision)
+        {
+            Longitude = Math.Round(longitude, precision);
+            Latitude = Math.Round(latitude, precision);
+            Altitude = altitude.HasValue
+                ? Math.Round(altitude.Value, precision)
                 : (double?)null;
         }
+
 
         public double Latitude { get; }
         public double Longitude { get; }
