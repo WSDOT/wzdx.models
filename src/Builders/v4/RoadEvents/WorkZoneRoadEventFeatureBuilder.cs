@@ -152,7 +152,12 @@ namespace Wzdx.v4.RoadEvents
 
         public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
         {
-            var builder = configure(new RestrictionBuilder(type, unit));
+            return WithRestriction(type, unit, 0, configure);
+        }
+
+        public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, double value, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        {
+            var builder = configure(new RestrictionBuilder(type, unit, value));
             var restriction = builder.Result();
             PropertiesConfiguration.Combine(properties => properties.Restrictions, properties => properties.Restrictions.Add(restriction));
             return Derived();

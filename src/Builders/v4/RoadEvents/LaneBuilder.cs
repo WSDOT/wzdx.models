@@ -42,9 +42,26 @@ namespace Wzdx.v4.RoadEvents
             return this;
         }
 
+        public LaneBuilder WithRestriction(RestrictionType type, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        {
+            var restriction = configure(new RestrictionBuilder(type)).Result();
+            Configuration.Set(lane => lane.Restrictions, lane =>
+            {
+                if (lane.Restrictions == null)
+                    lane.Restrictions = new List<Restriction>();
+                lane.Restrictions.Add(restriction);
+            });
+            return this;
+        }
+
         public LaneBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
         {
-            var restriction = configure(new RestrictionBuilder(type, unit)).Result();
+            return WithRestriction(type, unit, 0, configure);
+        }
+
+        public LaneBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, double value, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        {
+            var restriction = configure(new RestrictionBuilder(type, unit , value)).Result();
             Configuration.Set(lane => lane.Restrictions, lane =>
             {
                 if (lane.Restrictions == null)

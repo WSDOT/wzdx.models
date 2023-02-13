@@ -29,12 +29,17 @@ namespace Wzdx.v4.RoadEvents
             return Derived();
         }
 
-        public RoadRestrictionFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        public RoadRestrictionFeatureBuilder WithRestriction(RestrictionType type, Func<RestrictionBuilder, RestrictionBuilder> configure)
         {
-            var builder = configure(new RestrictionBuilder(type, unit));
+            var builder = configure(new RestrictionBuilder(type));
             var restriction = builder.Result();
             PropertiesConfiguration.Combine(properties => properties.Restrictions, properties => properties.Restrictions.Add(restriction));
             return Derived();
+        }
+
+        public RoadRestrictionFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        {
+            return WithRestriction(type, builder => configure(builder.WithMeasure(unit, 0)));
         }
     }
 }
