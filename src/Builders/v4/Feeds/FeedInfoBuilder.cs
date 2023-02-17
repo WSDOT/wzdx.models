@@ -37,7 +37,15 @@ namespace Wzdx.v4.Feeds
         public FeedInfoBuilder WithSource(string sourceId, Func<FeedSourceBuilder, FeedSourceBuilder> setup)
         {
             var source = setup(new FeedSourceBuilder(sourceId)).Result();
-            _configuration.Combine(info => info.DataSources, info => info.DataSources.Add(source));
+            _configuration.Combine(info => info.DataSources, info =>
+            {
+                info.DataSources.Add(source);
+                var updateDate = source.UpdateDate.GetValueOrDefault(info.UpdateDate);
+
+                if (info.UpdateDate < updateDate)
+                    info.UpdateDate = updateDate;
+            });
+            
             return this;
         }
 

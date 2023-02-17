@@ -35,7 +35,7 @@ namespace Wzdx.v4.Feeds
 
         public RoadEventFeedBuilder WithUpdateFrequency(TimeSpan? value)
         {
-            WithInfo(builder => value.HasValue 
+            WithInfo(builder => value.HasValue
                 ? builder.WithUpdateFrequency(value.Value)
                 : builder.WithNoUpdateFrequency());
             return this;
@@ -59,6 +59,8 @@ namespace Wzdx.v4.Feeds
             foreach (var feature in features)
             {
                 _features.Add(feature);
+                if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
+                    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
             }
 
             _infoBuilder.WithSource(sourceId, sourceBuilder => sourceBuilder.From(source));
@@ -68,16 +70,6 @@ namespace Wzdx.v4.Feeds
 
         public RoadEventsFeed Result()
         {
-            // todo: determine feed info / source update date?
-
-            //    feedInfo.UpdateDate = source.UpdateDate.Value;
-            //if (source.UpdateDate.HasValue && feedInfo.UpdateDate < source.UpdateDate.Value)
-            // match feed update date to max source update date 
-
-            // match source update date to max item update date 
-            //if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
-            //    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
-
             return new RoadEventsFeed
             {
                 FeedInfo = _infoBuilder.Result(),
@@ -85,8 +77,7 @@ namespace Wzdx.v4.Feeds
                 // todo: determine feed bbox?
             };
         }
-
-
+        
         public static IFactory<RoadEventFeedBuilder> Factory(string publisher)
         {
             return new DelegatingFactory<RoadEventFeedBuilder>(() => new RoadEventFeedBuilder(publisher));

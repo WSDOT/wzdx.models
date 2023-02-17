@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Wzdx.Core;
+using Wzdx.GeoJson.Geometries;
 using Wzdx.v4.Devices;
 
 namespace Wzdx.v4.Feeds
@@ -57,25 +58,17 @@ namespace Wzdx.v4.Feeds
             foreach (var feature in features)
             {
                 _features.Add(feature);
+                if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
+                    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
             }
-
+            
             _infoBuilder.WithSource(sourceId, sourceBuilder => sourceBuilder.From(source));
-
+            
             return this;
         }
 
         public FieldDeviceFeed Result()
         {
-            // todo: determine feed info / source update date?
-
-            //    feedInfo.UpdateDate = source.UpdateDate.Value;
-            //if (source.UpdateDate.HasValue && feedInfo.UpdateDate < source.UpdateDate.Value)
-            // match feed update date to max source update date 
-
-            // match source update date to max item update date 
-            //if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
-            //    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
-
             return new FieldDeviceFeed
             {
                 FeedInfo = _infoBuilder.Result(),

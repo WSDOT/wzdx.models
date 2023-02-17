@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Wzdx.GeoJson.Geometries;
@@ -7,23 +6,6 @@ using Xunit;
 
 namespace Wzdx.Models.Tests.Geometries
 {
-    internal sealed class GeometryTypeComparer : IEqualityComparer<IGeometry>
-    {
-        public bool Equals(IGeometry x, IGeometry y)
-        {
-            if (ReferenceEquals(x, y)) return true;
-            if (ReferenceEquals(x, null)) return false;
-            if (ReferenceEquals(y, null)) return false;
-            if (x.GetType() != y.GetType()) return false;
-            return x.Type == y.Type;
-        }
-
-        public int GetHashCode(IGeometry obj)
-        {
-            return (int)obj.Type;
-        }
-    }
-
     internal sealed class PointGeometryComparer : IEqualityComparer<Point>,
         IEqualityComparer<IGeometry>
     {
@@ -87,8 +69,7 @@ namespace Wzdx.Models.Tests.Geometries
                 : 0;
         }
     }
-
-
+    
     internal sealed class MultiPointGeometryComparer : IEqualityComparer<MultiPoint>,
         IEqualityComparer<IGeometry>
     {
@@ -120,8 +101,7 @@ namespace Wzdx.Models.Tests.Geometries
                 : 0;
         }
     }
-
-
+    
     public class WktTests
     {
         [Fact]
@@ -159,8 +139,6 @@ namespace Wzdx.Models.Tests.Geometries
             Assert.Equal(expected, actual, new PointGeometryComparer());
         }
 
-
-        // todo: handle point z
         [Fact]
         public void WkPointZTextShouldReturnPointGeometry()
         {
@@ -211,9 +189,6 @@ namespace Wzdx.Models.Tests.Geometries
             Assert.Equal(expected, actual, new LineStringGeometryComparer());
         }
 
-
-        // todo: handle point zm
-        // todo: handle multipoint
         [Fact]
         public void WkMultiPointTextShouldReturnGeometry()
         {
@@ -227,7 +202,6 @@ namespace Wzdx.Models.Tests.Geometries
             Assert.Equal(expected, actual, new MultiPointGeometryComparer());
         }
 
-
         [Fact]
         public void WkMultiPointTextAlternateShouldReturnGeometry()
         {
@@ -240,10 +214,5 @@ namespace Wzdx.Models.Tests.Geometries
             var actual = Geometry.FromWkt(wkt);
             Assert.Equal(expected, actual, new MultiPointGeometryComparer());
         }
-
-        // todo: handle multilinestring
-        // todo: handle multipolygon
-        // todo: handle geometrycollection
-
     }
 }
