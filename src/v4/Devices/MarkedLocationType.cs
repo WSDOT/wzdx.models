@@ -34,6 +34,8 @@ namespace Wzdx.v4.Devices
         [EnumMember(Value = @"road-closure")]
         RoadClosure = 12,
         [EnumMember(Value = @"delineator")]
-        Delineator = 13
+        Delineator = 13,
+        [EnumMember(Value = "work-truck-with-lights-flashing")]
+        WorkTruckWithLightsFlashing = 14
     }
 }

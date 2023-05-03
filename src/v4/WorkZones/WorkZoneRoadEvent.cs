@@ -16,6 +16,9 @@ namespace Wzdx.v4.WorkZones
             CoreDetails.EventType = EventType.WorkZone;
         }
 
+        // todo: v4.2, implement impacted_cds_curb_zones, https://github.com/usdot-jpo-ode/wzdx/blob/main/spec-content/objects/CdsCurbZonesReference.md
+        // todo: v4.2, implement work_zone_type, https://github.com/usdot-jpo-ode/wzdx/blob/main/spec-content/enumerated-types/WorkZoneType.md
+
         /// <summary>
         /// Name or number of the nearest cross street along the roadway where the event begins
         /// </summary>

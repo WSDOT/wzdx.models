@@ -100,6 +100,12 @@ namespace Wzdx.v4.RoadEvents
             return Derived();
         }
 
+
+        /// <summary>
+        /// Adds a LineString geometry of a road event used when a sequence of coordinates are known. The order of coordinates is meaningful and should follow the general order of travel.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public T WithGeometry(LineString value)
         {
             if (value.BoundaryBox == null)
@@ -108,6 +114,11 @@ namespace Wzdx.v4.RoadEvents
             return WithGeometry(value, value.BoundaryBox);
         }
 
+        /// <summary>
+        /// Adds a MultiPoint geometry of a road event used when only the start and end coordinates are known. The order of coordinates is meaningful and should follow the general order of travel.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public T WithGeometry(MultiPoint value)
         {
             if (value.BoundaryBox == null)

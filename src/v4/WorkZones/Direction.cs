@@ -15,6 +15,10 @@ namespace Wzdx.v4.WorkZones
         Southbound = 3,
         [EnumMember(Value = @"westbound")]
         Westbound = 4,
+        [EnumMember(Value = @"inner-loop")]
+        InnerLoop = 7,
+        [EnumMember(Value = @"outer-loop")]
+        OuterLoop = 8,
         [EnumMember(Value = @"undefined")]
         Undefined = 5,
         [EnumMember(Value = @"unknown")]

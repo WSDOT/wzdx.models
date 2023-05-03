@@ -107,6 +107,8 @@ namespace Wzdx.v4.Devices
         [JsonProperty("is_moving", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsMoving { get; set; }
 
+        // todo: v4.2, add velocity_kph property
+
         [JsonProperty("road_direction", Required = Required.Always, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public Direction Direction { get; set; } = Direction.Undefined;
