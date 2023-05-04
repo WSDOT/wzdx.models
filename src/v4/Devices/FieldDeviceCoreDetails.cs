@@ -109,7 +109,7 @@ namespace Wzdx.v4.Devices
 
         // todo: v4.2, add velocity_kph property
 
-        [JsonProperty("road_direction", Required = Required.Always, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("road_direction", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public Direction Direction { get; set; } = Direction.Undefined;
     }
