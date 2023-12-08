@@ -91,7 +91,13 @@ namespace Wzdx.v4.RoadEvents
             return Derived();
         }
 
-        public WorkZoneRoadEventFeatureBuilder WithStatus(EventStatus value)
+        public WorkZoneRoadEventFeatureBuilder WithWorkZoneType(WorkZoneType value)
+        {
+	        PropertiesConfiguration.Set(properties => properties.WorkZoneType, value);
+	        return Derived();
+        }
+
+		public WorkZoneRoadEventFeatureBuilder WithStatus(EventStatus value)
         {
             PropertiesConfiguration.Set(properties => properties.EventStatus, value);
             return Derived();
@@ -150,7 +156,13 @@ namespace Wzdx.v4.RoadEvents
             return Derived();
         }
 
-        public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        public WorkZoneRoadEventFeatureBuilder WithCdsCurbZone(CdsCurbZonesReference value)
+        {
+	        PropertiesConfiguration.Combine(properties => properties.CdsCurbZonesReference, properties => properties.CdsCurbZonesReference.Add(value));
+	        return Derived();
+        }
+        
+		public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
         {
             return WithRestriction(type, unit, 0, configure);
         }
