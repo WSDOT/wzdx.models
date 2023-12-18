@@ -8,7 +8,7 @@ The goal of WZDx is to enable widespread access to up-to-date information about 
 Specifically, WZDx defines the structure and content of several [GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946) documents that are each intended to be distributed as a data feed. The feeds describe a variety of high-level road work-related information such as the location and status of work zones, detours, and field devices.
 
 ## WZDX Models
-This project contains various classes and builders used to build WZDx 3.x and 4.1 feeds.
+This project contains various classes and builders used to build WZDx 3.x and 4.2 feeds.
 
 ## License
 The Washington State Department of Transportation created this project as part of a federal grant to expand the use of the WZDx specification. The WZDx.Models library and code is now licensed under the CC0-1.0, just like the specification format it creates.
