@@ -65,7 +65,6 @@ namespace Wzdx.v4.Feeds
         /// **DEPRECATED** A URL where additional information on the LRS information and transformation information is stored
         /// </summary>
         [JsonProperty("lrs_url", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        // todo: format validator
         public Uri LrsUrl { get; set; }
 
         /// <summary>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Wzdx.Core;
 using Wzdx.v4.WorkZones;
 
@@ -61,7 +62,9 @@ namespace Wzdx.v4.Feeds
             var source = setup(new RoadRestrictionSourceBuilder(sourceId)).Result(out var features);
             foreach (var feature in features)
             {
-                _features.Add(feature);
+                _features.Add(feature); 
+                if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
+                    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
             }
 
             _infoBuilder.WithSource(sourceId, sourceBuilder => sourceBuilder.From(source));
@@ -71,16 +74,6 @@ namespace Wzdx.v4.Feeds
 
         public RoadRestrictionFeed Result()
         {
-            // todo: determine feed info / source update date?
-
-            //    feedInfo.UpdateDate = source.UpdateDate.Value;
-            //if (source.UpdateDate.HasValue && feedInfo.UpdateDate < source.UpdateDate.Value)
-            // match feed update date to max source update date 
-
-            // match source update date to max item update date 
-            //if (source.UpdateDate < feature.Properties.CoreDetails.UpdateDate)
-            //    source.UpdateDate = feature.Properties.CoreDetails.UpdateDate;
-
             return new RoadRestrictionFeed
             {
                 FeedInfo = _infoBuilder.Result(),

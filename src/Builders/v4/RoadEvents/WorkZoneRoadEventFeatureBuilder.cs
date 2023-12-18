@@ -19,6 +19,8 @@ namespace Wzdx.v4.RoadEvents
         {
             FeatureConfiguration.Set(feature => feature.Id, featureId);
             CoreDetailConfiguration.Set(details => details.DataSourceId, sourceId);
+            //CoreDetailConfiguration.Set(details => details.Name, featureId);    // todo: set name!
+
             WithGeometry(MultiPoint.FromCoordinates(Enumerable.Empty<Position>()));
             WithRoadName(roadName);
             WithDirection(direction);
@@ -89,7 +91,13 @@ namespace Wzdx.v4.RoadEvents
             return Derived();
         }
 
-        public WorkZoneRoadEventFeatureBuilder WithStatus(EventStatus value)
+        public WorkZoneRoadEventFeatureBuilder WithWorkZoneType(WorkZoneType value)
+        {
+	        PropertiesConfiguration.Set(properties => properties.WorkZoneType, value);
+	        return Derived();
+        }
+
+		public WorkZoneRoadEventFeatureBuilder WithStatus(EventStatus value)
         {
             PropertiesConfiguration.Set(properties => properties.EventStatus, value);
             return Derived();
@@ -148,9 +156,20 @@ namespace Wzdx.v4.RoadEvents
             return Derived();
         }
 
-        public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        public WorkZoneRoadEventFeatureBuilder WithCdsCurbZone(CdsCurbZonesReference value)
         {
-            var builder = configure(new RestrictionBuilder(type, unit));
+	        PropertiesConfiguration.Combine(properties => properties.CdsCurbZonesReference, properties => properties.CdsCurbZonesReference.Add(value));
+	        return Derived();
+        }
+        
+		public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        {
+            return WithRestriction(type, unit, 0, configure);
+        }
+
+        public WorkZoneRoadEventFeatureBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, double value, Func<RestrictionBuilder, RestrictionBuilder> configure)
+        {
+            var builder = configure(new RestrictionBuilder(type, unit, value));
             var restriction = builder.Result();
             PropertiesConfiguration.Combine(properties => properties.Restrictions, properties => properties.Restrictions.Add(restriction));
             return Derived();

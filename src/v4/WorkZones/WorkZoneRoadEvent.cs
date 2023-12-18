@@ -16,10 +16,10 @@ namespace Wzdx.v4.WorkZones
             CoreDetails.EventType = EventType.WorkZone;
         }
 
-        /// <summary>
-        /// Name or number of the nearest cross street along the roadway where the event begins
-        /// </summary>
-        [JsonProperty("beginning_cross_street", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+		/// <summary>
+		/// Name or number of the nearest cross street along the roadway where the event begins
+		/// </summary>
+		[JsonProperty("beginning_cross_street", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string BeginningCrossStreet { get; set; }
 
         /// <summary>
@@ -120,17 +120,27 @@ namespace Wzdx.v4.WorkZones
         [JsonProperty("worker_presence", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public WorkerPresence WorkerPresence { get; set; }
 
-        /// <summary>
-        /// If applicable, the reduced speed limit posted within the road event, in kilometers per hour
-        /// </summary>
-        [JsonProperty("reduced_speed_limit_kph", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+		[JsonProperty("work_zone_type", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+		[JsonConverter(typeof(StringEnumConverter))]
+		public WorkZoneType? WorkZoneType { get; set; }
+
+		/// <summary>
+		/// If applicable, the reduced speed limit posted within the road event, in kilometers per hour
+		/// </summary>
+		[JsonProperty("reduced_speed_limit_kph", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [Range(0D, double.MaxValue)]
         public double? ReducedSpeedLimitKph { get; set; }
 
         /// <summary>
-        /// A list of zero or more restrictions applying to the road event
+        /// A list of zero or more references to external CDS Curb Zones impacted by the work zone.
         /// </summary>
-        [JsonProperty("restrictions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("impacted_cds_curb_zones", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public ICollection<CdsCurbZonesReference> CdsCurbZonesReference { get; set; } = new HashSet<CdsCurbZonesReference>();
+
+        /// <summary>
+		/// A list of zero or more restrictions applying to the road event
+		/// </summary>
+		[JsonProperty("restrictions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public ICollection<Restriction> Restrictions { get; set; } = new HashSet<Restriction>();
 
         /// <summary>

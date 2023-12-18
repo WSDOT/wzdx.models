@@ -10,6 +10,8 @@ namespace Wzdx.GeoJson.Geometries
         public static IGeometry FromWkt(string value)
         {
             // https://www.ibm.com/docs/en/db2-warehouse?topic=formats-well-known-text-wkt-format
+            // note: geometry with m - measure - is not supported in geo-json and should be ignored or throw an exception
+
             using (var reader = new StringReader(value))
             {
                 return FromWkt(reader);
@@ -49,7 +51,7 @@ namespace Wzdx.GeoJson.Geometries
                         throw new ArgumentOutOfRangeException();
                 }
             }
-
+            
             switch (type.Trim())
             {
                 case "POINT":
@@ -61,6 +63,11 @@ namespace Wzdx.GeoJson.Geometries
                 case "MULTIPOINT":
                 case "MULTIPOINT Z":
                     return GeometryFactory.CreateMultiPoint(positions);
+                    
+                // review: handling of multilinestring
+                // review: handling of multipolygon
+                // review: handling of geometrycollection
+
                 default:
                     throw new NotSupportedException($"Wkt Geometry '{type}' is not supported");
             }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -17,7 +18,7 @@ namespace Wzdx.GeoJson
         public FeatureType Type { get; set; }
             = FeatureType.FeatureCollection;
 
-        [JsonProperty("features", Required = Required.Always)]
+        [JsonProperty("features", Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Populate)]
         [DataMember(Name = "features", IsRequired = true)]
         public ICollection<T> Features { get; set; } = new Collection<T>();
 

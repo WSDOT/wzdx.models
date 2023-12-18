@@ -45,7 +45,13 @@ namespace Wzdx.v4.Devices
             return Derived();
         }
 
-        public T WithHasAutomaticLocation(bool value)
+        public T WithVelocityKph(int? value)
+        {
+	        CoreDetailConfiguration.Set(details => details.VelocityKph, value);
+	        return Derived();
+        }
+
+		public T WithHasAutomaticLocation(bool value)
         {
             CoreDetailConfiguration.Set(details => details.HasAutomaticLocation, value);
             return Derived();

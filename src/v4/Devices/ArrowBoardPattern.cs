@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace Wzdx.v4.Devices
@@ -7,12 +8,14 @@ namespace Wzdx.v4.Devices
     /// </summary>
     public enum ArrowBoardPattern
     {
+        [EnumMember(Value = @"unknown")]
+        Unknown = 0,
+        [EnumMember(Value = @"blank")]
+        Blank = 1,
         [EnumMember(Value = @"bidirectional-arrow-flashing")]
         BidirectionalArrowFlashing = 2,
         [EnumMember(Value = @"bidirectional-arrow-static")]
         BidirectionalArrowStatic = 3,
-        [EnumMember(Value = @"blank")]
-        Blank = 1,
         [EnumMember(Value = @"diamonds-alternating")]
         DiamondsAlternating = 4,
         [EnumMember(Value = @"four-corners-flashing")]
@@ -37,13 +40,21 @@ namespace Wzdx.v4.Devices
         RightArrowSequential = 14,
         [EnumMember(Value = @"right-arrow-static")]
         RightArrowStatic = 15,
+        [EnumMember(Value = @"right-chevron-flashing")]
+        RightChevronFlashing = 16,
+        [EnumMember(Value = @"right-chevron-sequential")]
+        RightChevronSequential = 17,
+        [EnumMember(Value = @"right-chevron-static")]
+        RightChevronStatic = 18,
+        // chevron values had been inconsistently defined
+        [Obsolete("Use RightChevronFlashing value")]
         [EnumMember(Value = @"right-chevrons-flashing")]
-        RightChevronsFlashing = 16,
+        RightChevronsFlashing = 19,
+        [Obsolete("Use RightChevronSequential value")]
         [EnumMember(Value = @"right-chevrons-sequential")]
-        RightChevronsSequential = 17,
+        RightChevronsSequential = 20,
+        [Obsolete("Use RightChevronStatic value")]
         [EnumMember(Value = @"right-chevrons-static")]
-        RightChevronsStatic = 18,
-        [EnumMember(Value = @"unknown")]
-        Unknown = 0
+        RightChevronsStatic = 21,
     }
 }

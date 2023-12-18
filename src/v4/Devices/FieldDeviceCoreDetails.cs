@@ -42,7 +42,7 @@ namespace Wzdx.v4.Devices
         public System.DateTimeOffset UpdateDate { get; set; }
 
         /// <summary>
-        /// A yes/no value indicating if the field device location (parent FieldDeviceFeature's geometry) is determined automatically from an onboard GPS (true) or manually set/overidden (false)
+        /// A yes/no value indicating if the field device location (parent FieldDeviceFeature's geometry) is determined automatically from an onboard GPS (true) or manually set/overridden (false)
         /// </summary>
         [JsonProperty("has_automatic_location", Required = Required.Always)]
         public bool HasAutomaticLocation { get; set; }
@@ -107,7 +107,13 @@ namespace Wzdx.v4.Devices
         [JsonProperty("is_moving", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsMoving { get; set; }
 
-        [JsonProperty("road_direction", Required = Required.Always, NullValueHandling = NullValueHandling.Ignore)]
+		/// <summary>
+		/// The velocity of the device in kilometers per hour.
+		/// </summary>
+		[JsonProperty("velocity_kph", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+		public int? VelocityKph { get; set; }
+
+        [JsonProperty("road_direction", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public Direction Direction { get; set; } = Direction.Undefined;
     }

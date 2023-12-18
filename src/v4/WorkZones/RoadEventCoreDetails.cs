@@ -23,7 +23,6 @@ namespace Wzdx.v4.WorkZones
         /// A human-readable name for the road event
         /// </summary>
         [JsonProperty("name", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        [Required(AllowEmptyStrings = true)]
         public string Name { get; set; }
 
         [JsonProperty("event_type", Required = Required.Always)]
