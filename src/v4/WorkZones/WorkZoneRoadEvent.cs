@@ -122,7 +122,7 @@ namespace Wzdx.v4.WorkZones
 
 		[JsonProperty("work_zone_type", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
 		[JsonConverter(typeof(StringEnumConverter))]
-		public WorkZoneType WorkZoneType { get; set; }
+		public WorkZoneType? WorkZoneType { get; set; }
 
 		/// <summary>
 		/// If applicable, the reduced speed limit posted within the road event, in kilometers per hour
@@ -134,8 +134,7 @@ namespace Wzdx.v4.WorkZones
         /// <summary>
         /// A list of zero or more references to external CDS Curb Zones impacted by the work zone.
         /// </summary>
-        [JsonProperty("impacted_cds_curb_zones", Required = Required.DisallowNull,
-	        NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("impacted_cds_curb_zones", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public ICollection<CdsCurbZonesReference> CdsCurbZonesReference { get; set; } = new HashSet<CdsCurbZonesReference>();
 
         /// <summary>
