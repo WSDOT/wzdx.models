@@ -44,7 +44,7 @@ namespace Wzdx.v4.RoadEvents
 
         public WorkerPresenceBuilder WithPresenceLastConfirmed(DateTimeOffset value)
         {
-            Configuration.Set(presence => presence.WorkerPresenceLastConfirmedDate, value.ToUniversalTime());
+            Configuration.Set(presence => presence.WorkerPresenceLastConfirmedDate, value.ToLocalTime());
             return this;
         }
 

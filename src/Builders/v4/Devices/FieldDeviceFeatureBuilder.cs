@@ -77,7 +77,7 @@ namespace Wzdx.v4.Devices
 
         public T WithUpdateDate(DateTimeOffset value)
         {
-            CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToUniversalTime());
+            CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToLocalTime());
             return Derived();
         }
 

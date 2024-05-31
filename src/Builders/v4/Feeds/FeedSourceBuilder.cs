@@ -119,7 +119,7 @@ namespace Wzdx.v4.Feeds
         /// <param name="value">DateTimeOffset containing the last updated date time in UTC</param>
         public T WithUpdateDate(DateTimeOffset? value)
         {
-            Configuration.Set(info => info.UpdateDate, value?.ToUniversalTime());
+            Configuration.Set(info => info.UpdateDate, value?.ToLocalTime());
             return Derived();
         }
 

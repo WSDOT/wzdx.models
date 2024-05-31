@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Wzdx.v4.WorkZones
 {
@@ -24,5 +25,10 @@ namespace Wzdx.v4.WorkZones
         /// </summary>
         [JsonProperty("lanes", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public ICollection<Lane> Lanes { get; set; } = new HashSet<Lane>();
+
+
+        [JsonProperty("vehicle_impact", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore )]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public VehicleImpact VehicleImpact { get; set; }
     }
 }

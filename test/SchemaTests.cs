@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Schema;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Schema;
-using Wzdx.Models.Tests.Core;
 using Xunit;
 
 namespace Wzdx.Models.Tests

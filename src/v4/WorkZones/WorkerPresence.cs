@@ -33,6 +33,6 @@ namespace Wzdx.v4.WorkZones
         /// A list of situations in which workers are considered to be present in the jurisdiction of the data provider
         /// </summary>
         [JsonProperty("definition", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore, ItemConverterType = typeof(StringEnumConverter))]
-        public ICollection<WorkerPresenceDefinition> Definition { get; set; }
+        public ICollection<WorkerPresenceDefinition> Definition { get; set; } = new HashSet<WorkerPresenceDefinition>();
     }
 }

@@ -181,7 +181,7 @@ namespace Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal(value.ToUniversalTime(), result.FeedInfo.UpdateDate);
+                    Assert.Equal(value.ToLocalTime(), result.FeedInfo.UpdateDate);
                 });
         }
 

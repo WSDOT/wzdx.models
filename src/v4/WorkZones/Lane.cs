@@ -8,7 +8,6 @@ namespace Wzdx.v4.WorkZones
     /// <summary>
     /// An individual lane within a road event
     /// </summary>
-
     public class Lane
     {
         /// <summary>
@@ -37,9 +36,7 @@ namespace Wzdx.v4.WorkZones
         /// A list of zero or more restrictions specific to the lane
         /// </summary>
         [JsonProperty("restrictions", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public ICollection<Restriction> Restrictions { get; set; }
-
-
+        public ICollection<Restriction> Restrictions { get; set; } = new HashSet<Restriction>();
 
         private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 

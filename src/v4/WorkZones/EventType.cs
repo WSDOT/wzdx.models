@@ -12,6 +12,8 @@ namespace Wzdx.v4.WorkZones
         [EnumMember(Value = @"detour")]
         Detour = 2,
         [EnumMember(Value = @"restriction")]
-        Restriction = 3
+        Restriction = 3,
+        [EnumMember(Value = @"incident")]
+        Incident = 4,
     }
 }

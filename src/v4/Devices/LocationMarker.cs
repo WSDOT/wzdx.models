@@ -22,6 +22,6 @@ namespace Wzdx.v4.Devices
         [JsonProperty("marked_locations", Required = Required.Always)]
         [Required]
         [MinLength(1)]
-        public ICollection<MarkedLocation> MarkedLocations { get; set; } = new Collection<MarkedLocation>();
+        public ICollection<MarkedLocation> MarkedLocations { get; set; } = new HashSet<MarkedLocation>();
     }
 }

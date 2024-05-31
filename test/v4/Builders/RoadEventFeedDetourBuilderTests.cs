@@ -76,7 +76,7 @@ namespace Wzdx.Models.Tests.v4.Builders
 
         //public T WithUpdated(DateTimeOffset value)
         //{
-        //    CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToUniversalTime());
+        //    CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToLocalTime());
         //    return Derived();
         //}
 

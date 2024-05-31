@@ -219,7 +219,7 @@ namespace Wzdx.Models.Tests.v4.Builders
                 result =>
                 {
                     Assert.NotNull(result);
-                    Assert.Equal<DateTimeOffset?>(value.ToUniversalTime(), result.UpdateDate);
+                    Assert.Equal<DateTimeOffset?>(value.ToLocalTime(), result.UpdateDate);
                 });
         }
         
