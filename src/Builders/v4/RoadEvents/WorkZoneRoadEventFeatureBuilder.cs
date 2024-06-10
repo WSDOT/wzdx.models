@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -88,6 +89,12 @@ namespace Wzdx.v4.RoadEvents
             PropertiesConfiguration.Default(properties => properties.EndingMilepost);
             PropertiesConfiguration.Set(properties => properties.EndingCrossStreet, crossStreet);
             PropertiesConfiguration.Set(properties => properties.EndingAccuracy, verification);
+            return Derived();
+        }
+
+        public WorkZoneRoadEventFeatureBuilder WithoutWorkZoneType()
+        {
+            PropertiesConfiguration.Default(properties => properties.WorkZoneType);
             return Derived();
         }
 
