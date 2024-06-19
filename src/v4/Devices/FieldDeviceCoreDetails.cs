@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Wzdx.v4.Devices
 {

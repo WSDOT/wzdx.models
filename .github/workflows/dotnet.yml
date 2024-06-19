@@ -16,11 +16,11 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
     - name: Build dependencies
       run: dotnet build
     - name: Test
-      run: dotnet test test/ -f net6.0 --no-build --verbosity normal 
+      run: dotnet test test/ -f net8.0 --no-build --verbosity normal 
     - name: Publish wzdx.models to nuget
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:

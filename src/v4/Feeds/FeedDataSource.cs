@@ -103,7 +103,7 @@ namespace Wzdx.v4.Feeds
                    LocationVerifyMethod == other.LocationVerifyMethod;
         }
 
-        [SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "Supressing Resharper Code Quality Check")]
+        [SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "Suppressing ReSharper Code Quality Check")]
         [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
         public override int GetHashCode()
         {

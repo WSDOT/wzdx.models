@@ -22,7 +22,7 @@ namespace Wzdx.v4.Devices
         public CameraFeatureBuilder WithImage(Uri url, DateTimeOffset timestamp)
         {
             PropertiesConfiguration.Set(properties => properties.ImageUrl, url);
-            PropertiesConfiguration.Set(properties => properties.ImageTimestamp, timestamp.ToUniversalTime());
+            PropertiesConfiguration.Set(properties => properties.ImageTimestamp, timestamp.ToLocalTime());
             return Derived();
         }
     }

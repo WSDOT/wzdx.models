@@ -65,7 +65,5 @@ namespace Wzdx.v4.WorkZones
         [JsonProperty("event_status", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public EventStatus? EventStatus { get; set; }
-
-
     }
 }

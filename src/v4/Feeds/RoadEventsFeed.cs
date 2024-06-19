@@ -16,7 +16,7 @@ namespace Wzdx.v4.Feeds
     public class RoadEventsFeed : FeatureCollection<RoadEventFeature>
     {
         [Obsolete("Use feed_info property")]
-        [JsonProperty("road_event_feed_info", Required = Required.Always)]
+        [JsonProperty("road_event_feed_info", Required = Required.Always, IsReference = true)]
         [Required]
         public FeedInfo RoadEventFeedInfo
         {

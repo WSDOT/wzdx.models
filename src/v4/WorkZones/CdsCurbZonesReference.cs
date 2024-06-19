@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Wzdx.v4.WorkZones
 {
@@ -7,12 +9,12 @@ namespace Wzdx.v4.WorkZones
 	/// Read more about the Open Mobility Foundation's Curb Data Specification (https://www.openmobilityfoundation.org/about-cds).
 	/// </summary>
 	public class CdsCurbZonesReference
-	{
-		/// <summary>
-		/// A list of CDS Curb Zone ids.
-		/// </summary>
-		[JsonProperty("cds_curb_zone_ids", Required = Required.Always)]
-		public int[] Ids { get; set; }
+    {
+        /// <summary>
+        /// A list of CDS Curb Zone ids (UUID).
+        /// </summary>
+        [JsonProperty("cds_curb_zone_ids", Required = Required.Always)]
+        public ICollection<Guid> Ids { get; set; } = new HashSet<Guid>();
 
 		/// <summary>
 		/// An identifier for the source of the requested CDS Curbs API. This MUST be a full HTTPS URL pointing to the main curbs API that contains detailed information about each curb zone identified in cds_curb_zone_ids

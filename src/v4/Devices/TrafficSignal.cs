@@ -14,7 +14,7 @@ namespace Wzdx.v4.Devices
         [Required]
         public FieldDeviceCoreDetails CoreDetails { get; set; } = new FieldDeviceCoreDetails()
             {
-                DeviceType = FieldDeviceType.ArrowBoard,
+                DeviceType = FieldDeviceType.TrafficSignal,
                 DeviceStatus = FieldDeviceStatus.Unknown
             };
 

@@ -63,6 +63,12 @@ namespace Wzdx.v4.RoadEvents
             PropertiesConfiguration.Set(properties => properties.EventStatus, value);
             return Derived();
         }
+
+        public DetourRoadEventFeatureBuilder WithStart(DateTimeOffset value)
+        {
+            return WithStart(value, TimeVerification.Estimated);
+        }
+
         public DetourRoadEventFeatureBuilder WithStart(DateTimeOffset value, TimeVerification accuracy)
         {
             PropertiesConfiguration.Set(properties => properties.StartDate, value);
@@ -70,10 +76,21 @@ namespace Wzdx.v4.RoadEvents
             return Derived();
         }
 
+        public DetourRoadEventFeatureBuilder WithEnd(DateTimeOffset value)
+        {
+            return WithEnd(value, TimeVerification.Estimated);
+        }
+
         public DetourRoadEventFeatureBuilder WithEnd(DateTimeOffset value, TimeVerification accuracy)
         {
             PropertiesConfiguration.Set(properties => properties.EndDate, value);
             PropertiesConfiguration.Set(properties => properties.EndDateAccuracy, accuracy);
+            return Derived();
+        }
+
+        public DetourRoadEventFeatureBuilder WithEventStatus(EventStatus value)
+        {
+            PropertiesConfiguration.Set(properties => properties.EventStatus, value);
             return Derived();
         }
     }

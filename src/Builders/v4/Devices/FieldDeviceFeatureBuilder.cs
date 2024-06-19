@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,7 +78,7 @@ namespace Wzdx.v4.Devices
 
         public T WithUpdateDate(DateTimeOffset value)
         {
-            CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToUniversalTime());
+            CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToLocalTime());
             return Derived();
         }
 
@@ -86,7 +87,7 @@ namespace Wzdx.v4.Devices
             CoreDetailConfiguration.Set(details => details.SerialNumber, value);
             return Derived();
         }
-        
+
         public T WithRoadName(string value)
         {
             CoreDetailConfiguration.Combine(details => details.RoadNames, details =>
@@ -109,7 +110,18 @@ namespace Wzdx.v4.Devices
 
         public T WithoutRoadNames()
         {
-            CoreDetailConfiguration.Combine(details => details.RoadNames, details => details.RoadNames = null);
+            CoreDetailConfiguration.Default(details => details.RoadNames);
+            return Derived();
+        }
+
+        public T WithRoadEvent(string value)
+        {
+            CoreDetailConfiguration.Combine(details => details.RoadEventIds, details =>
+            {
+                if (details.RoadEventIds == null) details.RoadEventIds = new List<string>();
+                details.RoadEventIds.Add(value);
+            });
+
             return Derived();
         }
 

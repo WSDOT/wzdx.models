@@ -42,11 +42,12 @@ namespace Wzdx.v4.Devices
                 .WithGeometry(geometry);
         }
 
-        public static LocationMarkerFeatureBuilder LocationMarker(this IFieldDeviceFeatureBuilderFactory factory, string roadName, Point geometry,
+        public static LocationMarkerFeatureBuilder LocationMarker(this IFieldDeviceFeatureBuilderFactory factory,
+            string roadName, Point geometry, MarkedLocationType type,
             Func<MarkedLocationBuilder, MarkedLocationBuilder> locationSetup)
         {
             return new LocationMarkerFeatureBuilder(factory.SourceId, factory.FeatureId, roadName)
-                .WithMarkedLocation(locationSetup)
+                .WithMarkedLocation(type, locationSetup)
                 .WithGeometry(geometry);
         }
 

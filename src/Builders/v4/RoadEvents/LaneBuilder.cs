@@ -54,6 +54,11 @@ namespace Wzdx.v4.RoadEvents
             return this;
         }
 
+        public LaneBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, double value)
+        {
+            return WithRestriction(type, config => config.WithMeasure(unit, value));
+        }
+
         public LaneBuilder WithRestriction(RestrictionType type, UnitOfMeasurement unit, Func<RestrictionBuilder, RestrictionBuilder> configure)
         {
             return WithRestriction(type, unit, 0, configure);

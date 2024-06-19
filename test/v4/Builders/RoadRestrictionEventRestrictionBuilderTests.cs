@@ -37,7 +37,7 @@ namespace Wzdx.Models.Tests.v4.Builders
                 .Create()
                 .WithSource(Constants.DefaultSourceId, sourceBuilder => sourceBuilder
                     .WithFeature(featureId, factory => setup(factory
-                        .RoadRestriction(string.Empty, Direction.Northbound, MultiPoint.FromCoordinates(new[] { new Position(0, 0) })))))
+                        .RoadRestriction(string.Empty, Direction.Northbound, MultiPoint.FromCoordinates(new[] { new Position(0, 0) }), RestrictionType.NoParking, r => r))))
                 .Result();
 
             EnsureValid(feed);

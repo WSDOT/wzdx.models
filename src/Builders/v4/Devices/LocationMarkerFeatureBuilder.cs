@@ -22,26 +22,46 @@ namespace Wzdx.v4.Devices
             WithGeometry(Point.FromCoordinates(Position.From(0, 0)));
             WithRoadName(roadName);
             WithStatus(FieldDeviceStatus.Unknown);
-            WithMarkedLocation(builder => builder.WithType(MarkedLocationType.TemporaryTrafficSignal));
+            WithMarkedLocation(MarkedLocationType.Flagger, builder => builder);
+        }
+
+        /// <summary>
+        /// Removes all marked locations
+        /// </summary>
+        public LocationMarkerFeatureBuilder WithoutMarkedLocations()
+        {
+            PropertiesConfiguration.Default(properties => properties.MarkedLocations, new Collection<MarkedLocation>());
+            return Derived();
         }
 
         /// <summary>
         /// Sets a single marked location for the feature
         /// </summary>
+        /// <param name="type">Marked location type</param>
+        public LocationMarkerFeatureBuilder WithMarkedLocation(MarkedLocationType type)
+        {
+            return WithMarkedLocation(type, builder => builder);
+        }
+
+        /// <summary>
+        /// Sets a single marked location for the feature
+        /// </summary>
+        /// <param name="type">Marked location type</param>
         /// <param name="config">Marked location builder factory</param>
-        public LocationMarkerFeatureBuilder WithMarkedLocation(Func<MarkedLocationBuilder, IBuilder<MarkedLocation>> config)
+        public LocationMarkerFeatureBuilder WithMarkedLocation(MarkedLocationType type, Func<MarkedLocationBuilder, IBuilder<MarkedLocation>> config)
         {
             PropertiesConfiguration.Default(properties => properties.MarkedLocations, new Collection<MarkedLocation>());
-            return WithMarkedLocations(new[] { config });
+            return WithMarkedLocations(type, new[] { config });
         }
 
         /// <summary>
         /// Sets additional marked locations for the feature
         /// </summary>
+        /// <param name="type">Default marked location type for locations</param>
         /// <param name="configs">Marked location builder factories</param>
-        public LocationMarkerFeatureBuilder WithMarkedLocations(IEnumerable<Func<MarkedLocationBuilder, IBuilder<MarkedLocation>>> configs)
+        public LocationMarkerFeatureBuilder WithMarkedLocations(MarkedLocationType type, IEnumerable<Func<MarkedLocationBuilder, IBuilder<MarkedLocation>>> configs)
         {
-            var values = configs.Select(config => config(new MarkedLocationBuilder()).Result()).ToList().AsReadOnly();
+            var values = configs.Select(config => config(new MarkedLocationBuilder(type)).Result()).ToList().AsReadOnly();
 
             PropertiesConfiguration.Combine(properties => properties.MarkedLocations, properties =>
             {

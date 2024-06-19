@@ -11,7 +11,8 @@ namespace Wzdx.v4.RoadEvents
     /// </summary>
     public sealed class RoadRestrictionFeatureBuilder : RoadEventFeatureBuilder<RoadRestrictionFeatureBuilder, RestrictionRoadEvent>
     {
-        public RoadRestrictionFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction) :
+        public RoadRestrictionFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction,
+            LaneType laneType, LaneStatus laneStatus, int laneOrder, Func<LaneBuilder, LaneBuilder> laneBuilder) :
             base(new DelegatingFactory<RoadEventFeature>(() => new RoadEventFeature() { Properties = new RestrictionRoadEvent() }))
         {
             FeatureConfiguration.Set(feature => feature.Id, featureId);
@@ -19,6 +20,27 @@ namespace Wzdx.v4.RoadEvents
             WithGeometry(MultiPoint.FromCoordinates(Enumerable.Empty<Position>()));
             WithRoadName(roadName);
             WithDirection(direction);
+            WithLane(laneType, laneStatus, laneOrder, laneBuilder);
+        }
+
+        public RoadRestrictionFeatureBuilder(string sourceId, string featureId, string roadName, Direction direction,
+            RestrictionType restrictionType,
+            Func<RestrictionBuilder, RestrictionBuilder> restrictionBuilder) :
+            base(new DelegatingFactory<RoadEventFeature>(() => new RoadEventFeature() { Properties = new RestrictionRoadEvent() }))
+        {
+            FeatureConfiguration.Set(feature => feature.Id, featureId);
+            CoreDetailConfiguration.Set(details => details.DataSourceId, sourceId);
+
+            WithGeometry(MultiPoint.FromCoordinates(Enumerable.Empty<Position>()));
+            WithRoadName(roadName);
+            WithDirection(direction);
+
+            WithRestriction(restrictionType, restrictionBuilder);
+        }
+
+        public RoadRestrictionFeatureBuilder WithLane(LaneType type, LaneStatus status, int order)
+        {
+            return WithLane(type, status, order, b => b);
         }
 
         public RoadRestrictionFeatureBuilder WithLane(LaneType type, LaneStatus status, int order, Func<LaneBuilder, LaneBuilder> configure)

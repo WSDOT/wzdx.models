@@ -32,7 +32,7 @@ namespace Wzdx.Models.Tests.v4.Builders
 
                     var properties = (WorkZoneRoadEvent)feature.Properties;
                     var details = properties.CoreDetails;
-                    Assert.Single<string>(details.RoadNames);
+                    Assert.Single(details.RoadNames);
                     Assert.Null(properties.BeginningCrossStreet);
                     Assert.Null(properties.BeginningMilepost);
                     Assert.Equal(SpatialVerification.Estimated, properties.BeginningAccuracy);
@@ -115,8 +115,8 @@ namespace Wzdx.Models.Tests.v4.Builders
                     var properties = feature.Properties;
                     var details = properties.CoreDetails;
 
-                    Assert.Single<string>(details.RoadNames);
-                    Assert.Equal(value, Enumerable.Single<string>(details.RoadNames));
+                    Assert.Single(details.RoadNames);
+                    Assert.Equal(value, Enumerable.Single(details.RoadNames));
                 });
         }
 
@@ -134,7 +134,7 @@ namespace Wzdx.Models.Tests.v4.Builders
                     var details = properties.CoreDetails;
 
                     Assert.Equal(2, details.RoadNames.Count);
-                    Assert.Equal(value, Enumerable.Last<string>(details.RoadNames));
+                    Assert.Equal(value, Enumerable.Last(details.RoadNames));
                 });
         }
 
@@ -151,7 +151,7 @@ namespace Wzdx.Models.Tests.v4.Builders
                     var properties = feature.Properties;
                     var details = properties.CoreDetails;
 
-                    Assert.Equal<ICollection<string>>(values, details.RoadNames);
+                    Assert.Equal(values, details.RoadNames);
                 });
         }
 
@@ -294,8 +294,7 @@ namespace Wzdx.Models.Tests.v4.Builders
                     var details = properties.CoreDetails;
 
                     Assert.NotNull(details.CreationDate);
-                    Assert.Equal<DateTimeOffset?>(value, details.CreationDate);
-                    Assert.Equal(TimeSpan.Zero, details.CreationDate.Value.Offset);
+                    Assert.Equal(value, details.CreationDate);
                 });
         }
 
@@ -314,8 +313,7 @@ namespace Wzdx.Models.Tests.v4.Builders
                     var details = properties.CoreDetails;
 
                     Assert.NotNull(details.UpdateDate);
-                    Assert.Equal<DateTimeOffset?>(value, details.UpdateDate);
-                    Assert.Equal(TimeSpan.Zero, details.UpdateDate.Value.Offset);
+                    Assert.Equal(value, details.UpdateDate);
                 });
         }
 

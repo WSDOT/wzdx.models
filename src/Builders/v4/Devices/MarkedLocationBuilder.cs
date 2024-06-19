@@ -10,9 +10,9 @@ namespace Wzdx.v4.Devices
         private BuilderConfiguration<MarkedLocation> Configuration { get; }
             = new BuilderConfiguration<MarkedLocation>();
 
-        public MarkedLocationBuilder() 
+        public MarkedLocationBuilder(MarkedLocationType type) 
         {
-            WithType(MarkedLocationType.TemporaryTrafficSignal);
+            WithType(type);
         }
         
         public MarkedLocationBuilder WithType(MarkedLocationType value)

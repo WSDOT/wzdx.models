@@ -65,6 +65,6 @@ namespace Wzdx.v4.Feeds
         [JsonProperty("data_sources", Required = Required.Always)]
         [Required]
         [MinLength(1)]
-        public ICollection<FeedDataSource> DataSources { get; set; } = new Collection<FeedDataSource>();
+        public ICollection<FeedDataSource> DataSources { get; set; } = new HashSet<FeedDataSource>();
     }
 }

@@ -29,10 +29,7 @@ namespace Wzdx.v4.RoadEvents
 
         public T WithName(string value)
         {
-            CoreDetailConfiguration.Combine(details => details.Name, details =>
-            {
-                details.Name = value;
-            });
+            CoreDetailConfiguration.Set(details => details.Name, value);
 
             return Derived();
         }
@@ -90,13 +87,13 @@ namespace Wzdx.v4.RoadEvents
 
         public T WithCreated(DateTimeOffset value)
         {
-            CoreDetailConfiguration.Set(details => details.CreationDate, value.ToUniversalTime());
+            CoreDetailConfiguration.Set(details => details.CreationDate, value.ToLocalTime());
             return Derived();
         }
 
         public T WithUpdated(DateTimeOffset value)
         {
-            CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToUniversalTime());
+            CoreDetailConfiguration.Set(details => details.UpdateDate, value.ToLocalTime());
             return Derived();
         }
 
