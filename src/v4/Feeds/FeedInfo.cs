@@ -57,7 +57,7 @@ namespace Wzdx.v4.Feeds
         /// </summary>
         [JsonProperty("license", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public LicenseType? License { get; set; }
+        public LicenseType? License { get; set; } = LicenseType.HttpsCreativeCommonsOrgPublicDomainZero10;
 
         /// <summary>
         /// A list of specific data sources for the road event data in the feed

@@ -42,7 +42,7 @@ namespace Wzdx.v3.Feeds
         /// <summary>The URL of the license that applies to the data in the WZDx feed. This *must* be the string "https://creativecommons.org/publicdomain/zero/1.0/"</summary>
         [JsonProperty("license", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public RoadEventFeedInfoLicense? License { get; set; }
+        public RoadEventFeedInfoLicense? License { get; set; } = RoadEventFeedInfoLicense.Https__creativecommons_org_publicdomain_zero_1_0_;
 
         /// <summary>A list of specific data sources for the road event data in the feed</summary>
         [JsonProperty("data_sources", Required = Required.Always)]
