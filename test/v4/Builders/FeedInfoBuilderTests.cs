@@ -242,10 +242,22 @@ namespace Wzdx.Models.Tests.v4.Builders
         /* test license requirement */
 
         [Fact]
-        public void DefaultResultLicenseShouldBeNull()
+        public void ShouldHaveDefaultLicense()
         {
             var result = new FeedInfoBuilder(Constants.DefaultPublisher).Result();
             Assert.NotNull(result);
+            Assert.NotNull(result.License);
+            EnsureValid(result);
+        }
+        
+        [Fact]
+        public void ShouldAllowNullLicense()
+        {
+            var result = new FeedInfoBuilder(Constants.DefaultPublisher).Result();
+            Assert.NotNull(result);
+            
+            result.License = null;
+            
             Assert.Null(result.License);
             EnsureValid(result);
         }
