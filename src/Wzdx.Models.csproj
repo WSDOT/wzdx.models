@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
+        <TargetFrameworks>net10.0;netstandard2.1;</TargetFrameworks>
         <RootNamespace>Wzdx</RootNamespace>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <Version>0.3.0</Version>
@@ -13,10 +13,6 @@
         <RepositoryUrl>https://github.com/WSDOT/wzdx.models</RepositoryUrl>
       <PackageLicenseFile>LICENSE</PackageLicenseFile>
       <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
-        <NoWarn>1701;1702;CS8032;CS8033;NETSDK1182</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -40,7 +36,7 @@
   </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     </ItemGroup>
 
